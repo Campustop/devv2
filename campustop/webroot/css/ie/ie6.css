@@ -1,0 +1,49 @@
+ul#priNavigation {
+	width:97%;
+}
+ul.subNavigation{
+	width:100%;
+}
+ul#priNavigation li a span strong
+{
+	line-height:2.3em;
+}
+div.dashBoard div.dashBoardMainContainer {
+	width:97%;
+}
+div.dashBoardSections{
+	margin:0 0 0 7px;
+}
+div#main {
+	margin-top:7px;
+}
+div.globalContainer table thead{
+	height:28px;
+}
+div.globalContainer table thead th{
+	padding-top:5px;
+}
+div.globalContainer ul.newsBlock li input.newsBrief{
+	margin-top:-2px;
+}
+div.globalContainer ul.newsBlock li div#newsBriefEditor ul li textarea{
+	margin-left:-2px;
+	width:200px;
+}
+div.globalContainer ul.newsBlock li select{
+	width:202px;
+}
+#first {
+	padding-bottom:10px;
+}
+#second {
+	padding-bottom:10px;
+}
+#tab-3{
+	clear:both;
+}
+div.globalContainer ul.addNewAlbum li img.addAlbum, 
+div.globalContainer ul.managePassword li img.addAlbum,
+div.globalContainer ul.enterAccount li img.addAlbum {
+	margin:0 0 0 160px;
+}

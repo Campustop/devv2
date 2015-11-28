@@ -1,0 +1,33 @@
+<html>
+
+		<script src="<? echo site_url('assets/js/jquery-1.11.0.min.js')?>"></script> 
+		<script src="<? echo site_url('assets/js/jquery-ui.js')?>"></script>
+		<script src="<? echo site_url('assets/js/tag-it.js')?>"></script>
+		<link href="<? echo site_url('assets/css/jquery-ui.css')?>" rel="stylesheet">
+	
+		<link href="<? echo site_url('assets/css/jquery.tagit.css')?>" rel="stylesheet">
+		<link href="<? echo site_url('assets/css/tagit.ui-zendesk.css')?>" rel="stylesheet">
+	
+
+
+
+ <script>
+        $(function(){
+            var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
+			
+			$('#singleFieldTags2').tagit({
+                        availableTags: sampleTags,
+			allowSpaces: true
+            });
+
+           
+            
+        });
+    </script>
+
+
+<input name="tags" id="singleFieldTags2" style="display:none;">
+								
+
+
+</html>

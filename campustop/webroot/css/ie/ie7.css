@@ -1,0 +1,12 @@
+ul#priNavigation {
+	width:97%;
+}
+ul.subNavigation{
+	width:100%;
+}
+ul#priNavigation li a span strong
+{
+	line-height:2.3em;
+}
+
+
