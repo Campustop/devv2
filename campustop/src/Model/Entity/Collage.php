@@ -5,7 +5,7 @@ namespace App\Model\Entity;
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\ORM\Entity;
 
-class City extends Entity
+class Collage extends Entity
 {
 
     // Make all fields mass assignable except for primary key field "id".

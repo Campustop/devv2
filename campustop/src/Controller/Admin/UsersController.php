@@ -1,20 +1,27 @@
 <?php
-namespace App\Controller\Admin;
-use App\Controller\AppController;
+namespace App\Controller\admin;
+use App\Controller\admin\AppController;
+use App\Controller\admin\CountrysController;
+use App\Controller\admin\ProgramController;
+
+use App\Controller\admin\UserroleController;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
+use Cake\Core\App;
 
 class UsersController extends AppController
 {
 	public function beforeFilter(Event $event)
 	{	
 		parent::beforeFilter($event);
-		$this->Auth->allow('add');
+		$this->Authadmin->allow('add');
 		
 	}
 	public function index()
 	{
 		$this->set('users', $this->Users->find('all'));
 	}
+	
 	public function view($id)
 	{
 		$user = $this->Users->get($id);
@@ -39,32 +46,52 @@ class UsersController extends AppController
 	{
 		$this->viewBuilder()->layout('adminlogin');
 	    if ($this->request->is('post')) {
-	        $user = $this->Auth->identify();
+	        $user = $this->Authadmin->identify();
 	        if ($user) {
-	            $this->Auth->setUser($user);
-	            return $this->redirect($this->Auth->redirectUrl());
+	            $this->Authadmin->setUser($user);
+	            return $this->redirect($this->Authadmin->redirectUrl());
 	            
 	        }
 	        $this->Flash->error(__('Invalid username or password, try again'));
 	    }
 	}
-	public function home()
+	public function viewadmin($id = null)
 	{
-		$this->viewBuilder()->layout('adminlogin');
-	    if ($this->request->is('post')) {
-	        $user = $this->Auth->identify();
-	        if ($user) {
-	            $this->Auth->setUser($user);
-	            return $this->redirect($this->Auth->redirectUrl());
-	            
-	        }
-	        $this->Flash->error(__('Invalid username or password, try again'));
-	    }
-	}
 
+		//echo $id;
+		//die;
+		$user = TableRegistry::get('Users');
+		$user1 = $user->find()->where(['user_id' => $id])->first();
+		$this->set('user', $user1);
+
+		$edutable = TableRegistry::get('user_education');
+		$education =  $edutable->find('all')->contain(['Program']);
+
+		$this->set('education', $education);
+
+		$worktable = TableRegistry::get('user_work_experiance');
+		$work = $worktable->find()->where(['user_id' => $id])->toArray();
+		//pr($work);die;
+		$this->set('work', $work);
+
+		
+
+
+		$getjobs5 = TableRegistry::get('countrys');
+        $rcountry = $getjobs5->find('list', ['keyField' => 'country_id','valueField' => 'country_name']);
+        $this->set('country', $rcountry);
+
+        $getjobs6 = TableRegistry::get('userrole');
+        $userrole = $getjobs6->find('list', ['keyField' => 'user_role_id','valueField' => 'user_role_name']);
+        $this->set('userrole', $userrole);
+
+
+
+
+	}
 	public function logout()
 	{
-	    return $this->redirect($this->Auth->logout());
+	    return $this->redirect($this->Authadmin->logout());
 	}
 	public function dashboard()
 	{
@@ -75,5 +102,20 @@ class UsersController extends AppController
 	{
 		echo "hello";
 	}
+	public function userlist()
+	 {
+
+	  $this->set('users', $this->Users->find('all')->contain(['Countrys']));
+
+	  //$useradmins = TableRegistry::get('users');
+	  
+	       //$noteadmin = $noteadmins->find()->toArray(); 
+
+	       //$this->set('users', $useradmins->find('all')->contain(['Countrys']));
+
+
+
+
+	 }
 }
 ?>

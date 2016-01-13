@@ -1,6 +1,6 @@
 <?php
 namespace App\Controller\Admin;
-use App\Controller\AppController;
+use App\Controller\Admin\AppController;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 
@@ -10,7 +10,9 @@ class DegreeController extends AppController
 	{	
 		parent::beforeFilter($event);
 		//$this->Auth->allow('add','edit');
-		$this->Auth->allow(['add', 'edit','delete']);
+		$this->viewBuilder()->layout('adminMain');
+		//$this->Auth->allow(['add', 'edit','delete']);
+		$this->Authadmin->deny(['add', 'edit','index','delete']);
 
 		
 	}
@@ -43,13 +45,20 @@ class DegreeController extends AppController
 		if ($this->request->is('post'))
 		{
 			$degree = $this->Degree->patchEntity($degree, $this->request->data);
+
+			$degree->de_code=strtoupper($this->request->data['de_code']);
 			if ($this->Degree->save($degree))
 
 			{
-				$this->Flash->success(__('The degree has been saved.'));
+				$this->Flash->success('The redord has been added successfully', [
+          			'key' => 'positive',
+      					]);
 				return $this->redirect(['action' => 'index']);
 			}
-			$this->Flash->error(__('Unable to add the country.'));
+			
+			$this->Flash->error('The redord has not been added.', [
+          			'key' => 'nagative',
+      					]);
 		}
 		$this->set('degree', $degree);
 
@@ -64,11 +73,18 @@ class DegreeController extends AppController
     $degree = $this->Degree->get($id);
     if ($this->request->is(['post', 'put'])) {
         $this->Degree->patchEntity($degree, $this->request->data);
+
+        $degree->de_code=strtoupper($this->request->data['de_code']);
         if ($this->Degree->save($degree)) {
-            $this->Flash->success(__('Your degree has been updated.'));
+             $this->Flash->success('The redord has been updated successfully', [
+          			'key' => 'positive',
+      					]);
             return $this->redirect(['action' => 'index']);
         }
-        $this->Flash->error(__('Unable to update your article.'));
+
+        $this->Flash->error('The redord has not been updated.', [
+          			'key' => 'nagative',
+      					]);
     }
 
     $this->set('degree', $degree);
@@ -80,7 +96,10 @@ public function delete($id)
 
     $degree = $this->Degree->get($id);
     if ($this->Degree->delete($degree)) {
-        $this->Flash->success(__('The article with id: {0} has been deleted.', h($id)));
+        //$this->Flash->success(__('The record has been deleted.', h($id)));
+         $this->Flash->success('The redord has been deleted successfully', [
+          			'key' => 'delete',
+      					]);
         return $this->redirect(['action' => 'index']);
     }
 }

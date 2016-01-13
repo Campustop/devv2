@@ -35,7 +35,7 @@
     <script src="<?php echo SITEURL; ?>webroot/js/morris/raphael-2.1.0.min.js"></script>
   
     
-    <script src="<?= SITEURL; ?>webroot/js/custom.js"></script>
+    <!--<script src="<?= SITEURL; ?>webroot/js/custom.js"></script>-->
   
 
 	<?php

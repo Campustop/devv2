@@ -14,7 +14,12 @@
       
                         </div>
 			 
-							<?php  echo $this->Flash->render('success'); ?>
+							<?php  //echo $this->Flash->render('success'); ?>
+							<?= $this->Flash->render('positive') ?>
+
+
+							
+							<?= $this->Flash->render('nagative') ?>
 							<?php // echo $this->Session->flash('good'); ?>
 		                        <div class="panel-body">
 									<div class="table-responsive">
@@ -24,7 +29,7 @@
 					                						<thead>
 														            <tr role="row">
 																	<th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 500px;" aria-sort="ascending" aria-label="Category Name">City Code</th>
-																	<th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 500px;" aria-sort="ascending" aria-label="Category Name">State</th>
+																	<th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 500px;" aria-sort="ascending" aria-label="Category Name">City Code</th>
 																	
 																	
 																	<th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 200px;" aria-label="Action">Action</th>

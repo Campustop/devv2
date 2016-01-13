@@ -1,6 +1,6 @@
 <?php
 namespace App\Controller\Admin;
-use App\Controller\AppController;
+use App\Controller\Admin\AppController;
 use App\Controller\ProvinceController;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
@@ -10,29 +10,18 @@ class CityController extends AppController
 	public function beforeFilter(Event $event)
 	{	
 		parent::beforeFilter($event);
-		//$this->Auth->allow('add','edit');
-		$this->Auth->allow(['add', 'edit','delete']);
+		$this->viewBuilder()->layout('adminMain');
+		//$this->Auth->allow(['add', 'edit','delete']);
+		$this->Authadmin->deny(['add', 'edit','index','delete']);
 
 		
 	}
 	public function index()
     {
 
-      /* if($this->request->is('ajax'))
-		{
-
-	            //$this->autoRender = false;
-	            //$this->paginate = array();
-
-			$this->DataTable->mDataProp = true;
-            echo json_encode($this->DataTable->getResponse());
-		}*/
-		
-		
-		//$this->set('city', $this->City->find());
+     
 		$this->set('city', $this->City->find('all')->contain(['Province']));
 
-		//$state = $this->RegionMaster->find('list',array('fields' => array('region_id','region_name')));
 		
 		//print_r($city);
 		// die;
@@ -50,10 +39,18 @@ class CityController extends AppController
 			if ($this->City->save($city))
 
 			{
-				$this->Flash->success(__('The city has been saved.'));
+				//$this->Flash->success(__('The city has been saved.'));
+				$this->Flash->success('The record has been saved successfully', [
+          			'key' => 'positive',
+      					]);
 				return $this->redirect(['action' => 'index']);
 			}
-			$this->Flash->error(__('Unable to add the city.'));
+			else
+			{
+			$this->Flash->error('The record has not been saved', [
+          			'key' => 'nagative',
+      					]);
+		}
 		}
 		$this->set('city', $city);
 
@@ -77,13 +74,19 @@ class CityController extends AppController
     $city = $this->City->get($id);
     if ($this->request->is(['post', 'put'])) {
     	pr($this->request->data);
+
+   
 	//die;
         $this->City->patchEntity($city, $this->request->data);
         if ($this->City->save($city)) {
-            $this->Flash->success(__('Your article has been updated.'));
+             	$this->Flash->success('The redord has been updated successfully', [
+          			'key' => 'positive',
+      					]);
             return $this->redirect(['action' => 'index']);
         }
-        $this->Flash->error(__('Unable to update your article.'));
+        $this->Flash->error('The redord has not been updated.', [
+          			'key' => 'nagative',
+      					]);
     }
 
     $this->set('city', $city);
@@ -95,7 +98,10 @@ public function delete($id)
 
     $city = $this->City->get($id);
     if ($this->City->delete($city)) {
-        $this->Flash->success(__('The article with id: {0} has been deleted.', h($id)));
+       // $this->Flash->success(__('The record has been deleted.', h($id)));
+        $this->Flash->success('The redord has been deleted successfully', [
+          			'key' => 'positive',
+      					]);
         return $this->redirect(['action' => 'index']);
     }
 }

@@ -16,6 +16,13 @@
 			 
 							<?php  echo $this->Flash->render('success'); ?>
 							<?php // echo $this->Session->flash('good'); ?>
+							<?= $this->Flash->render('positive') ?>
+
+							<?= $this->Flash->render('positivedelete') ?>
+
+
+							
+							<?= $this->Flash->render('nagative') ?>
 		                        <div class="panel-body">
 									<div class="table-responsive">
 										<div role="grid" class="dataTables_wrapper form-inline" id="dataTables-example_wrapper">
@@ -23,7 +30,6 @@
 									  
 					                						<thead>
 														            <tr role="row">
-																	<th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 500px;" aria-sort="ascending" aria-label="Category Name">Program Id</th>
 																	<th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 500px;" aria-sort="ascending" aria-label="Category Name">Program Name</th>
 																	<th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 500px;" aria-sort="ascending" aria-label="Category Name">Program Code</th>
 																	
@@ -38,8 +44,6 @@
 													                            <?php foreach ($program as $list): ?>
 													                                    <tr class="gradeA odd">
 																		
-																		 					
-													                                        <td class="sorting_1"><?php echo $list['program_id']; ?></td>
 													                                        <td class="sorting_1"><?php echo $list['pro_name']; ?></td>
 													                                        <td class="sorting_1"><?php echo $list['pro_code']; ?></td>
 													                                        

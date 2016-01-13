@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Admin;
-use App\Controller\AppController;
+use App\Controller\Admin\AppController;
+
 use App\Controller\CountrysController;
 use App\Controller\ProvinceController;
 use Cake\Event\Event;
@@ -11,8 +12,9 @@ class CollageController extends AppController
 	public function beforeFilter(Event $event)
 	{	
 		parent::beforeFilter($event);
+		$this->viewBuilder()->layout('adminMain');
 		//$this->Auth->allow('add','edit');
-		$this->Auth->deny(['add', 'edit','delete','index']);
+		$this->Authadmin->deny(['add', 'edit','delete','index']);
 
 		
 	}
@@ -54,10 +56,16 @@ class CollageController extends AppController
 			if ($this->Collage->save($collage))
 
 			{
-				$this->Flash->success(__('The collage has been saved.'));
+				//$this->Flash->success(__('The collage has been saved.'));
+				$this->Flash->success('The redord has been added successfully', [
+          			'key' => 'positive',
+      					]);
 				return $this->redirect(['action' => 'index']);
 			}
-			$this->Flash->error(__('Unable to add the collage.'));
+			//$this->Flash->error(__('Unable to add the collage.'));
+			 $this->Flash->error('The redord has not been added.', [
+          			'key' => 'nagative',
+      					]);
 		}
 		$this->set('collage', $collage);
 
@@ -118,10 +126,14 @@ function getprovince()
     if ($this->request->is(['post', 'put'])) {
         $this->Collage->patchEntity($collage, $this->request->data);
         if ($this->Collage->save($collage)) {
-            $this->Flash->success(__('Your article has been updated.'));
+            $this->Flash->success('The redord has been updated successfully', [
+          			'key' => 'positive',
+      					]);
             return $this->redirect(['action' => 'index']);
         }
-        $this->Flash->error(__('Unable to update your article.'));
+         $this->Flash->error('The redord has not been updated.', [
+          			'key' => 'nagative',
+      					]);
     }
 
     $this->set('collage', $collage);
@@ -133,7 +145,10 @@ public function delete($id)
 
     $collage = $this->Collage->get($id);
     if ($this->Collage->delete($collage)) {
-        $this->Flash->success(__('The article with id: {0} has been deleted.', h($id)));
+       // $this->Flash->success(__('The record has been deleted.', h($id)));
+    	 $this->Flash->success('The redord has been deleted successfully', [
+          			'key' => 'delete',
+      					]);
         return $this->redirect(['action' => 'index']);
     }
 }

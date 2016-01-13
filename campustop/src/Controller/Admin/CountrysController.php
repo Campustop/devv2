@@ -1,6 +1,6 @@
 <?php
 namespace App\Controller\Admin;
-use App\Controller\AppController;
+use App\Controller\Admin\AppController;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 
@@ -10,31 +10,11 @@ class CountrysController extends AppController
 	{	
 		parent::beforeFilter($event);
 		$this->viewBuilder()->layout('adminMain');
-		$this->Auth->allow(['add', 'edit','delete']);
-
-		
+		$this->Authadmin->deny(['add', 'edit','index','delete']);
 	}
 	public function index()
     {
-
-      /* if($this->request->is('ajax'))
-		{
-
-	            //$this->autoRender = false;
-	            //$this->paginate = array();
-
-			$this->DataTable->mDataProp = true;
-            echo json_encode($this->DataTable->getResponse());
-		}*/
-		
-		
 		$this->set('countrys', $this->Countrys->find());
-		
-		//print_r($countrys);
-		// die;
-		// 
-
-		
     }
 	
 	public function add()
@@ -43,18 +23,16 @@ class CountrysController extends AppController
 		if ($this->request->is('post'))
 		{
 			$country = $this->Countrys->patchEntity($country, $this->request->data);
-			if ($this->Countrys->save($country))
 
+			$country->country_code=strtoupper($this->request->data['country_code']);
+			if ($this->Countrys->save($country, ['checkExisting' => false]))
 			{
-				$this->Flash->success(__('The country has been saved.'));
+				$this->Flash->success('The record has been added successfully', ['key' => 'positive']);
 				return $this->redirect(['action' => 'index']);
 			}
-			$this->Flash->error(__('Unable to add the country.'));
+			$this->Flash->error('The record has not been added', ['key' => 'negative']);
 		}
 		$this->set('country', $country);
-
-
-
 	}
 
 
@@ -64,11 +42,14 @@ class CountrysController extends AppController
     $countrys = $this->Countrys->get($id);
     if ($this->request->is(['post', 'put'])) {
         $this->Countrys->patchEntity($countrys, $this->request->data);
-        if ($this->Countrys->save($countrys)) {
-            $this->Flash->success(__('Your article has been updated.'));
-            return $this->redirect(['action' => 'index']);
-        }
-        $this->Flash->error(__('Unable to update your article.'));
+
+        $countrys->country_code=strtoupper($this->request->data['country_code']);
+        if ($this->Countrys->save($countrys)) 
+        {
+          	$this->Flash->success('The record has been Updated successfully', ['key' => 'update']);
+	        return $this->redirect(['action' => 'index']);
+	    }
+	       $this->Flash->error('The record has not been updates', ['key' => 'negative']);
     }
 
     $this->set('countrys', $countrys);
@@ -79,8 +60,9 @@ public function delete($id)
     $this->request->allowMethod(['post', 'delete']);
 
     $countrys = $this->Countrys->get($id);
-    if ($this->Countrys->delete($countrys)) {
-        $this->Flash->success(__('The article with id: {0} has been deleted.', h($id)));
+    if ($this->Countrys->delete($countrys)) 
+   	{
+        $this->Flash->success('The record has been Deleted successfully', ['key' => 'delete']);
         return $this->redirect(['action' => 'index']);
     }
 }

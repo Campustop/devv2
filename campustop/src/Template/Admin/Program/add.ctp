@@ -42,6 +42,13 @@
 						</td>
 					</tr>
 					<tr>
+						<td> 
+							<?php
+									echo $this->Form->hidden('created_dt', ['value'=>time()]);
+						?>
+						</td>
+					</tr>
+					<tr>
 					<td colspan="2" align="center">
 					<?php
 					echo $this->Form->button('Add', array('type' => 'submit','class'=>'btn btn-default'));

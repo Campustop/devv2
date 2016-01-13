@@ -9,7 +9,7 @@ use Cake\ORM\Rule\IsUnique;
 
 
 
-class CountrysTable extends Table
+class DegreeTable extends Table
 {
 
 public function initialize(array $config)

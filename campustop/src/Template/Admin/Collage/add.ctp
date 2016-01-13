@@ -7,12 +7,12 @@ $("#stateclass").change(function(){
 	
      $.ajax({
                     type:"POST",
-                    url:"http://localhost/cakephp3/admin/collage/getprovince",
+                    url:"<?php echo SITEURL.'admin/collage/getprovince'; ?>",
                      data: {countryid:country},
                       dataType:"json",
                     success: function(data)
                     {
-alert(data);
+//alert(data);
 //var obj = jQuery.parseJSON(data);
 //alert(obj.province_id);
 
@@ -29,7 +29,7 @@ alert(data);
 
 
 
-                    	alert(data);
+                    	//alert(data);
                         //$("#bindcity").html(data);
                         $('#bindcity').html(html);
                     }
@@ -67,7 +67,7 @@ alert(data);
 							<label>Country name:</label>
 						</td>
 						<td>
-							<?php echo $this->Form->select('country_id', $country,['id'=>'stateclass']); ?>
+						<?php echo $this->Form->select('country_id', $country,['id'=>'stateclass','empty' => '(choose one)']);?>
 						</td>
 					</tr>
 					<tr>

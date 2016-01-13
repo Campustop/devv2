@@ -1,0 +1,151 @@
+function careermail()
+	{
+		if($_POST['comments'])
+		{
+			$comment=$_POST['comments'];
+		}
+		else
+		{
+			$comment='';
+		}
+		$name=ucfirst($_POST['name']);
+		$email=$_POST['email'];
+		$contactno=$_POST['phone'];
+
+		 
+         $flag1=true;
+		 $errormsg ="";
+		 if($_FILES['document']['name'] != "")
+		 {	
+			 
+				$config['upload_path'] = './userfiles/careerdocuments/';
+				$config['allowed_types'] = 'doc|pdf|docx';
+				$config['max_size'] = '' ;
+				$config['remove_spaces'] = true;
+				$config['overwrite'] = false;
+				$config['encrypt_name'] = false;
+				$config['file_name'] = time();
+				$this->load->library('upload');
+				$this->upload->initialize($config); 	
+					
+				if (!$this->upload->do_upload('document'))
+				{
+					
+						$flag1=false;
+						$error = array('warning' =>  $this->upload->display_errors());
+						$this->session->set_flashdata('error',($error[warning]));
+						redirect('career',$error);
+				   
+				}
+				else
+				{
+						$flag1 = true;
+						$image = $this->upload->data();
+					
+						$attach = FCPATH.'/userfiles/careerdocuments/'.$image['file_name'];
+						
+			
+						$message = "<table cellpadding='0' cellspacing='0' width='598px'>
+						<tr>
+							<td  style='border:1px solid #ccc;'>
+								<img src='".site_url()."assets/images/mail_top.jpg'>
+							</td>
+						</tr>
+						<tr>
+							<td style='border-left:1px solid #ccc; border-right:1px solid #ccc; min-height:500px; padding:20px 0'>
+								<table cellpadding='0' cellspacing='0' border=0 width='598px' align='center' style= 'font-family:Arial, Helvetica, sans-serif; font-size:14px;'>
+									<tr align=left>
+										<td>
+											<table cellpadding='0' cellspacing='0' border=0 width='598px' style= 'font-family:Arial, Helvetica, sans-serif; font-size:14px;'>
+												<tr><td height=30 colspan=2>&nbsp;&nbsp;&nbsp; <b>Career Request Details : </b></td></tr>
+															";
+												if($name!=''){
+
+												$message .= "
+												<tr>
+													<td align=left height=30><b>&nbsp;&nbsp;&nbsp;Name :</b></td>
+													<td> ".$name."</td>
+												</tr>";	}
+												if($email!=''){
+
+												$message .= "
+
+												<tr>
+													<td align=left height=30><b>&nbsp;&nbsp;&nbsp;E-mail :</b></td>
+													<td>".$email."</td>
+												</tr> ";}
+												if($contactno!=''){
+												$message .= "
+
+												<tr>
+													<td align=left height=30><b>&nbsp;&nbsp;&nbsp;Phone :</b></td>
+													<td>".$contactno."</td>
+												</tr>";	 }
+												if($comment!=''){  
+												$message .= "
+
+												<tr>
+													<td align=left height=30 valign='top'><b>&nbsp;&nbsp;&nbsp;Comments :</b></td>
+													<td>".nl2br($comment)."</td>
+												</tr>  ";}
+												$message .= "
+												
+												
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td>
+										&nbsp;</td>
+									</tr>
+								</table>
+							</td>
+						</tr><tr>
+							<td style='border:1px solid #ccc;'>
+								<img src='".site_url()."assets/images/mail_bottom.jpg' width='602'>
+							</td>
+						</tr>
+					</table>";
+					//echo $message;
+					//exit();
+					$config = array(
+						'mailtype' => 'html',
+						'charset' => 'utf-8',
+						'smtp_host'=>'localhost',
+						/*'smtp_user'=>'megh.staging@gmail.com',
+						'smtp_pass'=>'Pepsi123@',*/
+						'smtp_port'=>'25',
+						'wordwrap' => TRUE
+					);
+					
+					$subject="Career Request from website";
+					$from=$email;
+					$to='contact@proventusager.com';
+					$this->load->library('email',$config);
+					$this->email->from($from);
+					//echo $attach;die;
+					if($attach!="")
+					{	
+						 $this->email->attach($attach);
+					}  
+					$this->email->subject($subject);
+					$this->email->to($to); 
+					$this->email->message($message);    
+
+					//return $message;
+					if($this->email->send())
+					{
+						echo '';
+					}
+					else
+					{
+						//show_error($this->email->print_debugger());
+						//exit();
+					}
+				}
+		}
+
+	}
+
+
+	}

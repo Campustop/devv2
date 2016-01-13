@@ -1,0 +1,56 @@
+Cakephp Useful links:
+http://alvinalexander.com/php/cakephp-cheat-sheet-reference-page-examples
+
+to get last inserted id:
+
+$this->Model->getLastInsertID();
+http://stackoverflow.com/questions/18106438/cakephp-getting-the-id-of-a-record-from-a-db-table
+
+Syntax error or access violation CakePHP updateAll
+http://stackoverflow.com/questions/16946839/syntax-error-or-access-violation-cakephp-updateall
+
+http://book.cakephp.org/2.0/en/models/saving-your-data.html#model-updateall-array-fields-array-conditions
+
+
+datatable:cakephp
+https://desktop.github.com/
+https://github.com/cnizzdotcom/cakephp-datatable/issues/18
+
+join table in datatable
+https://github.com/cnizzdotcom/cakephp-datatable/wiki/3.-Model-Associations-with-Linkable
+
+bootstrap list style:
+http://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-lists.php
+
+
+requestAction:
+http://stackoverflow.com/questions/5579217/cakephp-requestaction-method-view-file
+
+radio button edit form:
+http://stackoverflow.com/questions/21751986/cakephp-radio-button-field-selected
+
+Dynamic Fields Validation In CakePHP
+http://www.php-dev-zone.com/2013/08/dynamic-fields-validation-in-cakephp.html
+
+Concat in cakephp
+https://github.com/cnizzdotcom/cakephp-datatable/wiki/5.-SUM,-CONCAT,-and-other-SQL-Functions
+
+
+Multiple checkbox in select
+http://codepen.io/elmahdim/pen/hlmri
+
+export to excel in  cakephp
+http://www.iamrohit.in/export-data-in-excel-using-php-and-cakephp/
+http://cakephp2.blogspot.in/2013/01/excel-export.html
+
+jQuery dynamically created datepicker
+http://stackoverflow.com/questions/10594056/jquery-dynamically-created-datepicker-not-working
+
+bxslider Image gallery with captions
+http://bxslider.com/examples/image-slideshow-captions
+
+Font-awesome cheeetsheet
+https://fortawesome.github.io/Font-Awesome/cheatsheet/
+
+CakePHP 3.0 Auth CAPTCHA Example
+https://captcha.com/doc/php/samples/cakephp-auth-captcha-example.html

@@ -14,8 +14,9 @@
       
                         </div>
 			 
-							<?php  echo $this->Flash->render('success'); ?>
-							<?php // echo $this->Session->flash('good'); ?>
+							<?= $this->Flash->render('positive') ?>
+							<?= $this->Flash->render('nagative') ?>
+							<?= $this->Flash->render('delete') ?>
 		                        <div class="panel-body">
 									<div class="table-responsive">
 										<div role="grid" class="dataTables_wrapper form-inline" id="dataTables-example_wrapper">

@@ -1,0 +1,34 @@
+Help with CakePHP-LinkedIn Plugin
+https://groups.google.com/forum/#!topic/cake-php/3z-uasof5rE
+
+INTEGRATE LINKEDIN API IN YOUR SITE
+http://thinkdiff.net/linkedin/integrate-linkedin-api-in-your-site/
+
+
+How to create Linkedin Application for Cakephp User Management Plugin
+http://blog.ektanjali.com/social-media/linkedin/linkedin-application-for-user-management-plugin/(important)
+
+How to build Facebook login using CakePHP Facebook Login Plugin 
+http://www.startutorial.com/articles/view/how-to-build-facebook-login-using-cakephp-facebook-login-plugin
+
+LinkedIn plugin for CakePHP
+https://github.com/inlet/CakePHP-LinkedIn(important)
+
+Linkedin plugin for CakePHP'
+https://packagist.org/packages/oxenti/linkedin
+https://packagist.org/packages/happyr/linkedin-api-client
+
+Social Share
+http://andy-carter.com/cakephp/social-share
+https://recalll.co/app/?q=Authenticate%20Facebook%20users%20in%20Cakephp%203x
+
+
+
+Convert document to pdf:
+----------------------------
+https://media.readthedocs.org/pdf/cakephp-upload/latest/cakephp-upload.pdf
+
+http://bakery.cakephp.org/2012/01/19/Mpdf-component-for-generating-PDF-files-from-HTML.html
+
+most important
+http://cakephp.incorrectcode.news/question/3627128/authenticate-facebook-users-within-cakephp-3x/

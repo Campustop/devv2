@@ -1,6 +1,6 @@
 <?php
 namespace App\Controller\Admin;
-use App\Controller\AppController;
+use App\Controller\Admin\AppController;
 use App\Controller\CountryController;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
@@ -11,7 +11,9 @@ class ProvinceController extends AppController
 	{	
 		parent::beforeFilter($event);
 		//$this->Auth->allow('add','edit');
-		$this->Auth->allow(['add', 'edit','delete']);
+		$this->viewBuilder()->layout('adminMain');
+		//$this->Auth->allow(['add', 'edit','delete']);
+		$this->Authadmin->deny(['add', 'edit','index','delete']);
 
 		
 	}
@@ -59,10 +61,14 @@ class ProvinceController extends AppController
 			if ($this->Province->save($province))
 
 			{
-				$this->Flash->success(__('The city has been saved.'));
+				$this->Flash->success('The redord has been added successfully', [
+          			'key' => 'positive',
+      					]);
 				return $this->redirect(['action' => 'index']);
 			}
-			$this->Flash->error(__('Unable to add the city.'));
+			$this->Flash->error('The redord has not been added.', [
+          			'key' => 'nagative',
+      					]);
 		}
 		$this->set('province', $province);
 		//$data =  $this->Countrys->find('list', ['fields' => ['country_id','country_name']]);
@@ -89,10 +95,14 @@ class ProvinceController extends AppController
     if ($this->request->is(['post', 'put'])) {
         $this->Province->patchEntity($province, $this->request->data);
         if ($this->Province->save($province)) {
-            $this->Flash->success(__('Your article has been updated.'));
+             $this->Flash->success('The redord has been added successfully', [
+          			'key' => 'positive',
+      					]);
             return $this->redirect(['action' => 'index']);
         }
-        $this->Flash->error(__('Unable to update your article.'));
+        $this->Flash->error('The redord has not been added.', [
+          			'key' => 'nagative',
+      					]);
     }
 
     $this->set('province', $province);
@@ -104,7 +114,10 @@ public function delete($id)
 
     $province = $this->Province->get($id);
     if ($this->Province->delete($province)) {
-        $this->Flash->success(__('The article with id: {0} has been deleted.', h($id)));
+       // $this->Flash->success(__('The record has been deleted.', h($id)));
+    	 $this->Flash->success('The redord has been deleted successfully', [
+          			'key' => 'delete',
+      					]);
         return $this->redirect(['action' => 'index']);
     }
 }

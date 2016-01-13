@@ -14,7 +14,10 @@
       
                         </div>
 			 
-							<?php  echo $this->Flash->render('success'); ?>
+							<?php  //echo $this->Flash->render('success'); ?>
+							<?= $this->Flash->render('positive') ?>
+							<?= $this->Flash->render('nagative') ?>
+							<?= $this->Flash->render('delete') ?>
 							<?php // echo $this->Session->flash('good'); ?>
 		                        <div class="panel-body">
 									<div class="table-responsive">
@@ -38,7 +41,26 @@
 													                                    <tr class="gradeA odd">
 																		
 													                                        <td class="sorting_1"><?php echo $list['cms_title']; ?></td>
-													                                        <td class="sorting_1"><?php echo $list['cms_desc']; ?></td>
+													                                        <td class="sorting_1"><?php 
+
+
+													                                        $stringdesc = $list['cms_desc'];
+
+													                                        $string = strip_tags($stringdesc);
+
+if (strlen($string) > 250) {
+
+    // truncate string
+    $stringCut = substr($string, 0, 500);
+
+    // make sure it ends in a word so assassinate doesn't become ass...
+    $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'..........'; 
+}
+echo $string;
+
+													                                         ?>
+
+													                                        </td>
 													                                        
 													                                         
 													                                         
@@ -84,3 +106,7 @@
     });
 });
   </script>
+
+
+
+  

@@ -5,7 +5,7 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                           Edit Province 
+                           Add Province 
                         </div>
                        <div class="panel-body">
                             <div class="row">

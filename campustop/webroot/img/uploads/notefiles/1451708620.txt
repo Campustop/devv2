@@ -1,0 +1,33 @@
+@media (min-width: 768px)
+.sidebar-mini.sidebar-collapse .main-sidebar {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+    width: 93px!important;
+    z-index: 850;
+
+
+.user-panel>.image>img {
+    width: 100%;
+    max-width: 70px;
+    height: auto;
+}
+
+
+.main-header {
+    /* position: relative;
+
+
+.user-panel {
+    margin-top: -36%;
+    overflow: hidden;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+
+
+.main-header {
+    margin-left: 7%;
+    max-height: 100px;
+}

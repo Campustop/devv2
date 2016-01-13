@@ -201,3 +201,14 @@ DispatcherFactory::add('ControllerFactory');
  */
 Type::build('date')->useLocaleParser();
 Type::build('datetime')->useLocaleParser();
+
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'campustop');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_PREFIX', '');
+//site config
+define('BASE_PATH', 'http://localhost/cakephp3/');
+
+
+//Social Logins

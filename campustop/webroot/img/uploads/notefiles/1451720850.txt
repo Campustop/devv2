@@ -1,0 +1,64 @@
+		  $this->set('profile', $this->Profile->find('all')->contain(['Province','Countrys','City']));
+
+  
+
+      	if ($this->request->is('post'))
+		{
+			
+			if (!empty($this->request->data)) 
+					{
+						$profile = $this->Profile->patchEntity($profile, $this->request->data);
+
+
+						if($this->request->data)
+						
+						{
+							
+								
+
+									
+								
+							if ($this->Profile->save($profile))
+							{
+
+							echo "dfdfxxxxxss";
+								exit;
+
+    						$users = TableRegistry::get('users');
+						  	$query = $users->query();
+						 	$query->update()
+						      ->set(['fname' => $this->request->data['fname'],'lname' => $this->request->data['lname'],'mname' => $this->request->data['mname']])
+	    					->where(['user_id' => 37])
+	    						->execute();
+
+
+
+
+	    						$this->Flash->success('The user has been saved', [
+						    'key' => 'positive',
+						]);
+			   				return $this->redirect(['action' => 'index']);
+
+	    					}
+
+	    					else 
+			   				{
+			  					$this->Flash->error('Records not be saved. Please, try again.');
+			   				}
+							
+					
+						
+						
+					}
+			 // $profile = $this->Profile->patchEntity($profile, $this->request->data);
+
+					
+		}
+
+
+       
+
+
+
+     	
+	}

@@ -14,8 +14,11 @@
       
                         </div>
 			 
-							<?php  echo $this->Flash->render('success'); ?>
-							<?php // echo $this->Session->flash('good'); ?>
+							 <?= $this->Flash->render('positive') ?>
+							 <?= $this->Flash->render('negative') ?>
+							 <?= $this->Flash->render('delete') ?>
+							 <?= $this->Flash->render('update') ?>
+                          
 		                        <div class="panel-body">
 									<div class="table-responsive">
 										<div role="grid" class="dataTables_wrapper form-inline" id="dataTables-example_wrapper">
@@ -26,8 +29,6 @@
 																	<th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 500px;" aria-sort="ascending" aria-label="Category Name">Country Id</th>
 																	<th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 500px;" aria-sort="ascending" aria-label="Category Name">Country Code</th>
 																	<th class="sorting_asc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 500px;" aria-sort="ascending" aria-label="Category Name">Country Code</th>
-																	
-																	
 																	<th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 200px;" aria-label="Action">Action</th>
 																	
 																	</tr>
@@ -37,26 +38,13 @@
 										   							  		{?>
 													                            <?php foreach ($countrys as $list): ?>
 													                                    <tr class="gradeA odd">
-																		
-																		 					
-													                                        <td class="sorting_1"><?php echo $list['country_id']; ?></td>
+																							<td class="sorting_1"><?php echo $list['country_id']; ?></td>
 													                                        <td class="sorting_1"><?php echo $list['country_name']; ?></td>
 													                                        <td class="sorting_1"><?php echo $list['country_code']; ?></td>
-													                                        
-													                                         
-													                                         
-
-
-													                                       <td class=" "> 
-
-													      
-
-													<?=$this->Html->link( 'Edit', ['controller' => 'Countrys','action' => 'edit', $list['country_id']] ); ?>  |  <?= $this->Form->postLink('Delete',['action' => 'delete', $list['country_id']],['confirm' => 'Are you sure?'])?>
-
+													                                      	<td class=" "> <?=$this->Html->link( 'Edit', ['controller' => 'Countrys','action' => 'edit', $list['country_id']] ); ?>  |  <?= $this->Form->postLink('Delete',['action' => 'delete', $list['country_id']],['confirm' => 'Are you sure?'])?>
 
 																		 					</td>
-																	   
-													                                        </tr>
+													                                    </tr>
 																			<?php endforeach; ?>
 																	<?php 	}
 																			else

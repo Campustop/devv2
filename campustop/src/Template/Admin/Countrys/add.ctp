@@ -28,6 +28,7 @@
 						</td>
 						<td>
 							<?php echo $this->Form->input('country_code', ['type' => 'text', 'label' => false]); ?>
+							<?php echo $this->Form->hidden('created_dt', ['value'=>time()]); ?>
 						</td>
 					</tr>
 					<tr>
@@ -38,13 +39,6 @@
 							<?php
 									$options = array(1 => 'YES',2 => 'NO');
 									echo $this->Form->input('status',['type'=>'checkbox','value'=>'1', 'options' => $options ,'label'=>false]);
-						?>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<?php
-									echo $this->Form->hidden('created_dt', ['value'=>time()]);
 						?>
 						</td>
 					</tr>

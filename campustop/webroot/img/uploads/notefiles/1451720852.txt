@@ -1,0 +1,65 @@
+ <script type="text/javascript">
+$(document).ready(function() 
+{
+ 
+  /* dropdown and filter select */
+  var bannedWords = ["cat", "dog", "test","madhuri","nidhi"],
+  regex = new RegExp('\\b' + bannedWords.join("\\b|\\b") + '\\b', 'i');
+
+console.log(regex); 
+console.log(regex.test(this.value));  
+
+$( "#noteform" ).submit(function( event ) {
+//  $( "#noteform" ).focus(function() {
+
+  //alert("hello");
+ 
+ var val = $('#description_resourse').val();
+    
+    if(!val)
+  {
+     //alert("dsfsdfdf");
+       $("#messageblank").show("slow");
+       $('#description_resourse').addClass('bordered');  
+       return false;
+  }
+    //alert(regex);
+    if(!regex.test(val))
+  {
+    //alert("valid");
+    $("#messagevalid").show();
+    $('#description_resourse').addClass('borderdgreen');  
+    
+    $("#messagenotvalid").hide("slow");
+      $("#messageblank").hide("slow");
+  
+    return true;
+  }
+  else
+  {
+      data = val+ " is not a proper word.";
+      $("#messagenotvalid").show("slow");
+     $("#messagevalid").hide("slow");
+       $("#messageblank").hide("slow");
+       $('#description_resourse').addClass('bordered');  
+       $('#description_resourse').removeClass('borderdgreen'); 
+       $('#messagenotvalid').html(data); 
+    return false;
+
+  }
+    
+  return true;
+  
+});
+
+
+
+
+//return true;
+  
+  /* Select2 plugin as tagpicker */
+ 
+
+}); //script         
+     
+      </script>

@@ -14,8 +14,15 @@
       
                         </div>
 			 
-							<?php  echo $this->Flash->render('success'); ?>
+							<?php  //echo $this->Flash->render('success'); ?>
 							<?php // echo $this->Session->flash('good'); ?>
+
+							<?= $this->Flash->render('positive') ?>
+
+
+							
+							<?= $this->Flash->render('nagative') ?>
+							<?= $this->Flash->render('delete') ?>
 		                        <div class="panel-body">
 									<div class="table-responsive">
 										<div role="grid" class="dataTables_wrapper form-inline" id="dataTables-example_wrapper">
@@ -43,7 +50,7 @@
 																		
 													                                        <td class="sorting_1"><?php echo $list['province_name']; ?></td>
 													                                        <td class="sorting_1"><?php echo $list['country']['country_name']; ?></td>
-													                                         <td class="sorting_1"><?php echo $list['status']; ?></td>
+													                                        
 													                                         
 													                                         
 

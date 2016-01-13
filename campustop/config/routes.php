@@ -47,15 +47,17 @@ Router::scope('/', function ($routes) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+    $routes->connect('/', ['controller' => 'Home', 'action' => 'index']);
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */
-    $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
-   Router::prefix('admin', function($routes) {
-  $routes->connect('/', ['controller' => 'Users', 'action' => 'home']);
+    $routes->connect('/pages/*', ['controller' => 'Home', 'action' => 'index']);
+     Router::prefix('admin', function($routes) {
+  $routes->connect('/admin/*', ['controller' => 'Users', 'action' => 'dashboard']);
+  $routes->fallbacks('InflectedRoute');
 });
+
 
     /**
      * Connect catchall routes for all controllers.

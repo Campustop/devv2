@@ -29,13 +29,8 @@ public function validationDefault(Validator $validator)
     {
         return $validator
             ->notEmpty('country_name', 'A country name is required')
-            ->notEmpty('country_code', 'A country code is required')
-             ->add('country_name', [
-        'length' => [
-            'rule' => ['minLength', 2],
-            'message' => 'country name need to be at least 10 characters long',
-        ]
-        ]);
+            ->notEmpty('country_code', 'A country code is required');
+      
     
           
            

@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Admin;
-use App\Controller\AppController;
+use App\Controller\Admin\AppController;
+use Cake\Event\Event;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 
@@ -10,7 +11,9 @@ class ProgramController extends AppController
 	{	
 		parent::beforeFilter($event);
 		//$this->Auth->allow('add','edit');
-		$this->Auth->allow(['add', 'edit','delete']);
+		$this->viewBuilder()->layout('adminMain');
+		//$this->Auth->allow(['add', 'edit','delete']);
+		$this->Authadmin->deny(['add', 'edit','index','delete']);
 
 		
 	}
@@ -43,13 +46,19 @@ class ProgramController extends AppController
 		if ($this->request->is('post'))
 		{
 			$program = $this->Program->patchEntity($program, $this->request->data);
+			
+			$program->pro_code=strtoupper($this->request->data['pro_code']);
 			if ($this->Program->save($program))
 
 			{
-				$this->Flash->success(__('The program has been saved.'));
+				$this->Flash->success('The redord has been added successfully', [
+          			'key' => 'positive',
+      					]);
 				return $this->redirect(['action' => 'index']);
 			}
-			$this->Flash->error(__('Unable to add the program.'));
+			$this->Flash->error('The redord has not been added.', [
+          			'key' => 'nagative',
+      					]);
 		}
 		$this->set('program', $program);
 
@@ -64,11 +73,16 @@ class ProgramController extends AppController
     $program = $this->Program->get($id);
     if ($this->request->is(['post', 'put'])) {
         $this->Program->patchEntity($program, $this->request->data);
+        $program->pro_code=strtoupper($this->request->data['pro_code']);
         if ($this->Program->save($program)) {
-            $this->Flash->success(__('Your Program has been updated.'));
+            $this->Flash->success('The redord has been added successfully', [
+          			'key' => 'positive',
+      					]);
             return $this->redirect(['action' => 'index']);
         }
-        $this->Flash->error(__('Unable to update your Program.'));
+        $this->Flash->error('The redord has not been added.', [
+          			'key' => 'nagative',
+      					]);
     }
 
     $this->set('program', $program);
@@ -80,7 +94,10 @@ public function delete($id)
 
     $program = $this->Program->get($id);
     if ($this->Program->delete($program)) {
-        $this->Flash->success(__('The program with id: {0} has been deleted.', h($id)));
+        //$this->Flash->success(__('The record has been deleted.', h($id)));
+         $this->Flash->success('The redord has been deleted successfully', [
+          			'key' => 'positivedelete',
+      					]);
         return $this->redirect(['action' => 'index']);
     }
 }

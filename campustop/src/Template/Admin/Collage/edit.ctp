@@ -12,12 +12,12 @@ $("#country_id").change(function(){
 	
      $.ajax({
                     type:"POST",
-                    url:"http://localhost/cakephp3/admin/collage/getprovince",
+                    url:"<?php echo SITEURL.'admin/collage/getprovince'; ?>",
                      data: {countryid:country},
                       dataType:"json",
                     success: function(data)
                     {
-alert(data);
+//alert(data);
 //var obj = jQuery.parseJSON(data);
 //alert(obj.province_id);
 
@@ -26,16 +26,7 @@ alert(data);
 
 					        html += '<option value="'+item.province_id+'">'+item.province_name+'</option>';
 					       });
-      /*var trHTML = '';
-        $.each(data, function (i, item) {
-        	alert(item.province_name+"dd");
-            trHTML += '<tr><td>' + item.province_id + '</td><td>' + item.province_name + '</td></tr>';
-        });*/
-
-
-
-                    	alert(data);
-                        //$("#bindcity").html(data);
+     
                         $('#bindcity').html(html);
                     }
             });

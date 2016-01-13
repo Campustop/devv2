@@ -1,6 +1,6 @@
 <?php
 namespace App\Controller\Admin;
-use App\Controller\AppController;
+use App\Controller\Admin\AppController;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 
@@ -9,8 +9,10 @@ class CmsController extends AppController
 	public function beforeFilter(Event $event)
 	{	
 		parent::beforeFilter($event);
+		$this->viewBuilder()->layout('adminMain');
 		//$this->Auth->allow('add','edit');
-		$this->Auth->allow(['add', 'edit','delete']);
+		//$this->Auth->allow(['add', 'edit','delete']);
+		$this->Authadmin->deny(['add', 'edit','index','delete']);
 
 		
 	}
@@ -46,10 +48,16 @@ class CmsController extends AppController
 			if ($this->Cms->save($cms))
 
 			{
-				$this->Flash->success(__('The cms has been saved.'));
+				//$this->Flash->success(__('The cms has been saved.'));
+					$this->Flash->success('The record has been saved successfully', [
+          			'key' => 'positive',
+      					]);
+
 				return $this->redirect(['action' => 'index']);
 			}
-			$this->Flash->error(__('Unable to add the Cms.'));
+			$this->Flash->error('The record has not been saved', [
+          			'key' => 'nagative',
+      					]);
 		}
 		$this->set('cms', $cms);
 
@@ -65,10 +73,18 @@ class CmsController extends AppController
     if ($this->request->is(['post', 'put'])) {
         $this->Cms->patchEntity($cms, $this->request->data);
         if ($this->Cms->save($cms)) {
-            $this->Flash->success(__('Your cms has been updated.'));
+
+            //$this->Flash->success(__('Your cms has been updated.'));
+            $this->Flash->success('The redord has been updated successfully', [
+          			'key' => 'positive',
+      					]);
             return $this->redirect(['action' => 'index']);
         }
-        $this->Flash->error(__('Unable to update your cms.'));
+        //$this->Flash->error(__('Unable to update your cms.'));
+
+           $this->Flash->error('The redord has not been updated.', [
+          			'key' => 'nagative',
+      					]);
     }
 
     $this->set('cms', $cms);
@@ -80,7 +96,10 @@ public function delete($id)
 
     $cms = $this->Cms->get($id);
     if ($this->Cms->delete($cms)) {
-        $this->Flash->success(__('The article with id: {0} has been deleted.', h($id)));
+       // $this->Flash->success(__('The record has been deleted.', h($id)));
+    	 $this->Flash->success('The redord has been deleted successfully', [
+          			'key' => 'positive',
+      					]);
         return $this->redirect(['action' => 'index']);
     }
 }

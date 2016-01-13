@@ -1,0 +1,327 @@
+<script>
+$(document).ready(function() 
+{
+
+
+    $("#bindstate").change(function(){
+    
+    var city=$("#bindstate").val();
+
+    //alert(city);
+    
+     $.ajax({
+                    type:"POST",
+                    url:"<?php echo SITEURL.'profile/getcity'; ?>",
+                     data: {cityid:city},
+                      dataType:"json",
+                    success: function(data)
+                    {
+//alert(data);
+//var obj = jQuery.parseJSON(data);
+//alert(obj.province_id);
+
+  var html = '<option value=""><?php echo "choose city"; ?></option>' ;
+                          $.each(data, function (i, item) {
+
+                            html += '<option value="'+item.city_id+'">'+item.city_name+'</option>';
+                           });
+      /*var trHTML = '';
+        $.each(data, function (i, item) {
+            alert(item.province_name+"dd");
+            trHTML += '<tr><td>' + item.province_id + '</td><td>' + item.province_name + '</td></tr>';
+        });*/
+
+
+
+                        //alert(data);
+                        //$("#bindcity").html(data);
+                        $('#bindcity').html(html);
+                    }
+            });
+    
+    });
+
+
+$("#stateclass").change(function(){
+    
+    var country=$("#stateclass").val();
+
+    //alert(country);
+    
+     $.ajax({
+                    type:"POST",
+                    url:"<?php echo SITEURL.'profile/getprovince'; ?>",
+                     data: {countryid:country},
+                      dataType:"json",
+                    success: function(data)
+                    {
+//alert(data);
+//var obj = jQuery.parseJSON(data);
+//alert(obj.province_id);
+
+  var html = '<option value=""><?php echo "choose province"; ?></option>' ;
+                          $.each(data, function (i, item) {
+
+                            html += '<option value="'+item.province_id+'">'+item.province_name+'</option>';
+                           });
+      /*var trHTML = '';
+        $.each(data, function (i, item) {
+            alert(item.province_name+"dd");
+            trHTML += '<tr><td>' + item.province_id + '</td><td>' + item.province_name + '</td></tr>';
+        });*/
+
+
+
+                        //alert(data);
+                        //$("#bindcity").html(data);
+                        $('#bindstate').html(html);
+                    }
+            });
+    
+    });
+
+ });
+
+
+
+</script>
+<style type="text/css">
+.nav-tabs>li {
+
+   border-left: 1px solid #ddd;
+        font-size: 19px;
+        
+}  
+
+  .nav-tabs {
+    
+    background-color: #F8F8F8;
+}
+.form-control {
+    display: inline-table;
+        width: 79%;
+
+}
+
+select#email_flag option[value="null"]   
+{ 
+
+    background-image:url("http://localhost/cakephp3/webroot/img/globe.jpg"); 
+      background-repeat: no-repeat;
+}
+
+input[type="text"].error, input[type="file"].error, input[type="password"].error,input[type="checkbox"].error textarea.error, select.error {
+ border:1px solid #F00!important;
+}
+
+label.error {
+ color:#ff0000!important;
+}
+
+</style>
+
+<nav class="navbar navbar-static-top" role="navigation" style="min-height: 45px;background-color:#F1F1F1;border-bottom: 1px solid #D3D7DA;">
+       <section id="tabs" class="page-section">
+            <div class="" style="">
+  <div class="row">
+                    <div class="col-md-12" >
+                        <div role="tabpanel" style="background-color: #FFFFFF;">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#home1" aria-controls="home" role="tab" data-toggle="tab">
+                                    <i class="fa fa-home"></i> My Introduction</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#profile1" aria-controls="profile" role="tab" data-toggle="tab">
+                                    <i class="fa fa-user"></i> Education</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#messages1" aria-controls="messages" role="tab" data-toggle="tab">
+                                    <i class="fa fa-comment"></i>Skills & Interests</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#settings1" aria-controls="settings" role="tab" data-toggle="tab">
+                                    <i class="fa fa-cogs"></i>Work Experiance</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#settings1" aria-controls="settings" role="tab" data-toggle="tab">
+                                    <i class="fa fa-cogs"></i>My Activity</a>
+                                </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content" style="">
+                                <div role="tabpanel" class="tab-pane active" id="home1" style="padding-left:1%;padding-right:1%;">
+                                     <section id="contact-us" class="page-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 contact-info">
+                            
+                        </div>
+                    </div>
+                    <hr class="pad-10">
+                    <div class="row">
+                        <div class="col-md-5" style="">
+                         <?= $this->Flash->render('positive') ?>
+                            <p class="form-message" style="display: none;"></p>
+                            <div class="contact-form">
+                                <!-- Form Begins -->
+                                <?php
+                                //pr($profile);
+                                //die;
+                                ?>
+                                <?= $this->Form->create($profile,['name'=>'profile','id'=>'profile']) ?>
+                                        <!-- Field 1 -->
+                                        <div class="input-text form-group">
+                                            <input type="text" name="fname" class="input-name form-control" required="required" placeholder="first Name" value="<?php if(($user->fname)!="") { echo $user->fname;} else { echo ""; } ?>" />
+                                        </div>
+                                        <!-- Field 2 -->
+                                       <div class="input-text form-group">
+                                            <input type="text" name="mname" class="input-name form-control" required="required" placeholder="Middle Name" value="<?php if(($user->mname)!="") { echo $user->mname;} else { echo ""; } ?>" />
+                                        </div>
+                                        <!-- Field 3 -->
+                                        <div class="input-email form-group">
+                                            <input type="text" name="lname" class="input-phone form-control" required="required" placeholder="Last Phone" value="<?php if(($user->lname)!="") { echo $user->lname;} else { echo ""; } ?>"/>
+                                        </div>
+                                         <div class="input-text form-group">
+                                            <input type="email" name="username" class="input-email form-control" placeholder="Email" value="<?php if(($user->username)!="") { echo $user->username;} else { echo ""; } ?>"/>&nbsp;
+<img class="" src="<?=SITEURL; ?>webroot/img/globe.jpg" alt="">
+                                            <select name="email_flag" required="required" >
+                                         <option value=""><img src="<?=SITEURL; ?>webroot/img/globe.jpg" width="24" height="25"></option>
+                                         <option value="1" <?php if(($profile->email_flag) == 1) { echo 'selected="selected"' ;} ?>>public</option>
+                                         <option value="0" <?php if(($profile->email_flag) == 0) { echo 'selected="selected"' ;} ?>>private</option>
+                                         
+                                        </select>
+
+                                       
+                                        </div>
+
+                                         <div class="input-text form-group">
+                                         Gender
+                                           <input type="radio" name="gender" value="M" <?php if(($profile->gender) == 'M') { echo 'checked="checked"' ;} ?>> Male
+                                            <input type="radio" name="gender" value="F" <?php if(($profile->gender) == 'F') { echo 'checked="checked"' ;} ?>> Female
+                                            &nbsp;<select name="gender_flag" required="required" >
+                                         <option value="" data-image="<?=SITEURL; ?>webroot/img/globe.jpg" ></option>
+                                         <option value="1" <?php if(($profile->gender_flag) == 1) { echo 'selected="selected"' ;} ?>>public</option>
+                                         <option value="0" <?php if(($profile->gender_flag) == 0) { echo 'selected="selected"' ;} ?>>private</option>
+                                         
+                                        </select>
+                                        </div>
+                                        <!-- Field 4 -->
+                                        <!--<div class="textarea-message form-group">
+                                            <textarea name="contact_number" class="textarea-message hight-82 form-control" placeholder="Contact No. Eg. +19876543210" rows="2" ></textarea>
+                                        </div>-->
+                                         <div class="input-text form-group">
+                                            <input type="text" required="required" name="contact_number" class="input-phone form-control" placeholder="Contact No. Eg. +19876543210" value="<?php if(($profile->contact_number)!="") { echo $profile->contact_number;} else { echo ""; } ?>" />&nbsp;<select name="contact_flag" required="required" >
+                                         <option value="" style="background-image:url('http://localhost/cakephp3/webroot/img/globe.jpg'); " ></option>
+                                         <option value="1" <?php if(($profile->contact_flag) == 1) { echo 'selected="selected"' ;} ?>>public</option>
+                                         <option value="0" <?php if(($profile->contact_flag) == 0) { echo 'selected="selected"' ;} ?>>private</option>
+                                         
+                                        </select>
+                                        </div>
+
+                                        <div class="input-email form-group">
+                                            <?php echo $this->Form->select('country_id', $country, array('id'=>'stateclass','class'=>'form-control','empty' => 'choose country','required' =>'required'));?>
+                                            &nbsp;<select name="country_flag" required="required" >
+                                         <option value="" style="background-image:url('http://localhost/cakephp3/webroot/img/globe.jpg'); " ></option>
+                                         <option value="1" <?php if(($profile->country_flag) == 1) { echo 'selected="selected"' ;} ?>>public</option>
+                                         <option value="0" <?php if(($profile->country_flag) == 0) { echo 'selected="selected"' ;} ?>>private</option>
+                                         
+                                        </select>
+
+                                                    </div>
+
+                                        <div class="input-email form-group">
+                                        <!--<select name="province_id" required="required" id="bindstate" class="form-control">
+                                         <option value=""><?php echo "choose province"; ?></option>
+                                        </select>-->
+                                        <?php echo $this->Form->select('province_id', $province, array('id'=>'bindstate','class'=>'form-control','empty' => 'choose province','required' =>'required'));?>&nbsp;<select name="province_flag" required="required" >
+                                         <option value="" style="background-image:url('http://localhost/cakephp3/webroot/img/globe.jpg'); " ></option>
+                                         <option value="1" <?php if(($profile->province_flag) == 1) { echo 'selected="selected"' ;} ?>>public</option>
+                                         <option value="0" <?php if(($profile->province_flag) == 0) { echo 'selected="selected"' ;} ?>>private</option>
+                                         
+                                        </select>
+                                         </div>
+
+                                         <div class="input-email form-group">
+                                        <!--<select name="city_id" required="required" id="bindcity" class="form-control">
+                                         <option value=""><?php echo "choose city"; ?></option>
+                                        </select>-->
+                                        <?php echo $this->Form->select('city_id', $city, array('id'=>'bindcity','class'=>'form-control','empty' => 'choose city','required' =>'required'));?>
+                                        &nbsp;<select name="city_flag" required="required" >
+                                         <option value="" style="background-image:url('http://localhost/cakephp3/webroot/img/globe.jpg'); " ></option>
+                                         <option value="1" <?php if(($profile->city_flag) == 1) { echo 'selected="selected"' ;} ?>>public</option>
+                                         <option value="0" <?php if(($profile->city_flag) == 0) { echo 'selected="selected"' ;} ?>>private</option>
+                                         
+                                        </select>
+                                         </div>
+
+                                         <div class="input-email form-group">
+                                        <select name="timezone" required="required"  class="form-control">
+                                         <option value=""><?php echo "choose timezone"; ?></option>
+                                         <option value="UTC+05:30 (IST)" <?php if(($profile->timezone) == "UTC+05:30 (IST)") { echo 'selected="selected"' ;} ?>>UTC+05:30 (IST)</option>
+                                         <option value="UTC−08:00 (PST)" <?php if(($profile->timezone) == "UTC−08:00 (PST)") { echo 'selected="selected"' ;} ?>>UTC−08:00 (PST)</option>
+                                         <option value="UTC−07:00 (MST)" <?php if(($profile->timezone) == "UTC−07:00 (MST)") { echo 'selected="selected"' ;} ?>>UTC−07:00 (MST)</option>
+                                         <option value="UTC−06:00 (CST)"  <?php if(($profile->timezone) == "UTC−06:00 (CST)") { echo 'selected="selected"' ;} ?>>UTC−06:00 (CST)</option>
+                              
+                                        </select>&nbsp;<select name="timezone_flag" required="required" >
+                                         <option value="" style="background-image:url('http://localhost/cakephp3/webroot/img/globe.jpg'); " ></option>
+                                         <option value="1" <?php if(($profile->timezone_flag) == 1) { echo 'selected="selected"' ;} ?>>public</option>
+                                         <option value="0" <?php if(($profile->timezone_flag) == 0) { echo 'selected="selected"' ;} ?>>private</option>
+                                         
+                                        </select>
+                                         </div>
+
+                                            
+
+                                        <div class="input-text form-group">
+                                            <input type="text" name="zipcode" required="required" class="input-zipcode form-control" placeholder="Zipcode" value="<?php if(($profile->zipcode)!="") { echo $profile->zipcode;} else { echo ""; } ?>" />&nbsp;<select name="zipcode_flag" required="required" >
+                                         <option value="" style="background-image:url('http://localhost/cakephp3/webroot/img/globe.jpg'); " ></option>
+                                         <option value="1" <?php if(($profile->zipcode_flag) == 1) { echo 'selected="selected"' ;} ?>>public</option>
+                                         <option value="0" <?php if(($profile->zipcode_flag) == 0) { echo 'selected="selected"' ;} ?>>private</option>
+                                         
+                                        </select>
+                                        </div>
+                                        <!-- Button -->
+                                       
+
+                                        <div>
+                                                    <?php echo $this->Form->button('Save', array('type' => 'submit','class'=>'myButton hvr-grow','id'=>'profilebtn','style'=>'rgba(0, 0, 0, 0) url("../../select2.png") no-repeat scroll 0 1px'));?>
+                                                </div>
+                               <?php echo $this->Form->end(); ?>
+                                <!-- Form Ends -->
+                            </div>
+                        </div>                      
+                        <div class="col-md-7">
+                     <?= $this->Form->create($profile,['name'=>'profilepic','id'=>'profilepic']) ?>
+                            <div class="col-md-6 col-md-offset-3">
+                            <h2 class="" style="font-family:'Lato';" >Your Photo</h2>
+                             <div class="input-text form-group">
+                            <img src="<?=SITEURL; ?>webroot/img/profile_image.jpg" width="100%" height="41%">
+                            </div>
+                            <div class="input-text form-group">
+                            <?php echo $this->Form->input('profile_pic', array('type' => 'file','label' => false,'required' => 'required')); ?>
+                            </div>
+                             <div>
+                                <?php echo $this->Form->button('Upload Image', array('type' => 'submit','class'=>'myButton hvr-grow','id'=>'profilepicbtn','style'=>'rgba(0, 0, 0, 0) url("../../select2.png") no-repeat scroll 0 1px'));?>
+                                                </div>
+                            </div>
+                            <?php echo $this->Form->end(); ?>
+                        </div><!-- map -->
+                </div>
+            </section><!-- page-section -->
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="profile1">
+                                <h5>Profile</h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae odit iste exercitationem praesentium deleniti nostrum laborum rem id nihil tempora. Adipisci ea commodi unde nam placeat cupiditate quasi a ducimus rem consequuntur ex eligendi minima voluptatem assumenda voluptas quidem sit maiores odio velit voluptate. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae odit iste exercitationem praesentium deleniti nostrum laborum rem id nihil tempora. Adipisci ea commodi unde nam placeat cupiditate quasi a ducimus rem consequuntur ex eligendi minima voluptatem assumenda voluptas quidem sit maiores odio velit voluptate.</div>
+                                <div role="tabpanel" class="tab-pane" id="messages1">
+                                <h5>Message</h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae odit iste exercitationem praesentium deleniti nostrum laborum rem id nihil tempora. Adipisci ea commodi unde nam placeat cupiditate quasi a ducimus rem consequuntur ex eligendi minima voluptatem assumenda voluptas quidem sit maiores odio velit voluptate. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae odit iste exercitationem praesentium deleniti nostrum laborum rem id nihil tempora. Adipisci ea commodi unde nam placeat cupiditate quasi a ducimus rem consequuntur ex eligendi minima voluptatem assumenda voluptas quidem sit maiores odio velit voluptate.</div>
+                                <div role="tabpanel" class="tab-pane" id="settings1">
+                                <h5>Settings</h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae odit iste exercitationem praesentium deleniti nostrum laborum rem id nihil tempora. Adipisci ea commodi unde nam placeat cupiditate quasi a ducimus rem consequuntur ex eligendi minima voluptatem assumenda voluptas quidem sit maiores odio velit voluptate. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae odit iste exercitationem praesentium deleniti nostrum laborum rem id nihil tempora. Adipisci ea commodi unde nam placeat cupiditate quasi a ducimus rem consequuntur ex eligendi minima voluptatem assumenda voluptas quidem sit maiores odio velit voluptate.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            </section>
+            </nav>
