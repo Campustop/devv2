@@ -107,8 +107,8 @@ class ForgotpasswordController extends AppController
                                     $message .= '</table></body></html>';
                                      
                                     // Sending email
-                                   echo $message;
-                                    die;
+                                  // echo $message;
+                                   // die;
                                     if(mail($to, $subject, $message, $headers)){
                                         echo 'Your mail has been sent successfully.';
                                     } else{

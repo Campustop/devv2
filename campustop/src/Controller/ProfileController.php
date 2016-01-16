@@ -315,41 +315,42 @@ class ProfileController extends AppController
 			}		
 		}
 	}
-	function work()
+function work()
    	{
    		$id=$this->Auth->user('user_id');
 		$articlesTable = TableRegistry::get('user_work_experiance');
 		$article = $articlesTable->newEntity();
-		$i="";
+
 		$existingid = $articlesTable->find()->where(['user_id' => $id])->toArray();
 
 	   	if ($this->request->is('post'))
 		{
-			//pr(count($existingid));die;
-
 			if (count($existingid) <= 0)
 			{
-
-				echo count($this->request->data['company_name']);
-				$i=0;
-				$k=0;
-
-				//$article = $articlesTable->query();
-				for($i=0;$i<count($this->request->data['company_name']);$i++)
+				foreach($this->request->data['company_name'] as $k => $v)
 				{
-					
+					$article = $articlesTable->query();
+					if(isset($this->request->data['work_flag'][$k]))
+					{
+						$flag=$this->request->data['work_flag'][$k];
+					}
+					else
+					{
+						$flag="";
+					}
+					$article->insert(['worked_in', 'job_was', 'worked_on', 'work_from', 'work_end','work_experience','user_id','work_flag'])
+					->values([
+					'worked_in' => $this->request->data['company_name'][$k],
+					'job_was' => $this->request->data['job'][$k], 
+					'worked_on' => $this->request->data['worked_on'][$k],
+					'work_from' => $this->request->data['work_from'][$k],
+					'work_end' => $this->request->data['work_end'][$k],
+					'work_experience' => $this->request->data['work_experience'][$k],
+					'user_id' => $id,
+					'work_flag' =>$flag,
+					])
+					->execute();
 
-						$attrdata=[
-									'worked_in' => $this->request->data['company_name'][$i],
-									'job_was' => $this->request->data['job'][$i], 
-									'worked_on' => $this->request->data['worked_on'][$i],
-									'work_from' => $this->request->data['work_from'][$i],
-									'work_end' => $this->request->data['work_end'][$i],
-									'work_experience' => $this->request->data['work_experience'][$i],
-									'user_id' => $id,
-									'work_flag' => $this->request->data['work_flag'][$i],
-								];
-								$article->save($attrdata);
 				}
 				
 			}
@@ -357,25 +358,26 @@ class ProfileController extends AppController
 			{
 
 				$articlesTable->deleteAll(['user_id' => $id]);
+
 				$article = $articlesTable->query();	
-				for($k=0;$k<count($this->request->data['company_name']);$k++)
+				foreach($this->request->data['company_name'] as $k => $v)
 				{
+					
 					
 
 				$article->insert(['worked_in', 'job_was', 'worked_on', 'work_from', 'work_end','work_experience','user_id','work_flag'])
 				->values([
-				'worked_in' => $this->request->data['company_name'][$i],
-				'job_was' => $this->request->data['job'][$i], 
-				'worked_on' => $this->request->data['worked_on'][$i],
-				'work_from' => $this->request->data['work_from'][$i],
-				'work_end' => $this->request->data['work_end'][$i],
-				'work_experience' => $this->request->data['work_experience'][$i],
+				'worked_in' => $this->request->data['company_name'][$k],
+				'job_was' => $this->request->data['job'][$k], 
+				'worked_on' => $this->request->data['worked_on'][$k],
+				'work_from' => $this->request->data['work_from'][$k],
+				'work_end' => $this->request->data['work_end'][$k],
+				'work_experience' => $this->request->data['work_experience'][$k],
 				'user_id' => $id,
-				'work_flag' => $this->request->data['work_flag'][$i],
+				'work_flag' => $this->request->data['work_flag'][$k],
 				])
 				->execute();
 
-				$i++;
 				
 				}
 

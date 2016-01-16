@@ -48,7 +48,8 @@ class AppController extends Controller
 
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['index', 'view', 'display','logout','setcountry','fblogin', 'fb_login','googlelogin','add','social_acount_info','googleloginfn','ratingcal','gridlist','notlistfree','notelistpr','gridlistfree','notelistpr','gridlistfree','gridlistpr']);
+
+        $this->Auth->allow(['index', 'view', 'display','logout','setcountry','subscribenewsletter','fblogin', 'fb_login','googlelogin','add','social_acount_info','googleloginfn','ratingcal','gridlist','notlistfree','notelistpr','gridlistfree','notelistpr','gridlistfree','gridlistpr']);
         $this->set('user', $this->Auth->user());
 
        

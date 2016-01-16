@@ -47,7 +47,7 @@ class NotedetailsController extends AppController
         //pr($noteratedetails);die;
 
         $notesfeedbackTable = TableRegistry::get('note_feedback');
-		$feedback = $notesfeedbackTable->find()->where(['note_feedback.note_id' => $id])->contain(['Note','Users'])->toArray();
+		$feedback = $notesfeedbackTable->find()->where(['note_feedback.note_id' => $id])->contain(['note','Users'])->toArray();
 		//pr($feedback);die;
 
 		$notelistTable = TableRegistry::get('note');

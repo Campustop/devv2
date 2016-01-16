@@ -34,21 +34,35 @@ class NotelistController extends AppController
 
 		function index()
 		{
-			$note = TableRegistry::get('note');
-	      	$note1 = $note->find()->contain(['Users'])->toArray();
+			 $note = TableRegistry::get('note');
+	        //$note1 = $note->find()->contain(['Users','Noterate']);
 
-	      	
-	     
-	    //$this->set('ratedetail', $ratedetail);
-	      //	$conn = ConnectionManager::get('default');
+	        $users = TableRegistry::get('note_rate');
+	         $query = $users->query();
+	         //$ratedetails=$note1->select(['rating' => $query->func()->avg('Noterate.rating')])->where(['Noterate.note_id' => 8]);
+	         //$ratedetail=$ratedetails->toArray();
+	         //pr($ratedetail);die;
+	     $this->set('note1', $ratedetail);
 
-	      	//$rs = $conn->execute('SELECT * FROM note')->execute();
 
-	      	//pr($rs);
-	      	//die;
+
+	     	    $test = $note->find('all')->select(['rating' => $query->func()->avg('note_rate.rating1'),'Note.note_id'])
+		    ->leftJoin('note_rate', 'note_rate.note_id = Note.note_id');
+		    //->where('Noterate.note_id' = 1);
+				$tests = $test->toArray();
+				pr($tests);die;
+
+
+
+	
+           // ->where(['b.category_id' => 1]);
+
+            $query1 = $query->toArray();
+				pr($query1);die;
 	        
 
 	        $this->set('note1', $note1);
+
 
 
 
