@@ -1,49 +1,37 @@
-<h3>Research Paper</h3>
 <hr class="hrstyle"/>
 <div class="col-md-8 form-group">
 
-                                   <div class="col-md-12 form-group" style="">
+                                  <div class="col-md-12 form-group" style="">
                                         <div class="col-md-4">
                                          <label >Field:</label> 
                                          </div>
                                           <div class="col-md-8">
-                                              <input type="text" name="field" id="field" class="form-control"  placeholder="Field in which Case was studied" value="" />
-                                              <div style="display:none;" id="fieldmessageblank"><i class="form-control-feedback fa fa-times" data-bv-icon-for="program_id" style="cursor: pointer;color: #a94442;" data-original-title="" title=""></i></div>
-                                              <div style="display:none;color: 00a65a;" id="fieldmessagevalid"><i class="form-control-feedback fa fa-check" data-bv-icon-for="degree_id" style="cursor: pointer; display: block;color: #00a65a;" data-original-title="" title=""></i></div>
+                                          <input type="text" name="field" id="field" class="form-control"  placeholder="Field in which Case was studied" value="" />
                                           </div>  
-                                         
                                   </div>
                                  <div class="col-md-12 form-group" style="" id="read1">
                                         <div class="col-md-4">
                                          <label >Read At:</label> 
                                          </div>
                                           <div class="col-md-8">
-                                         <input type="text" name="read_at[]"  id="read_at" class="input-name form-control" placeholder="Conferences/Seminars where paper was read"  value="" style="margin-bottom: 3%;" /><input type="button" class="submit_btn" id="readat"><span > </span></div> 
-
-
-                                          <div style="display:none;" id="readatmessageblank"><i class="form-control-feedback fa fa-times" data-bv-icon-for="program_id" style="cursor: pointer;color: #a94442;" data-original-title="" title=""></i></div>
-                                          <div style="display:none;color: 00a65a;" id="readatmessagevalid"><i class="form-control-feedback fa fa-check" data-bv-icon-for="degree_id" style="cursor: pointer; display: block;color: #00a65a;" data-original-title="" title=""></i></div> 
+                                         <input type="text" name="read_at[]" class="input-name form-control" placeholder="Conferences/Seminars where paper was read"  value="" style="margin-bottom: 3%;" /><input type="button" class="submit_btn" id="read_at"><span > </span></div>  
                                   </div>
                                    <div class="col-md-12 form-group" style="">
                                         <div class="col-md-4">
                                          <label >Publish in:</label> 
                                          </div>
                                           <div class="col-md-8">
-                                          <input type="text" name="publish_in" id="publishin" class="form-control"  placeholder="Let the word know where it was publish" value="" /></div> 
-                                           <div style="display:none;" id="publishinmessageblank"><i class="form-control-feedback fa fa-times" data-bv-icon-for="program_id" style="cursor: pointer;color: #a94442;" data-original-title="" title=""></i></div>
-                                          <div style="display:none;color: 00a65a;" id="publishinmessagevalid"><i class="form-control-feedback fa fa-check" data-bv-icon-for="degree_id" style="cursor: pointer; display: block;color: #00a65a;" data-original-title="" title=""></i></div> 
-                                         
+                                          <input type="text" name="publish_in" id="publish_in" class="form-control"  placeholder="Let the word know where it was publish" value="" />
+                                          </div>  
                                   </div>
 
                                   <div class="col-md-12 form-group">
                                           <div>
                                            <div class="col-md-4">
-
                                            <label>Batch</label>
                                           </div>
-
-                                          <select id="publish_on_month" name="publish_on_month[]"  class="input-email form-control" style="width:24%;margin-left: 2%;" >
-                                          <option value="">Month</option>
+                                          <select id="publish_on_month" name="publish_on_month[]" class="input-email form-control" style="width:24%;margin-left: 2%;" >
+                                          <option>Month</option>
                                               <script>
                                               var myDate = new Date();
                                               var year = myDate.getFullYear();
@@ -52,13 +40,9 @@
                                               }
                                               </script>
                                           </select>
-                                           <div style="display:none;" id="publishonmonthmessageblank"><i class="form-control-feedback fa fa-times" data-bv-icon-for="program_id" style="cursor: pointer;color: #a94442;" data-original-title="" title=""></i>
-                                          </div>
-                                          <div style="display:none;color: 00a65a;" id="publishonmonthmessagevalid"><i class="form-control-feedback fa fa-check" data-bv-icon-for="degree_id" style="cursor: pointer; display: block;color: #00a65a;" data-original-title="" title=""></i>
-                                          </div> 
                                                                                 
                                           <select id="publish_on_year" name="publish_on_year[]" class="input-email form-control" style="width:25%" >
-                                          <option value="">Year</option>
+                                          <option>Year</option>
                                           <script>
                                            var myDate = new Date();
                                            var year = myDate.getFullYear();
@@ -67,8 +51,6 @@
                                            }
                                            </script>
                                            </select>
-                                            <div style="display:none;" id="publishonyearmessageblank"><i class="form-control-feedback fa fa-times" data-bv-icon-for="program_id" style="cursor: pointer;color: #a94442;" data-original-title="" title=""></i></div>
-                                          <div style="display:none;color: 00a65a;" id="publishonyearmessagevalid"><i class="form-control-feedback fa fa-check" data-bv-icon-for="degree_id" style="cursor: pointer; display: block;color: #00a65a;" data-original-title="" title=""></i></div> 
                                             </div>
                                     </div>
                                   <div class="col-md-12 form-group" style="" id="team1">
@@ -77,11 +59,6 @@
                                          </div>
                                           <div class="col-md-8">
                                           <input type="text" name="team_member[]" id="team_member" class="form-control"  placeholder="Conferences/Seminars where paper was read" value="" style="margin-bottom: 3%;" /><input type="button" class="submit_btn" id="team"><span > </span>
-
-                                           <div style="display:none;" id="teammembermessageblank"><i class="form-control-feedback fa fa-times" data-bv-icon-for="program_id" style="cursor: pointer;color: #a94442;" data-original-title="" title=""></i>
-                                          </div>
-                                          <div style="display:none;color: 00a65a;" id="teammembermessagevalid"><i class="form-control-feedback fa fa-check" data-bv-icon-for="degree_id" style="cursor: pointer; display: block;color: #00a65a;" data-original-title="" title=""></i>
-                                          </div> 
                                           </div>  
                                   </div>
 
@@ -91,11 +68,6 @@
                                          </div>
                                           <div class="col-md-8">
                                           <input type="text" name="under_gidance[]" id="under_gidance" class="form-control"  placeholder="Make your Guide/Mentor famous" value="" style="margin-bottom: 3%;" /><input type="button" class="submit_btn" id="under"><span > </span>
-
-                                           <div style="display:none;" id="undergidancemessageblank"><i class="form-control-feedback fa fa-times" data-bv-icon-for="program_id" style="cursor: pointer;color: #a94442;" data-original-title="" title=""></i>
-                                          </div>
-                                          <div style="display:none;color: 00a65a;" id="undergidancemessagevalid"><i class="form-control-feedback fa fa-check" data-bv-icon-for="degree_id" style="cursor: pointer; display: block;color: #00a65a;" data-original-title="" title=""></i>
-                                          </div> 
                                           </div>  
                                   </div>
 
@@ -136,18 +108,6 @@
                                        
                                     </div>
                                 </div>
-                                 <div class="col-md-12" style="">
-
-                                  <div class="col-md-11"> 
-                                  <input type="checkbox" name="agreement" id="agreement1"> 
-                                   I agree that the materials being uploaded are purely compiled or created by me and sources of original content have been mentioned in the form. I also agree that campustop.in will not be responsible for any future claims on this material by a third party including but not limited to copyright infringement.
-                                    <div style="display:none;" id="agreement1blank"><i class="form-control-feedback fa fa-times" data-bv-icon-for="program_id" style="cursor: pointer;color: #a94442;" data-original-title="" title=""></i><div style="display:none;color: 00a65a;" id="agreement1valid"><i class="form-control-feedback fa fa-check" data-bv-icon-for="degree_id" style="cursor: pointer; display: block;color: #00a65a;" data-original-title="" title=""></i>
-              </div></div>
-              
-                                  </div>
-                               
-                              </div>
-       
                                 <?php
                                  echo $this->Form->hidden('created_dt', ['value'=>time()]);
                                       ?>
@@ -181,7 +141,12 @@ $(function(){
       $(this).parent().parent().parent().remove();
       });
       var filevalue=$("#error_output2").html();
-      var file_txt = $('<div/>').addClass('file-row-text').append('<input type="hidden" name="research_file[]" value="'+filevalue+'"></br><span style="margin-left:17%"> Set price </span></br>');
+        var split= filevalue.split(',');
+        var filename=split[0];
+        var filesize=split[1];
+        
+
+      var file_txt = $('<div/>').addClass('file-row-text').append('<input type="hidden" name="research_file[]" value="'+filename+'"><input type="hidden" name="research_size[]" value="'+filesize+'"></br><span style="margin-left:17%"> Set price </span></br>');
      
       file_txt.append('<input type="text" class="" name="research_file_title[]" placeholder="File Title">');
 

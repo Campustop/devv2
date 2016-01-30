@@ -25,7 +25,7 @@ $(document).ready(function()
         }
         count++;
     });
-    $("#readat").click(function () {
+    $("#read_at").click(function () {
          $("#read1").append(' <div class="col-md-3"></div><div class="col-md-9"><input type="text" name="read_at[]" style="width: 69%;margin-left: 12%;margin-bottom: 3%;" class="input-name form-control"  placeholder="Conferences/Seminars where paper was read"  value="" /></div>');
     });
     $("#team").click(function () {
@@ -102,24 +102,6 @@ $(document).ready(function()
       var degreeid = $('#degreeid').val();
       var resourse = $('#resourse').val();
       var flag=true;
-      var flag=true;
-
-    if(!resourse)
-    {
-        
-        $("#degreemessageblank1").show("slow");
-        $('#resourse').addClass('bordered');
-         $('#resourse').removeClass('borderdgreen');
-        $("#resoursemessagevalid .fa-times").css({ display: "none" });
-        $("#resoursemessagevalid .fa-check").css({ display: "block" });  
-        flag = false;
-    }
-    else
-    {
-      $('#resourse').addClass('borderdgreen');
-     $('#resourse').removeClass('bordered');
-    }
-
       if(resourse==5)
       {
 
@@ -128,47 +110,11 @@ $(document).ready(function()
           {
             $("#youtubelinksmessageblank").show("slow");
             $('#youtubelinks').addClass('bordered'); 
-             $('#youtubelinks').removeClass('borderdgreen'); 
-            $("#youtubelinksmessagevalid").css({ display: "none" });
-            $("#youtubelinksmessageblank").css({ display: "block" });   
+            $("#youtubelinksmessagevalid .fa-times").css({ display: "none" });
+            $("#youtubelinksmessagevalid .fa-check").css({ display: "block" });   
             flag = false;
-          }
-          else
-          {
-             $('#youtubelinks').addClass('borderdgreen'); 
-              $("#youtubelinksmessagevalid").css({ display: "block" });
-            $("#youtubelinksmessageblank").css({ display: "none" });   
           }
           
-      }
-      if(resourse==3)
-      {
-
-        //var agreement = $('#agreement').val();
-        
-          if($("#agreement").is(':checked'))
-          {
-            //flag = true;
-            $('#agreement').removeAttr('style');
-            $('#agreement').css('outline-color', '#00a65a');
-            $('#agreement').css('outline-style', 'solid');
-            $('#agreement').css('outline-width', 'thin');
-             $("#agreementvalid").css({ display: "block" });
-             $("#agreementeblank").css({ display: "none" });   
-            //return true;
-          }
-          else
-          {
-           // alert("cccc");
-            $("#agreementeblank").show("slow");
-            $('#agreement').css('outline-color', 'red');
-            $('#agreement').css('outline-style', 'solid');
-            $('#agreement').css('outline-width', 'thin');
-            $("#agreementvalid .fa-times").css({ display: "none" });
-            $("#agreementeblank .fa-check").css({ display: "block" });   
-            flag = false;
-          }
-
       }
        if(resourse==6)
       {
@@ -178,310 +124,86 @@ $(document).ready(function()
           {
             $("#fieldmessageblank").show("slow");
             $('#field').addClass('bordered'); 
-            $('#field').removeClass('borderdgreen'); 
-            $("#fieldmessagevalid").css({ display: "none" });
-            $("#fieldmessageblank").css({ display: "block" });   
+            $("#fieldmessagevalid .fa-times").css({ display: "none" });
+            $("#fieldmessagevalid .fa-check").css({ display: "block" });   
             flag = false;
           }
-           else
-          {
 
-            $('#field').addClass('borderdgreen'); 
-            
-             $("#fieldmessageblank").css({ display: "none" });
-            $("#fieldmessagevalid").css({ display: "block" });   
-          }
-        
-
-          var readat = $('#read_at').val();
+          var readat = $('#readat').val();
           if(!readat)
           {
             $("#readatmessageblank").show("slow");
-            $('#read_at').addClass('bordered');
-            $('#read_at').removeClass('borderdgreen'); 
-             
-            $("#readatmessagevalid").css({ display: "none" });
-            $("#readatmessageblank").css({ display: "block" });   
+            $('#readat').addClass('bordered'); 
+            $("#readatmessagevalid .fa-times").css({ display: "none" });
+            $("#readatmessagevalid .fa-check").css({ display: "block" });   
             flag = false;
           }
-           else
-          {
-
-            $('#read_at').addClass('borderdgreen'); 
-            
-             $("#readatmessageblank").css({ display: "none" });
-            $("#readatmessagevalid").css({ display: "block" });   
-          }
-
           var publishin = $('#publishin').val();
           if(!publishin)
           {
             $("#publishinmessageblank").show("slow");
-            $('#publishin').addClass('bordered'); 
-             $('#publishin').removeClass('borderdgreen'); 
-            $("#publishinmessagevalid").css({ display: "none" });
-            $("#publishinmessageblank").css({ display: "block" });   
+            $('#field').addClass('bordered'); 
+            $("#publishinmessagevalid .fa-times").css({ display: "none" });
+            $("#publishinmessagevalid .fa-check").css({ display: "block" });   
             flag = false;
-          }
-           else
-          {
-
-            $('#publishin').addClass('borderdgreen'); 
-            
-             $("#publishinmessageblank").css({ display: "none" });
-            $("#publishinmessagevalid").css({ display: "block" });   
           }
           var publishonyear = $('#publish_on_year').val();
           if(!publishonyear)
           {
             $("#publishonyearmessageblank").show("slow");
             $('#publish_on_year').addClass('bordered'); 
-             $('#publish_on_year').removeClass('borderdgreen'); 
             $("#publishonyearmessagevalid .fa-times").css({ display: "none" });
-            $("#publishonyearmessageblank .fa-check").css({ display: "block" });   
-            flag = false;
-          }
-           else
-          {
-
-            $('#publish_on_year').addClass('borderdgreen'); 
-            
-             $("#publishonyearmessageblank").css({ display: "none" });
-            $("#publishonyearmessagevalid").css({ display: "block" });   
-          }
-          var publishonmonth = $('#publish_on_month').val();
-
-          if(!publishonmonth)
-          {
-            $("#publishonmonthmessageblank").show("slow");
-            $('#publish_on_month').addClass('bordered'); 
-            $('#publish_on_month').removeClass('borderdgreen'); 
-            $("#publishonmonthmessagevalid .fa-times").css({ display: "none" });
-            $("#publishonmonthmessageblank .fa-check").css({ display: "block" });   
-            flag = false;
-          }
-           else
-          {
-
-            $('#publish_on_month').addClass('borderdgreen'); 
-            
-             $("#publishonmonthmessageblank").css({ display: "none" });
-            $("#publishonmonthmessagevalid").css({ display: "block" });   
-          }
-
-          var teammember = $('#team_member').val();
-          
-          if(!teammember)
-          {
-            $("#teammembermessageblank").show("slow");
-            $('#team_member').addClass('bordered'); 
-            $('#team_member').removeClass('borderdgreen'); 
-            $("#teammembermessagevalid").css({ display: "none" });
-            $("#teammembermessageblank").css({ display: "block" });   
-            flag = false;
-          }
-          else
-          {
-
-            $('#team_member').addClass('borderdgreen'); 
-            
-            $("#teammembermessageblank").css({ display: "none" });
-            $("#teammembermessagevalid").css({ display: "block" });   
-          }
-
-          var undergidance = $('#under_gidance').val();
-          
-          if(!undergidance)
-          {
-            $("#undergidancemessageblank").show("slow");
-            $('#under_gidance').addClass('bordered'); 
-            $("#undergidancemessagevalid .fa-times").css({ display: "none" });
-            $("#undergidancemessageblank .fa-check").css({ display: "block" });   
-            flag = false;
-          }
-          else
-          {
-
-            $('#under_gidance').addClass('borderdgreen'); 
-            
-            $("#undergidancemessageblank").css({ display: "none" });
-            $("#undergidancemessagevalid").css({ display: "block" });   
-          }
-
-          if($("#agreement1").is(':checked'))
-          {
-             $('#agreement1').removeAttr('style');
-            //return true;
-          }
-          else
-          {
-           // alert("cccc");
-          
-            $("#agreement1blank").show("slow");
-            $('#agreement1').css('outline-color', 'red');
-            $('#agreement1').css('outline-style', 'solid');
-            $('#agreement1').css('outline-width', 'thin');
-            $("#agreement1valid .fa-times").css({ display: "none" });
-            $("#agreement1valid .fa-check").css({ display: "block" });   
+            $("#publishonyearmessagevalid .fa-check").css({ display: "block" });   
             flag = false;
           }
           
           
       }
-
-       if(resourse==7)
-      {
-
-        //var agreement = $('#agreement').val();
-
-          var field = $('#casefield').val();
-          if(!field)
-          {
-            $("#casefieldmessageblank").show("slow");
-            $('#casefield').addClass('bordered'); 
-            $('#casefield').removeClass('borderdgreen'); 
-             $("#casefieldmessageblank").css({ display: "block" });
-            $("#casefieldmessagevalid").css({ display: "none" });   
-
-           
-            flag = false;
-          }
-          else
-          {
-
-            $('#casefield').addClass('borderdgreen'); 
-            
-             $("#casefieldmessageblank").css({ display: "none" });
-            $("#casefieldmessagevalid").css({ display: "block" });   
-          }
-        
-          if($("#agreementcase").is(':checked'))
-          {
-            //flag = true;
-            $('#agreementcase').removeAttr('style');
-             $('#agreementcase').css('outline-color', '#00a65a');
-            $('#agreementcase').css('outline-style', 'solid');
-            $('#agreementcase').css('outline-width', 'thin');
-               $("#agreementcasevalid").css({ display: "block" }); 
-                $("#agreementcaseblank").css({ display: "none" });  
-           
-          }
-          else
-          {
-            
-            $("#agreementcaseblank").show("slow");
-            $('#agreementcase').css('outline-color', 'red');
-            $('#agreementcase').css('outline-style', 'solid');
-            $('#agreementcase').css('outline-width', 'thin');
-            $("#agreementcasevalid .fa-times").css({ display: "none" });
-            $("#agreementcasevalid .fa-check").css({ display: "block" });   
-            flag = false;
-          }
-
-      }
-
       if(!val)
       {
           $("#messageblank").show("slow");
           $('#description_resourse').addClass('bordered');
           $("#messagevalid .fa-times").css({ display: "none" });
           $("#messagevalid .fa-check").css({ display: "block" });  
-          flag= false;
+          flag = false;
       }
       if(!collageid)
       {
           
           $("#messageblank1").show("slow");
-          $('#collage_id').addClass('bordered');
-          $('#nameresourse').removeClass('borderdgreen'); 
-          $("#messagevalid1").css({ display: "none" });
-          $("#messageblank1").css({ display: "block" });   
-          flag= false;
+          $('#collage_id').addClass('bordered'); 
+          $("#messagevalid1 .fa-times").css({ display: "none" });
+          $("#messagevalid1 .fa-check").css({ display: "block" });   
+          flag = false;
       }
-      else
-      {
-        
-         $('#collage_id').addClass('borderdgreen');
-         $("#messagevalid1").css({ display: "block" });
-          $("#messageblank1").css({ display: "none" });  
-      }
-
       if(!countryid)
       {
           $("#countrymessageblank").show("slow");
-          $('#countryid').addClass('bordered'); 
-           $('#countryid').removeClass('borderdgreen'); 
-          $("#countrymessagevalid").css({ display: "none" });
-          $("#countrymessageblank").css({ display: "block" });  
+          $('#countryid').addClass('bordered');  
+          $("#countrymessagevalid .fa-times").css({ display: "none" });
+          $("#countrymessagevalid .fa-check").css({ display: "block" });  
             flag= false;
       }
-       else
-      {
-        
-         $('#countryid').addClass('borderdgreen');
-         $("#countrymessagevalid").css({ display: "block" });
-          $("#countrymessageblank").css({ display: "none" });  
-      }
-
-      var nameresourse = $('#nameresourse').val();
-      if(!nameresourse)
-      {
-          
-         $("#nameresoursemessageblank").show("slow");
-         $('#nameresourse').addClass('bordered');
-         $('#nameresourse').removeClass('borderdgreen');
-         $("#nameresoursemessagevalid").css({ display: "none" });
-          $("#nameresoursemessageblank").css({ display: "block" });  
-         flag= false;
-      }
-      else
-      {
-        
-         $('#nameresourse').addClass('borderdgreen');
-         $("#nameresoursemessagevalid").css({ display: "block" });
-          $("#nameresoursemessageblank").css({ display: "none" });  
-      }
-
       if(!programid)
       {
           $("#programmessageblank").show("slow");
-          $('#programid').addClass('bordered'); 
-           $('#programid').removeClass('borderdgreen'); 
-          $("#countrymessagevalid").css({ display: "none" });
-          $("#programmessageblank").css({ display: "block" });
+          $('#programid').addClass('bordered');  
+          $("#countrymessagevalid .fa-times").css({ display: "none" });
+          $("#countrymessagevalid .fa-check").css({ display: "block" });
            flag= false;
-      }
-      else
-      {
-        
-         $('#programid').addClass('borderdgreen');
-         $("#programmessagevalid").css({ display: "block" });
-          $("#programmessageblank").css({ display: "none" });  
       }
       if(!degreeid)
       {
           $("#degreemessageblank1").show("slow");
           $('#degreeid').addClass('bordered');  
-          $('#degreeid').removeClass('borderdgreen');
-          $("#degreemessagevalid").css({ display: "none" });
-          $("#degreemessageblank").css({ display: "block" });
+          $("#countrymessagevalid .fa-times").css({ display: "none" });
+          $("#countrymessagevalid .fa-check").css({ display: "block" });
            flag= false;
       }
-
-      else
+      else if(!resourse)
       {
-        
-         $('#degreeid').addClass('borderdgreen');
-          $("#degreemessagevalid").css({ display: "block" });
-          $("#degreemessageblank").css({ display: "none" });
-      }
-
-     if(!description_resourse)
-      {
-        
           $("#degreemessageblank1").show("slow");
-          $('#description_resourse').addClass('bordered'); 
-           $('#description_resourse').removeClass('borderdgreen');   
+          $('#resourse').addClass('bordered');  
           $("#countrymessagevalid .fa-times").css({ display: "none" });
           $("#countrymessagevalid .fa-check").css({ display: "block" });
            flag= false;
@@ -502,14 +224,13 @@ $(document).ready(function()
             $("#messagevalid").hide("slow");
             $("#messageblank").hide("slow");
             $('#description_resourse').addClass('bordered');  
-            $('#description_resourse').removeClass('borderdgreen');
+            $('#description_resourse').removeClass('borderdgreen'); 
             $('#messagenotvalid').html(data); 
         }    
       var resourcename = $('#nameresourse').val();
       checktypeofresourse(resourcename);
-
+      return true;
       
-  
 });
 
 $( "#description_resourse" ).blur(function() {
@@ -518,10 +239,9 @@ $( "#description_resourse" ).blur(function() {
   {
   
      $("#messageblank").show("slow");
-     $('#description_resourse').addClass('bordered');
-     $('#description_resourse').removeClass('borderdgreen');   
-     $("#messagevalid").css({ display: "none" });
-      $("#messageblank").css({ display: "block" });
+     $('#description_resourse').addClass('bordered');  
+     $("#countrymessagevalid .fa-times").css({ display: "none" });
+      $("#countrymessagevalid .fa-check").css({ display: "block" });
      return false;
   }
     
@@ -531,7 +251,7 @@ if(!regex.test(val))
     $('#description_resourse').addClass('borderdgreen');  
     $("#messagenotvalid").hide("slow");
     $("#messageblank").hide("slow");
-    
+    return true;
   }
   else if(regex.test(val))
   {
@@ -546,7 +266,6 @@ if(!regex.test(val))
   }
 });
 
-
 $( "#nameresourse" ).blur(function() {
     var val = $('#collage_id').val();
     if(!val)
@@ -557,35 +276,8 @@ $( "#nameresourse" ).blur(function() {
         $("#messagevalid .fa-check").css({ display: "block" });  
        return false;
     }
- 
+  return true;
 });
-
-
-$( "#nameresourse" ).blur(function() {
- if(!nameresourse)
-      {
-         
-          $('#nameresourse').addClass('borderdgreen');
-         $("#nameresoursemessagevalid").css({ display: "block" });
-          $("#nameresoursemessageblank").css({ display: "none" });  
-         
-      }
-      else
-      {
-       
-         
-          $("#nameresoursemessageblank").show("slow");
-         $('#nameresourse').addClass('bordered');
-         $('#nameresourse').removeClass('borderdgreen');
-         $("#nameresoursemessagevalid").css({ display: "none" });
-          $("#nameresoursemessageblank").css({ display: "block" });  
-         flag= false;
-      }
-  });    
-
-
-
-
 $( "#collage_id" ).blur(function() {
     var val = $('#collage_id').val();
     if(!val)
@@ -596,17 +288,12 @@ $( "#collage_id" ).blur(function() {
         $("#messagevalid .fa-check").css({ display: "block" });  
        return false;
     }
-    else
-    {
-      $('#collage_id').removeClass('bordered');
-    }
   return true;
 });
-
 $( "#programid" ).blur(function() 
 {
     var programid = $('#programid').val();
-  
+   
     if(!programid)
     {
         $("#programmessageblank").show("slow");
@@ -615,11 +302,6 @@ $( "#programid" ).blur(function()
         $("#programmessagevalid .fa-check").css({ display: "block" });  
         return false;
     }
-     else
-    {
-      $('#programid').removeClass('bordered');
-    }
-
 
     return true;
 
@@ -637,10 +319,6 @@ $( "#countryid" ).blur(function()
           $("#countrymessagevalid .fa-check").css({ display: "block" }); 
           return false;
       }
-      else
-      {
-        $('#countryid').removeClass('bordered');
-      }
     return true;
 
 });
@@ -654,10 +332,6 @@ $( "#degreeid" ).blur(function()
         $("#degreemessagevalid .fa-times").css({ display: "none" });
         $("#degreemessagevalid .fa-check").css({ display: "block" }); 
         return false;
-    }
-     else
-    {
-      $('#degreeid').removeClass('bordered');
     }
       
     return true;
@@ -674,8 +348,9 @@ $( "#resourse" ).blur(function()
         $("#resoursemessagevalid .fa-check").css({ display: "block" });  
         return false;
     }
- }); 
+    return true;
 
+});
 
 $( "#nameresourse" ).blur(function() 
 {
@@ -688,72 +363,9 @@ $( "#nameresourse" ).blur(function()
         $("#nameresoursemessagevalid .fa-check").css({ display: "block" });  
        return false;
     }
-	else{
-		$('#nameresourse').removeClass('bordered');
-	}
-   
+    return true;
 
 });
-
-
-    if(resourse==7)
-      {
-
-          $( "#casefield").blur(function() 
-          {
-
-
-                  //var agreement = $('#agreement').val();
-                   var field = $('#casefield').val();
-                    if(!field)
-                    {
-
-                      $("#casefieldmessageblank").show("slow");
-                      $('#casefield').addClass('bordered'); 
-                       $("#casefieldmessageblank").css({ display: "block" });
-                      $("#casefieldmessagevalid").css({ display: "none" });   
-
-                     
-                      flag = false;
-                    }
-                    else
-                    {
-
-                      $('#casefield').addClass('borderdgreen'); 
-                      
-                       $("#casefieldmessageblank").css({ display: "none" });
-                      $("#casefieldmessagevalid").css({ display: "block" });   
-                    }
-                  
-
-                    if($("#agreementcase").is(':checked'))
-                    {
-                      //flag = true;
-                      $('#agreementcase').removeAttr('style');
-                       $('#agreementcase').css('outline-color', '#00a65a');
-                      $('#agreementcase').css('outline-style', 'solid');
-                      $('#agreementcase').css('outline-width', 'thin');
-                         $("#agreementcasevalid").css({ display: "block" }); 
-                          $("#agreementcaseblank").css({ display: "none" });  
-                     
-                    }
-                    else
-                    {
-                      
-                      $("#agreementcaseblank").show("slow");
-                      $('#agreementcase').css('outline-color', 'red');
-                      $('#agreementcase').css('outline-style', 'solid');
-                      $('#agreementcase').css('outline-width', 'thin');
-                      $("#agreementcasevalid .fa-times").css({ display: "none" });
-                      $("#agreementcasevalid .fa-check").css({ display: "block" });   
-                      flag = false;
-                    }
-
-              
-
-              });
-
-  }
     
 
 }); //script         
@@ -823,12 +435,11 @@ $( "#nameresourse" ).blur(function()
                                                           <div class="col-md-6">
                                                                      <div class="col-md-12 input-text form-group">
                                                                          <div class="col-md-4">
-                                                                            <label>Name of resourse:<sup>*</sup></label> 
+                                                                            <label>Name of resourse:</label> 
                                                                           </div>
                                                                           <div class="col-md-8">
-                                                                                <input type="text" name="name_of_resourse" class="input-name form-control" placeholder="Eg. Introduction" id="nameresourse" onblur="checktypeofresourse(this.value)"/>
-
-                                                                                <div style="display:none;color: #a94442;" id="nameresoursemessagenotvalid">Note title is already exists<i class="form-control-feedback fa fa-times" data-bv-icon-for="program_id" style="cursor: pointer;color: #a94442;" data-original-title="" title=""></i></div>
+                                                                                <input type="text" name="name_of_resourse" class="input-name form-control" placeholder="Eg. Introduction" id="nameresourse"
+                                                                                 onblur="checktypeofresourse(this.value)"/>
 
                                                                                 <div style="display:none;" id="nameresoursemessageblank"><i class="form-control-feedback fa fa-times" data-bv-icon-for="program_id" style="cursor: pointer;color: #a94442;" data-original-title="" title=""></i></div>
                                                                                 <div style="display:none;color: 00a65a;" id="nameresoursemessagevalid"><i class="form-control-feedback fa fa-check" data-bv-icon-for="degree_id" style="cursor: pointer; display: block;color: #00a65a;" data-original-title="" title=""></i></div>
@@ -837,7 +448,7 @@ $( "#nameresourse" ).blur(function()
 
                                                                        <div class="col-md-12 form-group">
                                                                                         <div class="col-md-4">
-                                                                                        <label >Collage:<sup>*</sup></label> 
+                                                                                        <label >Collage:</label> 
                                                                                         </div>
                                                                                          <div class="col-md-8">
 
@@ -860,9 +471,7 @@ $( "#nameresourse" ).blur(function()
                                                                         </div>
                                                                          <div class="col-md-12 form-group">
                                                                                   <div class="col-md-4">
-                                                                                     <label>Country:<sup>*</sup>
-
-                                                                                     </label> 
+                                                                                     <label >Country:</label> 
                                                                                   </div>
                                                                                   <div class="col-md-8">
                                                                                       <select name="country_id" id="countryid" class="form-control"  >
@@ -881,7 +490,7 @@ $( "#nameresourse" ).blur(function()
                                                                         </div>
                                                                         <div class="col-md-12 form-group">
                                                                                          <div class="col-md-4">
-                                                                                        <label>Restrict resourse to collage?<sup>*</sup></label> 
+                                                                                        <label >Restrict resourse to collage?</label> 
                                                                                         </div>
                                                                                         <div class="col-md-8">
                                                                                            <input type="radio" name="collage_restricted" value="Y"  checked> Yes
@@ -892,7 +501,7 @@ $( "#nameresourse" ).blur(function()
 
                                                                         <div class="col-md-12 form-group">
                                                                               <div class="col-md-4">
-                                                                                    <label >Program/Major:<sup>*</sup></label> 
+                                                                                    <label >Program/Major</label> 
                                                                               </div>
                                                                               <div class="col-md-8">
                                                                                   <?php echo $this->Form->select('program_id', $program, array('class'=>'input-email form-control','empty' => 'Choose major','id'=>'programid'));?>
@@ -902,7 +511,7 @@ $( "#nameresourse" ).blur(function()
                                                                         </div>
                                                                         <div class="col-md-12 form-group">
                                                                               <div class="col-md-4">
-                                                                                  <label >Degree:<sup>*</sup></label> 
+                                                                                  <label >Degree</label> 
                                                                               </div>
                                                                               <div class="col-md-8">
                                                                                    <select name="degree_id" id="degreeid" class="form-control"  data-show-icon="true">
@@ -924,7 +533,7 @@ $( "#nameresourse" ).blur(function()
 
                                                                          <div class="col-md-12 input-text form-group" id="test1">
                                                                                          <div class="col-md-3">
-                                                                                        <label >Tag:</label> 
+                                                                                        <label >Tag</label> 
                                                                                         </div>
                                                                                          <div class="col-md-9">
                                                                                         
@@ -937,7 +546,7 @@ $( "#nameresourse" ).blur(function()
 
                                                                         <div class="col-md-12 input-text form-group">
                                                                                          <div class="col-md-4">
-                                                                                        <label >Description of the resourse:<sup>*</sup></label> 
+                                                                                        <label >Description of the resourse:</label> 
                                                                                         </div>
                                                                                         <div class="col-md-8">
                                                                                             <textarea style="height: 120px; width: 248px;" name="description_resourse" id="description_resourse"></textarea>
@@ -952,10 +561,10 @@ $( "#nameresourse" ).blur(function()
 
                                                                          <div class="col-md-12 form-group">
                                                                                         <div class="col-md-4">
-                                                                                         <label >Type of Resourse:<sup>*</sup></label> 
+                                                                                         <label >Type of Resourse:</label> 
                                                                                          </div>
                                                                                          <div class="col-md-8">
-                                                                                            <?php echo $this->Form->select('resource_id', $resource_name, array('class'=>'form-control','empty' => 'Choose resourse', 'id'=>'resourse'));?>
+                                                                                            <?php echo $this->Form->select('resource_id', $resource_name, array('class'=>'input-email form-control','empty' => 'Choose resourse', 'id'=>'resourse'));?>
                                                                                             <?php echo $this->Form->hidden('created_dt', ['value'=>time()]);
                                                                                             ?>
                                                                                             <div style="display:none;" id="resoursemessageblank"><i class="form-control-feedback fa fa-times" data-bv-icon-for="program_id" style="cursor: pointer;color: #a94442;" data-original-title="" title=""></i></div>
@@ -964,14 +573,16 @@ $( "#nameresourse" ).blur(function()
                                                                         </div>
                                                                 </div>
                                                               <div class="row">
-                                                                      <div class="col-md-12" id="video" style="display:none;">
-                                                                          <?php  include('video.ctp');?>
-                                                                      </div>
-                                                                      <div class="col-md-12" id="notes" style="display:none;">
+
+                                                              <div class="col-md-12" id="notes" style="display:none;">
                                                                           <h3>Notes</h3>
                                                                           <?php include 'notes.ctp';?>
 
                                                                       </div>
+                                                                      <div class="col-md-12" id="video" style="display:none;">
+                                                                          <?php  include('video.ctp');?>
+                                                                      </div>
+                                                                      
                                                                       <div class="col-md-12" id="casestudy" style="display:none;">
                                                                            <h3>Case Study</h3>
                                                                           <?php include 'casestudy.ctp';?>
@@ -1023,8 +634,25 @@ $( "#nameresourse" ).blur(function()
                  {
                     if(data==1)
                       {
-                          $('#nameresoursemessagenotvalid').show(); 
-                          return false; 
+                          noty({
+                          layout: 'center',
+                          type: 'error',
+                          text: 'Note title is already exists',
+                          dismissQueue: true, 
+                          animation: {
+                            open: {height: 'toggle'},
+                            close: {height: 'toggle'},
+                            easing: 'swing',
+                            speed: 500 
+                            },
+                          timeout: 0
+                          });   
+                        $('#nameresourse').addClass('bordered');
+                        $('#nameresourse').removeClass('bordeblue');
+                        $(".fa-times").css({ display: "block" });
+                        $(".fa-check").css({ display: "none" });
+                        $("#messageblank").show("slow");  
+                        return false; 
                       }
                       if(data==0)
                       {

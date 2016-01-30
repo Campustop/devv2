@@ -74,7 +74,7 @@ font-size:200%;
             <input type="checkbox" name="agreement" id="agreement"> 
              I agree that the materials being uploaded are purely compiled or created by me and sources of original content have been mentioned in the form. I also agree that campustop.in will not be responsible for any future claims on this material by a third party including but not limited to copyright infringement.
             </div>
-
+         
         </div>
        
         <?php echo $this->Form->hidden('created_dt', ['value'=>time()]); ?>
@@ -116,9 +116,7 @@ $(function(){
 
       file_txt.append('<input type="radio" name="choice'+(count)+'" onclick="showfree('+(count)+')" id="free'+(count)+'"> i would like to charge  <input type="radio" name="choice'+(count)+'" onclick="showcharge('+(count)+')" id="charge'+(count)+'" onload="showcharge('+(count)+')"> Nah! i would give it free ');
 
-     
-      file_txt.append('<input type="text" name="price[]" id="price'+(count)+'" onkeyup="changetotal('+(count)+',this.value)" class="price priceset" placeholder="price" onkeypress="return event.charCode >= 48 && event.charCode <= 57">');
-      
+      file_txt.append('<input type="text" name="price[]" id="price'+(count)+'" onkeyup="changetotal('+(count)+',this.value)" class="price priceset" placeholder="price">');
       file_txt.append('<span id="currency'+(count)+'" class="price priceset">$</span><span id="total'+(count)+'" class="price priceset"> 0.00</span><span id="freecharge'+(count)+'" class="price priceset" style="font:14px bold">free</span>');
       file_txt.append('<span id="freeforcollage'+(count)+'" class="price priceset"><input type="checkbox" name="free_for_collage[]" > Make it free for your collage folks? </span>');
      
@@ -132,8 +130,8 @@ $(function(){
     url: process_url,
     dataType: 'json',
     autoUpload: false,
-    maxNumberOfFiles: 4,
-    acceptFileTypes: /(\.|\/)(doc|docx|txt|pdf|odt|xsl|xsls|xlsx|ppt|pptx)$/i,
+    maxNumberOfFiles:4,
+    acceptFileTypes: /(\.|\/)(doc|docx|txt|pdf|odt|xsl|xslx|ppt|pptx|)$/i,
     maxFileSize: 8048576, //1MB
     // Enable image resizing, except for Android and Opera,
     // which actually support image resizing, but fail to

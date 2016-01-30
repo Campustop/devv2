@@ -15,23 +15,21 @@ font-size:200%;
 
               <div class="col-md-12 form-group" style="">
                   <div class="col-md-2">
-                    <label >Field:<sup>*</sup></label> 
+                    <label >Field:</label> 
                   </div>
                   <div class="col-md-6">
-                     <input  type="text" name="casefield" id="casefield"  class="form-control" placeholder="Field in which case was studied">
-                      <div style="display:none;" id="casefieldmessageblank"><i class="form-control-feedback fa fa-times" data-bv-icon-for="program_id" style="cursor: pointer;color: #a94442;" data-original-title="" title=""></i></div>
-                                              <div style="display:none;color: 00a65a;" id="casefieldmessagevalid"><i class="form-control-feedback fa fa-check" data-bv-icon-for="degree_id" style="cursor: pointer; display: block;color: #00a65a;" data-original-title="" title=""></i></div>
+                     <input  type="text" name="casefield" class="form-control" placeholder="Field in which case was studied">
                   </div>   
                   <div class="col-md-4"> 
                  </div>  
               </div>
               <div class="col-md-12 form-group" style="">
                   <div class="col-md-2">
-                    <label >File Upload:<sup>*</sup></label> 
+                    <label >File Upload:</label> 
                   </div>
                   <div class="col-md-6">
                       <div class="upload-wrapper">
-                        <div id="error_output1" style="display:none"></div>
+                        <div id="error_output" style="display:none"></div>
                           <!-- file drop zone -->
                             <div id="dropzone1">
                               <i>Drop files here</i>
@@ -65,19 +63,8 @@ font-size:200%;
 
             <div class="col-md-11"> 
             <input type="hidden" name="finalcaseprice" id="finaltotalcaseprice" value="0.00">
-            <input type="checkbox" name="agreement" id="agreementcase"> 
+            <input type="checkbox" name="agreement" id="agreement"> 
              I agree that the materials being uploaded are purely compiled or created by me and sources of original content have been mentioned in the form. I also agree that campustop.in will not be responsible for any future claims on this material by a third party including but not limited to copyright infringement.
-                    <div style="display:none;" id="agreementcaseblank">
-
-                    <i class="form-control-feedback fa fa-times" data-bv-icon-for="program_id" style="cursor: pointer;color: #a94442;" data-original-title="" title=""></i>
-                    </div>
-                    <div style="display:none;color:#00a65a;" id="agreementcasevalid">
-
-                    <i class="form-control-feedback fa fa-check" 
-                    data-bv-icon-for="degree_id" style="" data-original-title="" title=""></i>
-
-                 
-              </div>
             </div>
          
         </div>
@@ -111,11 +98,7 @@ $(function(){
       $(this).parent().parent().parent().remove();
       });
       var filevalue=$("#error_output").html();
-      var split= filevalue.split(',');
-        var filename=split[0];
-        var filesize=split[1];
-
-      var file_txt = $('<div/>').addClass('file-row-text').append('<input type="hidden" name="case_file[]" value="'+filevalue+'"><input type="hidden" name="research_size[]" value="'+filesize+'"></br><span style="margin-left:17%"> Set price </span></br>');
+      var file_txt = $('<div/>').addClass('file-row-text').append('<input type="hidden" name="case_file[]" value="'+filevalue+'"></br><span style="margin-left:17%"> Set price </span></br>');
      
       file_txt.append('<input type="text" class="" name="case_file_title[]" placeholder="File Title">');
 
@@ -125,7 +108,7 @@ $(function(){
 
       file_txt.append('<input type="radio" name="choicecase'+(count)+'" onclick="showfreecase('+(count)+')" id="free'+(count)+'"> i would like to charge  <input type="radio" name="choicecase'+(count)+'" onclick="showcasecharge('+(count)+')" id="casecharge'+(count)+'" onload="showcasecharge('+(count)+')"> Nah! i would give it free ');
 
-      file_txt.append('<input type="text" name="case_price[]" id="caseprice'+(count)+'" onkeyup="changecasetotal('+(count)+',this.value)" class="price priceset" placeholder="price" onkeypress="return event.charCode >= 48 && event.charCode <= 57">');
+      file_txt.append('<input type="text" name="case_price[]" id="caseprice'+(count)+'" onkeyup="changecasetotal('+(count)+',this.value)" class="price priceset" placeholder="price">');
       file_txt.append('<span id="casecurrency'+(count)+'" class="price priceset">$</span><span id="casetotal'+(count)+'" class="price priceset"> 0.00</span><span id="casefreecharge'+(count)+'" class="price priceset" style="font:14px bold">free</span>');
       file_txt.append('<span id="casefreeforcollage'+(count)+'" class="price priceset"><input type="checkbox" name="case_free_for_collage[]" > Make it free for your collage folks? </span>');
      
@@ -194,8 +177,6 @@ $(function(){
   });
   
   fi1.on('fileuploadprogress', function (e, data) {
-   
-    
     var progress = parseInt(data.loaded / data.total * 100, 10);
     if (data.context) {
       data.context.each(function () {
@@ -204,10 +185,8 @@ $(function(){
     }
   });
 
-
-
  fi1.on('fileuploaddone', function (e, data) {
-  
+ // alert(data);
         $.each(data.result.files, function (index, file) {
             if (file.url) {
                 var link = $('<a>') .attr('target', '_blank') .prop('href', file.url);
@@ -224,7 +203,7 @@ $(function(){
     });
   
   fi1.on('fileuploadfail', function (e, data) {
-     $('#error_output1').html(data.jqXHR.responseText);
+     $('#error_output').html(data.jqXHR.responseText);
   });
   
   function format_size(bytes) {
@@ -246,6 +225,7 @@ $(function(){
 
  function showfreecase(value)
   {
+    alert(value);
     $("#caseprice"+value).removeClass('price');
     $("#caseprice"+value).addClass('changeprice');
     $("#casetotal"+value).removeClass('price');
@@ -260,7 +240,7 @@ $(function(){
   }
   function showcasecharge(value)
   {
-  
+    alert(value);
     $("#casefreecharge"+value).removeClass('price');
     $("#casefreecharge"+value).addClass('changeprice');
     $("#caseprice"+value).removeClass('changeprice');

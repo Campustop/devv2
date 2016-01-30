@@ -5,13 +5,10 @@
 
                                   <div class="col-md-12 form-group" style="">
                                         <div class="col-md-4">
-                                         <label >YouTube Links:<sup>*</sup></label> 
+                                         <label >YouTube Links:</label> 
                                          </div>
                                           <div class="col-md-8">
-                                              <input type="text" name="youtube_links" id="youtubelinks" class="form-control"  placeholder="Paste the YouTube embed links saprated by comma" value="" />
-                                              <div style="display:none;" id="youtubelinksmessageblank"><i class="form-control-feedback fa fa-times" data-bv-icon-for="program_id" style="cursor: pointer;color: #a94442;" data-original-title="" title=""></i></div>
-                                              <div style="display:none;color: 00a65a;" id="youtubelinksmessagevalid"><i class="form-control-feedback fa fa-check" data-bv-icon-for="degree_id" style="cursor: pointer; display: block;color: #00a65a;" data-original-title="" title=""></i></div>
-                                          
+                                          <input type="text" name="youtube_links" id="youtube_links" class="form-control"  placeholder="Paste the YouTube embed links saprated by comma" value="" />
                                           </div>  
                                   </div>
                                   <div class="col-md-12 form-group" style="">

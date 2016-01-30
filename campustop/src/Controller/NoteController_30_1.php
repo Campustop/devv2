@@ -22,8 +22,8 @@ class NoteController extends AppController
 		$this->Auth->autoRedirect = FALSE;	
 		parent::beforeFilter($event);
 		$this->viewBuilder()->layout('user_profile');
-		$this->Auth->deny(['addnotedetails','index']);
-		
+		$this->Auth->deny(['add','index']);
+		//$this->Auth->allow('index','add');
 		$this->set('userData', $this->Auth->user());
 		
 		
@@ -31,9 +31,8 @@ class NoteController extends AppController
 	}
 	public function index()
 	{
-		
-         $getjobs4 = TableRegistry::get('degree');
-        $degree = $getjobs4->find()->toArray();
+		 $getjobs1 = TableRegistry::get('degree');
+        $degree = $getjobs1->find('list', ['keyField' => 'degree_id','valueField' => 'de_name']);
         $this->set('degree', $degree);
 
         $getjobs2 = TableRegistry::get('program');
@@ -45,7 +44,7 @@ class NoteController extends AppController
         $this->set('univercity', $univercity);
 
         $getjobs4 = TableRegistry::get('collage');
-        $collage = $getjobs4->find()->toArray();
+        $collage = $getjobs4->find('list', ['keyField' => 'collage_id','valueField' => 'collage_name']);
         $this->set('collage', $collage);
 
          $getjobs4 = TableRegistry::get('types_of_resource');
@@ -59,123 +58,59 @@ class NoteController extends AppController
         $this->set('note', $this->Note->find('all'));
      		
 	}
-	
-	public function addnotedetails()
+	public function add()
 	{
-		$this->autoRender = false;
+		
 
 		$id=$this->Auth->user('user_id');
 		$noteTable = TableRegistry::get('note');
 		$note = $noteTable->newEntity();
-			
-		
+			//pr($this->request->data);
+			//die;
 		if ($this->request->is('post') || $this->request->is('put'))
 		{
 				if($this->request->data['resource_id'] == "3") 
 				{
 					$price=$this->request->data['finalnoteprice'];
-					if(isset($this->request->data['note_file']))
-					{
-						$filecount = count($this->request->data['note_file']);
-
-					}
-					else
-					{
-						$filecount = 0;
-					}
-					
 				}
 				else if($this->request->data['resource_id'] == "7") 
 				{
 					$price=$this->request->data['finalcaseprice'];
-				
-					if(isset($this->request->data['case_file']))
-					{
-						$filecount = count($this->request->data['case_file']);
-
-					}
-					else
-					{
-						$filecount = 0;
-					}
 				}
 				else if($this->request->data['resource_id'] == "6") 
 				{
 					$price=$this->request->data['finaltotalresearchprice'];
-					
-
-					if(isset($this->request->data['research_file']))
-					{
-						$filecount = count($this->request->data['research_file']);
-					}
-					else
-					{
-						$filecount = 0;
-					}
-					
 				}
 				else if($this->request->data['resource_id'] == "5") 
 				{
 					$price="0.00";
-					$filecount = 1;
 				}
-			
-				//die;
-				$existingid = $noteTable->find()->where(['name_of_resourse' => $this->request->data['name_of_resourse'],'user_id'=>$id])->first();
-				if($existingid=="" && $filecount>0)
-				{
-					$note->user_id = $id;
-					$note->name_of_resourse = $this->request->data['name_of_resourse'];
-					$note->collage_id = $this->request->data['collage_id'];
-					$note->country_id = $this->request->data['country_id'];
-					$note->collage_restricted=$this->request->data['collage_restricted'];
-					$note->program_id=$this->request->data['program_id'];
-					$note->degree_id=$this->request->data['degree_id'];
-					$note->description_resourse=$this->request->data['description_resourse'];
-					$note->tag=$this->request->data['tag'];
-					$note->resource_id=$this->request->data['resource_id'];
-					$note->created_dt=time();
-					$note->totalprice=$price;
+			//pr($this->request->data);die;
+				//$tg = $this->request->data['tag'];
+				//$tgstr = implode(",",$tg);
 
+				$note->user_id = $id;
+				$note->name_of_resourse = $this->request->data['name_of_resourse'];
+				$note->collage_id = $this->request->data['collage_id'];
+				$note->country_id = $this->request->data['country_id'];
+				$note->collage_restricted=$this->request->data['collage_restricted'];
+				$note->program_id=$this->request->data['program_id'];
+				$note->degree_id=$this->request->data['degree_id'];
+				$note->description_resourse=$this->request->data['description_resourse'];
+				$note->tag=$this->request->data['tag'];
+				$note->resource_id=$this->request->data['resource_id'];
+				$note->created_dt=time();
+				$note->totalprice=$price;
 
-					
-				}
-
-				else if($filecount == 0)
-				{
-					
-					$this->Flash->error('You must have to select a file.', ['key' => 'nagative']);
-
-					echo "dsfsdfdsf======xxx";
-					//die;
-
-					return $this->redirect(['action' => 'index']);
-				}
-				
-
-				else if($existingid!="")
-				{
-					echo "dsfsdfdsf";
-					$this->Flash->error('The name of resourse is already Exists', ['key' => 'nagative']);
-					return $this->redirect(['action' => 'index']);
-				}
-
-				
-				
-
-
-				
 				if ($nottmp = $noteTable->save($note))
 				{
-					pr($this->request->data);
-					echo "aaaaaaaaaaaa";
-					
+					//pr($this->request->data);die;
 						$notesTable = TableRegistry::get('note_detail');
 						$notes = $notesTable->newEntity();
 						$noteid = $nottmp->note_id;
 						if($this->request->data['resource_id'] == "3") 
 						{
-							
+							//pr($this->request->data);die;
 
 									$notes = $notesTable->query();
 				  					foreach($this->request->data['note_file'] as $k => $v)
@@ -210,10 +145,8 @@ class NoteController extends AppController
 										->execute();
 									}
 
-										$session = $this->request->session();
-			        					$session->write('notepositive', "The record has been saved successfully");
-						  				return $this->redirect(['action' => 'index']);
-										
+										$this->Flash->success('The record has been saved successfully', ['key' => 'positive']);
+										return $this->redirect(['action' => 'index']);
 
 						}
 						else if($this->request->data['resource_id'] == "7") 
@@ -257,7 +190,7 @@ class NoteController extends AppController
 										'file_name' => $this->request->data['case_file'][$k],
 										'file_title' => $this->request->data['case_file_title'][$k], 
 										'file_price' => $this->request->data['case_price'][$k],
-										'created_dt' => time(),
+										'created_dt' => $this->request->data['created_dt'],
 										'upload_collage_user_flag' => $uploadflag,
 										'note_id'=>$noteid,
 										'user_id' => $id,
@@ -266,9 +199,9 @@ class NoteController extends AppController
 										->execute();
 									}
 
-									$session = $this->request->session();
-			        				$session->write('notepositive', "The record has been saved successfully");
-						  			return $this->redirect(['action' => 'index']);
+										$this->Flash->success('The record has been saved successfully', ['key' => 'positive']);
+										return $this->redirect(['action' => 'index']);
+
 				  		}	
 	
 						else if($this->request->data['resource_id'] == "5")
@@ -282,9 +215,9 @@ class NoteController extends AppController
 									$video->created_dt=time();
 									$note_video->save($video);
 
-									$session = $this->request->session();
-			        				$session->write('notepositive', "The record has been saved successfully");
-						  			return $this->redirect(['action' => 'index']);
+									$this->Flash->success('The record has been saved successfully', ['key' => 'positive']);
+										return $this->redirect(['action' => 'index']);
+
 						}
 						
 						else if($this->request->data['resource_id'] == "6") 
@@ -338,7 +271,7 @@ class NoteController extends AppController
 											'file_name' => $this->request->data['research_file'][$k],
 											'file_title' => $this->request->data['research_file_title'][$k], 
 											'file_price' => $this->request->data['research_price'][$k],
-											'created_dt' =>time(),
+											'created_dt' => $this->request->data['created_dt'],
 											'upload_collage_user_flag' => $uploadflag,
 											'note_id'=>$noteid,
 											'user_id' => $id,
@@ -347,13 +280,13 @@ class NoteController extends AppController
 											->execute();
 										}
 										
-										$session = $this->request->session();
-			        					$session->write('notepositive', "The record has been saved successfully");
-						  				return $this->redirect(['action' => 'index']);
+									
+
+										$this->Flash->success('The record has been saved successfully', ['key' => 'positive']);
+										return $this->redirect(['action' => 'index']);
 						}
-							$session = $this->request->session();
-			        		$session->write('notepositive', "The record has been saved successfully");
-						  	return $this->redirect(['action' => 'index']);
+							$this->Flash->error('profile not been saved. Please, try again.');
+							return $this->redirect(['action' => 'index']);
 				}
 				
 		}
@@ -368,7 +301,7 @@ class NoteController extends AppController
 			//print_R($file);die;
 			$filename=time().'.'.substr(strtolower(strrchr($file['name'], '.')), 1);
 			
-			$folder =$_SERVER['DOCUMENT_ROOT'].'/campustop/webroot/img/uploads/notefiles/'.$filename; 
+			$folder =$_SERVER['DOCUMENT_ROOT'].'/cakephp3/webroot/img/uploads/notefiles/'.$filename; 
 			if(move_uploaded_file($this->request->data['fileupload']["tmp_name"], $folder)) {
 				print_r($filename);die;
 			} else {
@@ -386,7 +319,7 @@ class NoteController extends AppController
 				//print_R($file);die;
 				$filename=time().'.'.substr(strtolower(strrchr($file['name'], '.')), 1);
 				
-				$folder =$_SERVER['DOCUMENT_ROOT'].'/campustop/webroot/img/uploads/casestudy/'.$filename; 
+				$folder =$_SERVER['DOCUMENT_ROOT'].'/cakephp3/webroot/img/uploads/casestudy/'.$filename; 
 				if(move_uploaded_file($this->request->data['casefileupload']["tmp_name"], $folder)) {
 					print_r($filename);die;
 				} else {
@@ -405,7 +338,7 @@ class NoteController extends AppController
 				//print_R($file);die;
 				$filename=time().'.'.substr(strtolower(strrchr($file['name'], '.')), 1);
 				
-				$folder =$_SERVER['DOCUMENT_ROOT'].'/campustop/webroot/img/uploads/research/'.$filename; 
+				$folder =$_SERVER['DOCUMENT_ROOT'].'/cakephp3/webroot/img/uploads/research/'.$filename; 
 				if(move_uploaded_file($this->request->data['researchfileupload']["tmp_name"], $folder)) {
 					print_r($filename);die;
 				} else {
@@ -414,30 +347,9 @@ class NoteController extends AppController
 			} 
 
 		}
-		function checkname()
+		function notelist()
 		{
 			
-			$getjobs = TableRegistry::get('note');
-	       	$query = $getjobs->find('all', [
-	    		'conditions' => ['name_of_resourse' => $this->request->data['nameofresourse']]
-			]);
-			$row = $query->first();
-
-			if(count($row)>0)
-			{
-				echo "1";die;
-			}
-			else
-			{
-				echo "0";die;
-			}
-		}
-		public function resetsession()
-		{
-			$this->autoRender = false;
-		    $session = $this->request->session();
-	        $session->write('notepositive',"");
-	        $session->write('Negative',"");
 		}
 
 					

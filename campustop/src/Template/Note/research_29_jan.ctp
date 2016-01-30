@@ -180,8 +180,9 @@ $(function(){
        $('.remove').on('click', function(e, data){
       $(this).parent().parent().parent().remove();
       });
-      var filevalue=$("#error_output2").html();
+       var filevalue=$("#error_output2").html();
       var file_txt = $('<div/>').addClass('file-row-text').append('<input type="hidden" name="research_file[]" value="'+filevalue+'"></br><span style="margin-left:17%"> Set price </span></br>');
+     
      
       file_txt.append('<input type="text" class="" name="research_file_title[]" placeholder="File Title">');
 
@@ -191,7 +192,7 @@ $(function(){
 
       file_txt.append('<input type="radio" name="choiceresearch'+(count)+'" onclick="showresearchfree('+(count)+')" id="free'+(count)+'"> i would like to charge  <input type="radio" name="choiceresearch'+(count)+'" onclick="showresearchcharge('+(count)+')" id="researchcharge'+(count)+'" onload="showresearchcharge('+(count)+')"> Nah! i would give it free ');
 
-      file_txt.append('<input type="text" name="research_price[]" id="researchprice'+(count)+'" onkeyup="changeresearchtotal('+(count)+',this.value)" class="price priceset" placeholder="price">');
+      file_txt.append('<input type="text" name="research_price[]" id="researchprice'+(count)+'" onkeyup="changeresearchtotal('+(count)+',this.value)" class="price priceset" placeholder="price" onkeypress="return event.charCode >= 48 && event.charCode <= 57">');
       file_txt.append('<span id="researchcurrency'+(count)+'" class="price priceset">$</span><span id="researchtotal'+(count)+'" class="price priceset"> 0.00</span><span id="researchfreecharge'+(count)+'" class="price priceset" style="font:14px bold">free</span>');
       file_txt.append('<span id="researchfreeforcollage'+(count)+'" class="price priceset"><input type="checkbox" name="research_free_for_collage[]" > Make it free for your collage folks? </span>');
      
