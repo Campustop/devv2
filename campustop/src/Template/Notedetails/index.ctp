@@ -1,9 +1,12 @@
+
+
 <link href="<?= SITEURL; ?>webroot/css/rateit/rateit.css" type="text/css" rel="stylesheet">
 <script src="<?= SITEURL; ?>webroot/js/rateit/jquery.rateit.js"></script>
 
 <link rel="stylesheet" href="<?= SITEURL; ?>webroot/js/popup/popupwindow.css">
 <script src="<?= SITEURL; ?>webroot/js/popup/popupwindow.js"></script>
 <script src="<?= SITEURL; ?>webroot/js/popup/demo.js"></script> 
+        
 
 <script type="text/javascript">
 
@@ -24,18 +27,40 @@
  
   <!-- Sticky Navbar -->
   <div class="page-header">
-    <div class="container">
-      <h1 class="title">Sample Blog Post</h1>
-    </div>
-    <div class="breadcrumb-box">
-      <div class="container">
-        <ul class="breadcrumb">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="#">Pages</a></li>
-          <li class="active">Sample Blog Pos</li>
-        </ul>
+      <div class="image-bg content-in fixed">
+                
       </div>
-    </div>
+      <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-md-offset-1 icons-circle icons-bg-color fa-1x">
+                              <div class="col-md-2" style="width: 12.666667%;padding-right: 0px;">
+                              <?php
+
+                                 echo $this->Form->select('programsearch', $program , array('empty' => 'All Program','id'=>'programsearch','class' => 'form-control','style'=>'background: #E5E5E5;border-radius: 0px;'));
+                              ?>
+                              </div>
+                              <form method="post" action="../notfound">
+                                  <div class="col-md-6 paddingclass">
+                                      <input type="text"  name="searchtext" id="searchtext" autocomplete="off" class="form-control" onkeyup="fillonkeypress()" style="margin-bottom:0px;background: white;border-radius: 0px;"/>
+                                      <div id="displaysearch"></div>
+                                  </div>
+                                  <div class="col-md-2" style="padding-left:0px">
+                                      <input type="submit" name="submit" value="Search" class="myButton1" />
+                                      <input type="hidden" name="programsearchtxt" value="" id="programsearchtxt">
+                                  </div>
+                              </form>
+                        </div>
+                        <div class="col-md-12 col-md-offset-1 icons-circle icons-bg-color fa-1x">
+                             <div class="col-md-3">
+                             </div>
+                             <div class="col-md-4">
+                               <p style="color:#FFFFFF;">Have Something to upload?<a href="<?=SITEURL; ?>note" class="myButton" />upload</a></p>
+                             </div>
+                             <div class="col-md-2">
+                             </div>
+                        </div>     
+                    </div>              
+             </div>
   </div>
   <!-- page-header -->
    <section class="page-section">
@@ -47,7 +72,7 @@
               <div class="grid"> <img src="img/sections/portfolio/b7.jpg" alt="" class="img-responsive" width="370" height="370">
                 <div class="figcaption"> 
                   <!-- Image Popup--> 
-                  <a data-rel="prettyPhoto[portfolio]" href="img/sections/portfolio/b7.jpg" > <i class="icon-search text-white border-color"></i> <i class="icon-eye text-white border-color" data-toggle="tooltip" title="Views">10</i> <i class="icon-download text-white border-color" data-toggle="tooltip" title="Downloads">10</i> <i class="icon-user text-white border-color" data-toggle="tooltip" title="Users">10</i> <i class="icon-comments text-white border-color" data-toggle="tooltip" title="Comments">10</i> </a> </div>
+                  <a data-rel="prettyPhoto[portfolio]" href="img/sections/portfolio/b7.jpg" > <i class="icon-search text-white border-color"></i> <i class="icon-eye text-white border-color" data-toggle="tooltip" title="Views">10</i> <i class="icon-download text-white border-color" data-toggle="tooltip" title="Downloads">10</i><i class="icon-comments text-white border-color" data-toggle="tooltip" title="Comments">10</i> </a> </div>
               </div>
             </div>
           </div>
@@ -86,19 +111,11 @@
                 </tr>
                 <tr>
                   <th scope="row">File Size:</th>
-                  <td>10 MB</td>
-                </tr>
-                <tr>
-                  <th scope="row">Laungage:</th>
-                  <td>Lorem ipsum</td>
+                  <td>-</td>
                 </tr>
                 <tr>
                   <th scope="row">Upload Date:</th>
                   <td><?php echo date('d-m-Y',strtotime($note->created_dt)) ?></td>
-                </tr>
-                <tr>
-                  <th scope="row">Member ID:</th>
-                  <td>123456789</td>
                 </tr>
                 <tr>
                   <th scope="row">Resource:</th>
@@ -149,39 +166,17 @@
               </li>
             </ul>
           </div>
-          <div class="widget">
-            <div class="widget-title">
-              <h3 class="title">Tags</h3>
-            </div>
-            <ul class="tags">
-              <li> <a href="#">Corporate</a> </li>
-              <li> <a href="#">business</a> </li>
-              <li> <a href="#">agency</a> </li>
-              <li> <a href="#">medical</a> </li>
-              <li> <a href="#">studio</a> </li>
-              <li> <a href="#">university</a> </li>
-              <li> <a href="#">motors</a> </li>
-              <li> <a href="#">charity</a> </li>
-              <li> <a href="#">realestate</a> </li>
-              <li> <a href="#">app</a> </li>
-              <li> <a href="#">restaurant</a> </li>
-              <li> <a href="#">fitness</a> </li>
-              <li> <a href="#">band</a> </li>
-              <li> <a href="#">wedding</a> </li>
-              <li> <a href="#">sports</a> </li>
-              <li> <a href="#">fashion</a> </li>
-            </ul>
-          </div>
+         
         </div>
         <div class="col-md-8">
           <div data-animation="fadeInRight icon-3 color-icons" class="section-title text-left animated fadeInRight visible">
             <h2 class="title"><?php echo ucwords($note->name_of_resourse)?>
               <?php $noteid=md5($note->note_id);?>
               <div class="pull-right">
-                <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost/cakephp3/Notedetails/index/8" target="_blank"><span class="pe-so-facebook"></span> </a>
-                <a href="https://twitter.com/intent/tweet?url=http://localhost/cakephp3/Notedetails/index/8&text=TEXT&via=YOURTWITTERACCOUNTNAME" target="_blank"> <span class="pe-so-twitter"></span> </a>
-                <a href="https://plus.google.com/share?url={http://cs.spunktek.com/campustop/home}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank"><span class="pe-so-google-plus"></span> </a>
-                 <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost/cakephp3/Notedetails/index/8" target="_blank"> <span class="pe-so-linkedin"></span> </a></div>
+                <a href="https://www.facebook.com/sharer.php?u=<?php echo SITEURL;?>Notedetails/index/<?php echo $note->note_id; ?>" target="_blank"><span class="pe-so-facebook"></span> </a>
+                <a href="https://twitter.com/intent/tweet?url=<?php echo SITEURL;?>Notedetails/index/<?php echo $note->note_id; ?>&text=TEXT&via=YOURTWITTERACCOUNTNAME" target="_blank"> <span class="pe-so-twitter"></span> </a>
+                <a href="https://plus.google.com/share?url={<?php echo SITEURL;?>Notedetails/index/<?php echo $note->note_id; ?>}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank"><span class="pe-so-google-plus"></span> </a>
+                 <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo SITEURL;?>Notedetails/index/<?php echo $note->note_id; ?>" target="_blank"> <span class="pe-so-linkedin"></span> </a></div>
             </h2>
           </div>
           <!-- <div data-animation="fadeInRight" class="col-md-12 text-right animated fadeInRight icon-3 color-icons visible"> <a href="#"> <span class="pe-so-facebook"></span> </a> <a href="#"> <span class="pe-so-twitter"></span> </a> <a href="#"> <span class="pe-so-google-plus"></span> </a> <a href="#"> <span class="pe-so-linkedin"></span> </a> </div> -->
@@ -289,7 +284,7 @@
                                         <!-- Image Popup-->
                                         
                                         <p class="top-pad-10"> <a data-rel="prettyPhoto[portfolio]" href="img/sections/portfolio/b7.jpg" > <i class="icon-search text-white border-color"></i> </a> </p>
-                                        <p class="top-pad-10"> <a href="#" > <i class="icon-eye text-white border-color" data-toggle="tooltip" title="Views">10</i> <i class="icon-download text-white border-color" data-toggle="tooltip" title="Downloads">10</i> <i class="icon-user text-white border-color" data-toggle="tooltip" title="Users">10</i> <i class="icon-comments text-white border-color" data-toggle="tooltip" title="Comments">10</i></a> </p>
+                                        <p class="top-pad-10"> <a href="#" > <i class="icon-eye text-white border-color" data-toggle="tooltip" title="Views">10</i> <i class="icon-download text-white border-color" data-toggle="tooltip" title="Downloads">10</i><i class="icon-comments text-white border-color" data-toggle="tooltip" title="Comments">10</i></a> </p>
                                       </div>
                                     </div>
                                   </div>
@@ -418,43 +413,55 @@
     <div class="container">
       <div class="section-title">
         <h4 class="title">Tell Us what you have to say</h4>
+             
       </div>
+
       <div class="row">
         <div class="col-sm-12 col-md-12 work-section">
           <div aria-multiselectable="true" role="tablist" id="accordion" class="panel-group">
             <div class="panel panel-default" style="padding:4px;">
               <div id="headingOne" role="tab" class="panel-heading">
-                <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> Write a Feedback for the Response </a> </h4>
+                   
+
+                <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> Write a Feedback for the Response  <strong style="color:#F00">Click Here.</strong>  </a> </h4>
               </div>
               <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
                   <div id="message" class='alert alert-success' style="display:none">
-                    <label>Feedback has been submitted</label>
+                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                      <label>Feedback has been submitted</label>
                   </div>
-                   <div id="errormessage" class='alert alert-warning' style="display:none">
-                    <label>Feedback has been already submitted by you.</label>
+                 
+                  <div id="errormessage" class='alert alert-warning' style="display:none">
+                      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                      <label>Feedback has been already submitted by you.</label>
                   </div>
+
                   <div class="formdiv">
                   <?php if($userData['user_id']!="")
-                  { ?>
+                  {
+
+                        if($userfeedback=="")
+                        {?>
                           <form id="feedbackform" name="feedbackform" method="post" action="Notedetails/getfeedback">
                           
                             <div class="row">
                               <div class="form-group col-sm-12">
                                 <label for="exampleInputEmail1">Title</label>
-                                <input type="text" name="title" placeholder="Title" class="form-control">
-                                <input type="hidden" name="user_id" value="<?php echo $userData['user_id']; ?>" >
-                                <input type="hidden" name="note_id" value="<?php echo $note['note_id']; ?>" >
-                                <input type="hidden" name="created_dt" value="<?php echo time(); ?>">
+                                <input type="text" id="feedbacktitle" name="title" placeholder="Title" class="form-control">
+                                <input type="hidden" id="feedbackuserid" name="user_id" value="<?php echo $userData['user_id']; ?>" >
+                                <input type="hidden" id="feedbacknoteid" name="note_id" value="<?php echo $note['note_id']; ?>" >
+                                <input type="hidden" id="feedbackcreateddt" name="created_dt" value="<?php echo time(); ?>">
+                                <input type="hidden" id="feedbackformtype" name="formtype" value="feedback">
                                 
 
                               </div>
                               <div class="form-group col-sm-12">
                                 <label>Do you need this for your Exam?</label>
                                 <br>
-                                <input type="radio" name="exam" id="inlineRadio1" value="0" >
+                                <input type="radio" name="feedbackexam" id="inlineRadio1" value="0" checked>
                                 Yes
-                                <input type="radio" name="exam" id="inlineRadio2" value="1" >
+                                <input type="radio" name="feedbackexam" id="inlineRadio2" value="1" >
                                 No </div>
                               <div class="form-group col-sm-12">
                                 <label>If yes rate 1 to 5, how helpful was the resource to you ?</label>
@@ -470,19 +477,28 @@
                                 <label for="exampleInputEmail1">Description</label>
                                 <textarea rows="3" class="form-control" name="description"></textarea>
                               </div>
+                            </div>
+                            <div class="row">
                               <div class="form-group col-sm-12">
-                                <label for="exampleInputEmail1">Display Name</label>
-                                <input type="text" placeholder="Display Name" name="displayname" class="form-control">
-                              </div>
+                                <span class="confirmMessage" id="confirmMessage" style="display:none; color:#ff0000;">All fields are mandatory..</span> 
+                           
                               <button class="btn btn-default" type="button" id="reviewsubmit" name="reviewsubmit">Submit</button>
                             </div>
-                          </form>
-                <?php }
+                        </form>
+
+                      <?php }
+                            else
+                              {?>
+                                    <div  class='alert alert-warning'>
+                                        <label>You already give feedback this note.</label>
+                                    </div>
+                               <?php }
+                      }
                       else
                       { ?>
                          <div class="panel panel-default" style="padding:4px;">
                           <div class="panel-heading">
-                            <h4 class="panel-title"> <a class="dropdown-toggle" href="#loginmenu" data-toggle="dropdown" id="#loginmenu">Please<strong style="color:#F00"> login </strong> or <strong style="color:#F00">create account </strong> to write a feedback. </a> 
+                            <h4 class="panel-title"><a class="dropdown-toggle" href="<?php echo SITEURL?>register" data-toggle="dropdown" id="#loginmenu">Please login  or <strong style="color:#F00">create account </strong> to write a feedback. </a> 
 
                             </h4>
                           </div>
@@ -494,7 +510,86 @@
             </div>
             <div class="panel panel-default" style="padding:4px;">
               <div class="panel-heading">
-                <h4 class="panel-title"> <a class="collapsed" href="#contact"> If you need held or have a question for Customer Services <strong style="color:#F00">Click Here.</strong> </a> </h4>
+                <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapsetwo" aria-expanded="true" aria-controls="collapsetwo">  If you need held or have a question for Customer Services <strong style="color:#F00">Click Here.</strong> </a> </h4>
+              </div>
+                  <div id="collapsetwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                              <div class="panel-body">
+                                         <div id="customerreviewmessage" class='alert alert-success' style="display:none">
+                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                              <label>Feedback has been submitted</label>
+                                          </div>
+                                         
+                                          <div id="customerreviewerrormessage" class='alert alert-warning' style="display:none">
+                                              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                              <label>Feedback has been already submitted by you.</label>
+                                          </div>
+                                      <div class="customformdiv">
+                                      <?php if($userData['user_id']!="")
+                                            { 
+                                                  if($customerreviewfeedback=="")
+                                                  { ?>
+                                                            <form id="customerreviewform" name="customerreviewform" method="post" action="Notedetails/getfeedback">
+                                                            
+                                                              <div class="row">
+                                                                <div class="form-group col-sm-12">
+                                                                  <label for="exampleInputEmail1">Title</label>
+                                                                  <input type="text" id="customerreviewtitle" name="customerreviewtitle" placeholder="Title" class="form-control">
+                                                                  <input type="hidden" id="customerreviewuserid" name="customerreviewuserid" value="<?php echo $userData['user_id']; ?>" >
+                                                                  <input type="hidden" id="customerreviewnoteid" name="customerreviewnoteid" value="<?php echo $note['note_id']; ?>" >
+                                                                  <input type="hidden" id="customerreviewcreateddt" name="customerreviewcreateddt" value="<?php echo time(); ?>">
+                                                                  <input type="hidden" id="customerreviewformtype" name="customerreviewformtype" value="customerreview">
+
+                                                                </div>
+                                                                <div class="form-group col-sm-12">
+                                                                  <label>Do you need this for your Exam?</label>
+                                                                  <br>
+                                                                  <input type="radio" name="customerreviewexam" id="inlineRadio1" value="0" checked>
+                                                                  Yes
+                                                                  <input type="radio" name="customerreviewexam" id="inlineRadio2" value="1" >
+                                                                  No </div>
+                                                                <div class="form-group col-sm-12">
+                                                                  <label>If yes rate 1 to 5, how helpful was the resource to you ?</label>
+                                                                  
+                                                                     <div class="rateit" style="margin-top:0px;" id="customerrateit" onclick="customerreviewcountval()"></div>
+                                                                      <span class="spnrate">
+                                                                      <input type="text" class="ratevalidate" name="customerreviewratedata" id="customerreviewratedata" value="" style="width:0px; border:0px!important; background:none;"/>
+                                                                      </span> 
+                                                                </div>
+                                                              </div>
+                                                              <div class="row">
+                                                                <div class="form-group col-sm-12">
+                                                                  <label for="exampleInputEmail1">Description</label>
+                                                                  <textarea rows="3" class="form-control" name="customerreviewdescription"></textarea>
+                                                               </div>
+                                                            </div>
+                                                            <div class="row">
+                                                              <div class="form-group col-sm-12">
+                                                                <span class="confirmMessage" id="customerreviewconfirmMessage" style="display:none; color:#ff0000;">All fields are mandatory..</span> 
+                                                           
+                                                                <button class="btn btn-default" type="button" id="customerreviewsubmit" name="customerreviewsubmit">Submit</button>
+                                                              </div>
+                                                            </form>
+                                                      <?php
+                                                    }
+                                                    else
+                                                      {?>
+                                                           <div  class='alert alert-warning'>
+                                                                  <label>You already give feedback this note.</label>
+                                                              </div>
+                                                   <?php   }
+                                          }
+                                          else
+                                          { ?>
+                                             <div class="panel panel-default" style="padding:4px;">
+                                              <div class="panel-heading">
+                                                <h4 class="panel-title"> <a class="dropdown-toggle" href="<?php echo SITEURL?>register" data-toggle="dropdown" id="#loginmenu">Please login  or <strong style="color:#F00">create account </strong> to write a feedback. </a>
+
+                                                </h4>
+                                              </div>
+                                            </div>
+                                    <?php  } ?>
+                                      </div>
+                </div>
               </div>
             </div>
             <div class="panel panel-default" style="padding:4px;">
@@ -503,73 +598,175 @@
               </div>
               <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                 <div class="panel-body">
-                  <form>
-                    <div class="row">
-                      <div class="form-group col-sm-3">
-                        <label for="exampleInputEmail1">Name</label>
-                        <input type="text" placeholder="Your Name" class="form-control">
-                      </div>
-                      <div class="form-group col-sm-3">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" placeholder="Enter email" id="exampleInputEmail1" class="form-control">
-                      </div>
-                      <div class="form-group col-sm-3">
-                        <label for="exampleInputEmail1">College/Organization</label>
-                        <input type="text" placeholder="College/Organization" class="form-control">
-                      </div>
-                      <div class="form-group col-sm-3">
-                        <label for="exampleInputEmail1">Contact</label>
-                        <input type="text" placeholder="Your Contact Number" class="form-control">
-                      </div>
-                      <div class="form-group col-sm-6">
-                        <label for="exampleInputEmail1">Source</label>
-                        <textarea rows="3" class="form-control"></textarea>
-                      </div>
-                      <div class="form-group col-sm-6">
-                        <label for="exampleInputEmail1">Statement</label>
-                        <textarea rows="3" class="form-control"></textarea>
-                      </div>
-                      <button class="btn btn-default" type="submit">Submit</button>
+                    <div id="qualityreviewmessage" class='alert alert-success' style="display:none">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <label>Feedback has been submitted</label>
                     </div>
-                  </form>
+                 
+                    <div id="qualityreviewerrormessage" class='alert alert-warning' style="display:none">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <label>Feedback has been already submitted by you.</label>
+                    </div>
+                  <div class="qualityformdiv">
+                  <?php if($userData['user_id']!="")
+                          { 
+                            if($qualityrevieweedback=="")
+                              { ?>
+                                          <form id="qualityreviewform" name="qualityreviewform" method="post" action="Notedetails/getfeedback">
+                                          
+                                            <div class="row">
+                                              <div class="form-group col-sm-12">
+                                                <label for="exampleInputEmail1">Title</label>
+                                                <input type="text" name="qualitystitle" placeholder="Title" class="form-control">
+                                                <input type="hidden" name="qualitysuser_id" value="<?php echo $userData['user_id']; ?>" >
+                                                <input type="hidden" name="qualitysnote_id" value="<?php echo $note['note_id']; ?>" >
+                                               
+                                                 <input type="hidden" name="qualitysformtype" value="qualityreview">
+
+                                              </div>
+                                              <div class="form-group col-sm-12">
+                                                <label>Do you need this for your Exam?</label>
+                                                <br>
+                                                <input type="radio" name="qualitysexam" id="inlineRadio1" value="0" checked>
+                                                Yes
+                                                <input type="radio" name="qualitysexam" id="inlineRadio2" value="1" >
+                                                No </div>
+                                              <div class="form-group col-sm-12">
+                                                <label>If yes rate 1 to 5, how helpful was the resource to you ?</label>
+                                                
+                                                   <div class="rateit" style="margin-top:0px;" id="qualitysrateit10b" onclick="qualityreviewcountval()"></div>
+                                                    <span class="spnrate">
+                                                    <input type="text" class="ratevalidate" name="qualityreviewratedata" id="qualityreviewratedata" value="" style="width:0px; border:0px!important; background:none;"/>
+                                                    </span> 
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <div class="form-group col-sm-12">
+                                                <label for="exampleInputEmail1">Description</label>
+                                                <textarea rows="3" class="form-control" name="qualitysdescription" id="qualitysdescription"></textarea>
+                                              </div>
+                                           </div>
+                                            <div class="row">
+                                                <div class="form-group col-sm-12">
+                                                  <span class="confirmMessage" id="qualityconfirmMessage" style="display:none; color:#ff0000;">All fields are mandatory..</span> 
+                                             
+                                              <button class="btn btn-default" type="button" id="qualitysubmit" name="qualitysubmit">Submit</button>
+                                            </div>
+                                            </div>
+                                          </form>
+                          <?php }
+                              else
+                              {?>
+                                    <div  class='alert alert-warning'>
+                                          <label>You already give feedback this note.</label>
+                                    </div>
+                        <?php  }
+                      }
+                      else
+                      { ?>
+                         <div class="panel panel-default" style="padding:4px;">
+                          <div class="panel-heading">
+                            <h4 class="panel-title"> <a class="dropdown-toggle" href="<?php echo SITEURL?>register" data-toggle="dropdown" id="#loginmenu">Please login  or <strong style="color:#F00">create account </strong> to write a feedback. </a>
+
+                            </h4>
+                          </div>
+                        </div>
+                <?php  } ?>
+                  </div>
                 </div>
               </div>
             </div>
+          
             <div class="panel panel-default" style="padding:4px;">
               <div id="headingFour" role="tab" class="panel-heading">
-                <h4 class="panel-title"> <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour"> Would you like to report poor quality or formatting in this block <strong style="color:#F00">Click Here.</strong> </a> </h4>
+                <h4 class="panel-title"> <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour"> Report Copyright infrigment <strong style="color:#F00">Click Here.</strong> </a> </h4>
               </div>
               <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
                 <div class="panel-body">
-                  <form>
-                    <div class="row">
-                      <div class="form-group col-sm-3">
-                        <label for="exampleInputEmail1">Name</label>
-                        <input type="text" placeholder="Your Name" class="form-control">
-                      </div>
-                      <div class="form-group col-sm-3">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" placeholder="Enter email" id="exampleInputEmail1" class="form-control">
-                      </div>
-                      <div class="form-group col-sm-3">
-                        <label for="exampleInputEmail1">College/Organization</label>
-                        <input type="text" placeholder="College/Organization" class="form-control">
-                      </div>
-                      <div class="form-group col-sm-3">
-                        <label for="exampleInputEmail1">Contact</label>
-                        <input type="text" placeholder="Your Contact Number" class="form-control">
-                      </div>
-                      <div class="form-group col-sm-6">
-                        <label for="exampleInputEmail1">Source</label>
-                        <textarea rows="3" class="form-control"></textarea>
-                      </div>
-                      <div class="form-group col-sm-6">
-                        <label for="exampleInputEmail1">Statement</label>
-                        <textarea rows="3" class="form-control"></textarea>
-                      </div>
-                      <button class="btn btn-default" type="submit">Submit</button>
+                   <div id="copymessage" class='alert alert-success' style="display:none">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <label>Feedback has been submitted</label>
                     </div>
-                  </form>
+                 
+                    <div id="copyerrormessage" class='alert alert-warning' style="display:none">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <label>Feedback has been already submitted by you.</label>
+                    </div>
+                    <div class="copyformdiv">
+                               <?php 
+                               if($userData['user_id']!="")
+                                { 
+                                    if($copyrightfeedback=="")
+                                      {?>
+                                                            <h4 class="panel-title"> To fill the notification, you must be either the copyright owner of the work or an individual authorized to act on behalf of the copyright owner</h4>  
+                                                                <form id="copyform" name="copyform" method="post" action="Notedetails/getcopy">
+                                                                    <div class="row">
+                                                                      <div class="form-group col-sm-12">
+                                                                        <label for="exampleInputEmail1">Name</label>
+                                                                        <input type="text" placeholder="Your Name" name="copyrightname" class="form-control" value="<?php echo $userData['fname']." ".$userData['lname']; ?>" >
+                                                                        <input type="hidden" name="copyrightsuser_id" value="<?php echo $userData['user_id']; ?>" >
+                                                                        <input type="hidden" name="copyrightsnote_id" value="<?php echo $note['note_id']; ?>" >
+                                                                      </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                      <div class="form-group col-sm-12">
+                                                                        <label for="exampleInputEmail1">Email address</label>
+                                                                        <input type="email" placeholder="Enter email" name="copyrightemail" id="exampleInputEmail1" class="form-control" value="<?php echo $userData['username']; ?>">
+                                                                      </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                      <div class="form-group col-sm-12">
+                                                                        <label for="exampleInputEmail1">College/Organization</label>
+                                                                         <?php 
+                                                                           echo $this->Form->select('copyrightcollage',$collage, array('id'=>'stateclass','class'=>'form-control','empty' => 'Choose Collage'));?>
+                                                                      </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                      <div class="form-group col-sm-12">
+                                                                        <label for="exampleInputEmail1">Contact</label>
+                                                                        <input type="text" placeholder="Your Contact Number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="copyrightcontact" id="copyrightcontact" class="form-control">
+                                                                      </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                      <div class="form-group col-sm-12">
+                                                                        <label for="exampleInputEmail1">Source</label>
+                                                                        <textarea rows="3" class="form-control" name="copyrightsource" id="copyrightsource"></textarea>
+                                                                      </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                      <div class="form-group col-sm-12">
+                                                                        <label for="exampleInputEmail1">Statement</label>
+                                                                        <textarea rows="3" class="form-control" name="copyrightstatement" id="copyrightstatement"></textarea>
+                                                                      </div>
+
+                                                                 </div>
+                                                                <div class="row">
+                                                                    <div class="form-group col-sm-12">
+                                                                      <span class="confirmMessage" id="copyrightconfirmMessage" style="display:none; color:#ff0000;">All fields are mandatory..</span> 
+
+                                                                      <button class="btn btn-default" type="button" id="copyrightsubmit">Submit</button>
+                                                                  </div>
+                                                                  </div>
+                                                                </form>
+                                <?php }
+                                      else
+                                            {?>
+                                                  <div  class='alert alert-warning'>
+                                                        <label>You already give feedback this note.</label>
+                                                  </div>
+                                      <?php  }
+                                    }
+                                    else
+                                    { ?>
+                                       <div class="panel panel-default" style="padding:4px;">
+                                        <div class="panel-heading">
+                                          <h4 class="panel-title"> <a class="dropdown-toggle" href="<?php echo SITEURL?>register" data-toggle="dropdown" id="#loginmenu">Please login  or <strong style="color:#F00">create account </strong> to write a feedback. </a>
+
+                                          </h4>
+                                        </div>
+                                      </div>
+                              <?php  } ?>
+                        </div>
                 </div>
               </div>
             </div>
@@ -695,40 +892,246 @@
   
   <!-- page-section -->
   
- 
+
 <script>
 $(document).ready(function(){
 $('[data-toggle="tooltip"]').tooltip();   
     $('#reviewsubmit').on('click', function() 
     {  
-        if ($('#feedbackform').valid()) // check if form is valid
-        {
-              var form = $('#feedbackform');
-            
-              $.ajax({
-               type:"POST",
-               url:"<?php echo SITEURL.'Notedetails/getfeedback';?>",
-               data:  form.serialize(),
-               success: function(data)
-               {
-                if(data=="yes")
-                {
-                  $('#message').show();
-                  $('.form-control').val('');
-                  $('#formdiv').hide();
-                }
-                else
-                {
-                  
-                  $('#errormessage').show();
-                 $('.form-control').val('');
-                 
-                }
-                 
-               }
-              });
-        }
+          var title= $('#feedbacktitle').val();
+            var ratedata= $('#ratedata').val();
+            var description= $('#feedbackdescription').val();
+           
+
+            if(title!="")
+            {
+              if(ratedata!="")
+              {
+                 if(description!="")
+                  {
+                        $("#confirmMessage").hide();
+                        var form = $('#feedbackform');
+                        
+                          $.ajax({
+                           type:"POST",
+                           url:"<?php echo SITEURL.'Notedetails/getfeedback';?>",
+                           data:  form.serialize(),
+                           success: function(data)
+                           {
+                            if(data=="yes")
+                              {
+                                
+                                $('div#message').show();
+                                $('.form-control').val('');
+                                $('div#formdiv').hide();
+                              }
+                              else
+                              {
+                                 
+                                $('div#errormessage').show();
+                               $('.form-control').val('');
+                                $('div#formdiv').hide();
+                              }
+                               
+                             
+                           }
+                          });
+                      }
+                      else
+                        {
+                           $("#confirmMessage").show();
+                        }
+                    }
+                     else
+                        {
+                           $("#confirmMessage").show();
+                        }
+                
+            }
+            else
+            {
+               $("#confirmMessage").show();
+            }
+        
+          
     });
+    $('#customerreviewsubmit').on('click', function() 
+    {  
+
+
+       var title= $('#customerreviewtitle').val();
+            var ratedata= $('#customerreviewratedata').val();
+            var description= $('#customerreviewdescription').val();
+           
+
+            if(title!="")
+            {
+              if(ratedata!="")
+              {
+                 if(description!="")
+                  {
+                        $("#customerreviewconfirmMessage").hide();
+                        var form = $('#customerreviewform');
+                          
+                            $.ajax({
+                             type:"POST",
+                             url:"<?php echo SITEURL.'Notedetails/getreview';?>",
+                             data:  form.serialize(),
+                             success: function(data)
+                             {
+                            if(data=="yes")
+                              {
+                                $('div#customerreviewmessage').show();
+                                $('.form-control').val('');
+                                $('#formdiv').hide();
+                              }
+                              else
+                              {
+                                
+                               $('div#customerreviewerrormessage').show();
+                               $('.form-control').val('');
+                               
+                              }
+                               
+                             }
+                            });
+                      }
+                      else
+                        {
+                           $("#customerreviewconfirmMessage").show();
+                        }
+                    }
+                     else
+                        {
+                           $("#customerreviewconfirmMessage").show();
+                        }
+                
+            }
+            else
+            {
+               $("#customerreviewconfirmMessage").show();
+            }
+        
+         
+        
+    });
+
+    $('#qualitysubmit').on('click', function() 
+    {  
+          var title= $('#qualitytitle').val();
+            var ratedata= $('#qualityreviewratedata').val();
+            var description= $('#qualitysdescription').val();
+          
+            if(title!="")
+            {
+              if(ratedata!="")
+              {
+                 if(description!="")
+                  {
+                        $("#qualityconfirmMessage").hide();
+                        var form = $('#qualityreviewform');
+            
+                            $.ajax({
+                             type:"POST",
+                             url:"<?php echo SITEURL.'Notedetails/getqualityreview';?>",
+                             data:  form.serialize(),
+                             success: function(data)
+                             {
+                              if(data=="yes")
+                              {
+                                $('div#qualityreviewmessage').show();
+                                $('.form-control').val('');
+                                $('#formdiv').hide();
+                              }
+                              else
+                              {
+                                
+                                $('div#qualityreviewerrormessage').show();
+                               $('.form-control').val('');
+                               
+                              }
+                               
+                             }
+                            });
+        
+                      }
+                      else
+                        {
+                           $("#qualityconfirmMessage").show();
+                        }
+                    }
+                     else
+                        {
+                           $("#qualityconfirmMessage").show();
+                        }
+                
+            }
+            else
+            {
+               $("#qualityconfirmMessage").show();
+            }
+          
+    });
+
+    $('#copyrightsubmit').on('click', function() 
+    {  
+        var copyrightname= $('#copyrightname').val();
+        var copyrightcontact= $('#copyrightcontact').val();
+        var copyrightsource= $('#copyrightsource').val();
+          
+            if(copyrightname!="")
+            {
+              if(copyrightcontact!="")
+              {
+                 if(copyrightsource!="")
+                  {
+                        $("#copyrightconfirmMessage").hide();
+                       var form = $('#copyform');
+            
+                                $.ajax({
+                                 type:"POST",
+                                 url:"<?php echo SITEURL.'Notedetails/getcopyrightreview';?>",
+                                 data:  form.serialize(),
+                                 success: function(data)
+                                 {
+                                 if(data=="yes")
+                                  {
+                                    
+                                    $('div#copymessage').css('display','block');
+                                    $('.form-control').val('');
+                                    
+                                  }
+                                  else
+                                  {
+                                    
+                                    $('div#copyerrormessage').show();
+                                   $('.form-control').val('');
+                                   
+                                  }
+                                   
+                                 }
+                                });
+                      }
+                      else
+                        {
+                           $("#copyrightconfirmMessage").show();
+                        }
+                    }
+                     else
+                        {
+                           $("#copyrightconfirmMessage").show();
+                        }
+                
+            }
+            else
+            {
+               $("#copyrightconfirmMessage").show();
+            }
+          
+        
+    });
+
+    
     $('#ratesubmit').on('click', function() 
     {  
         if ($('#ratingform').valid()) // check if form is valid
@@ -768,11 +1171,32 @@ function countval()
     {
       $(".spnrate label").css('color','#ffc400');
     }
-  }
+
+}
+function customerreviewcountval()
+  {
+    var rate=$('#customerrateit').rateit('value');
+    $('#customerreviewratedata').val(rate);
+    if(rate != "")
+    {
+      $(".spnrate label").css('color','#ffc400');
+    }
+
+}
+function qualityreviewcountval()
+  {
+    var rate=$('#qualitysrateit10b').rateit('value');
+    $('#qualityreviewratedata').val(rate);
+    if(rate != "")
+    {
+      $(".spnrate label").css('color','#ffc400');
+    }
+
+}
+
 function countval1()
   {
     var rate=$('#rateit').rateit('value');
-    alert(rate);
     $('#ratestore').val(rate);
     if(rate != "")
     {
