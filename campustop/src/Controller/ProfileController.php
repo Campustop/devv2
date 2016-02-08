@@ -263,122 +263,239 @@ class ProfileController extends AppController
  	}
 	
 	
-	function education()
+		function education()
    	{
    		$id=$this->Auth->user('user_id');
-   		$id1=0;
+   		
+   		$i=0;
 		$articlesTable = TableRegistry::get('user_education');
-		$article = $articlesTable->newEntity();
+		//$article = $articlesTable->newEntity();
 	   	if ($this->request->is('post'))
 		{
+			//echo $this->request->data['totalcount'];
+			//echo $this->request->data['degree_id'][1];
+			//echo $this->request->data['program_id'][1];
+			//echo $this->request->data['course_name'][1];
+			//pr($this->request->data);die;
+						//pr("1234rtrt");die;
 			if($this->request->data['degree_id'])
 			{
-				//pr($this->request->data);die;
-					$article = $articlesTable->query();
-					foreach($this->request->data['degree_id'] as $k => $v)
-					{
-						if($this->request->data['user_education_id'][$k]=="")
-						{
-							$article->insert(['major_id', 'program_id', 'course_name', 'university_id', 'collage_id','starting_year','ending_year','education_flag','user_id'])
-							->values([
-							'major_id' => $this->request->data['degree_id'][$k],
-							'program_id' => $this->request->data['program_id'][$k], 
-							'course_name' => $this->request->data['course_name'][$k],
-							'university_id' => $this->request->data['university_id'][$k],
-							'collage_id' => $this->request->data['collage_id'][$k],
-							'starting_year' => $this->request->data['starting_year'][$k],
-							'ending_year' => $this->request->data['ending_year'][$k],
-							'education_flag'=>$this->request->data['education_flag'][$k],
-							'user_id' => $id
-							])
-							->execute();
-						}
-						else
-						{
-							$article->update()
-							      	->set(['major_id' => $this->request->data['degree_id'][$k],
-							      			'program_id' => $this->request->data['program_id'][$k],
-							      			'course_name' => $this->request->data['course_name'][$k],
-							      			'university_id' => $this->request->data['university_id'][$k],
-							      			'collage_id' => $this->request->data['collage_id'][$k],
-							      			'starting_year' => $this->request->data['starting_year'][$k],
-											'ending_year' => $this->request->data['ending_year'][$k],
-											'education_flag'=>$this->request->data['education_flag'][$k],
-											'user_id' => $id])
-		    						->where(['user_education_id' => $this->request->data['user_education_id'][$k]])
-		    						->execute();
+				$existingid = $articlesTable->find()->where(['user_id' => $id])->toArray();
 
+					if(count($existingid)>0)
+					{
+
+						 
+						$articlesTable->deleteAll(['user_id' => $id]);
+						//echo count($existingid);die;
+						
+
+						foreach($this->request->data['degree_id'] as $k => $v)
+						{
+							
+							$photo = $articlesTable->newEntity();
+
+							
+
+							if($this->request->data['degree_id'][$k]!="" && $this->request->data['program_id'][$k]!="" && $this->request->data['university_id'][$k]!="")
+								{
+									$photo->degree_id = $this->request->data['degree_id'][$k];
+									$photo->program_id = $this->request->data['program_id'][$k];
+									$photo->course_name = $this->request->data['course_name'][$k];
+									$photo->university_id = $this->request->data['university_id'][$k];
+									$photo->collage_id = $this->request->data['collage_id'][$k];
+									$photo->starting_year = $this->request->data['starting_year'][$k];
+									$photo->ending_year = $this->request->data['ending_year'][$k];
+									$photo->created_dt = time();
+									$photo->user_id = $id;
+
+									//echo "=============";
+
+									$articlesTable->save($photo);
+
+								}
+								else
+								{
+									//echo "dff";
+									//pr($this->request->data);
+
+									$this->Flash->error('You must have to enter value to add new education', ['key' => 'positive']);
+									return $this->redirect(['action' => 'index']);
+									//die;
+									
+								}
+
+
+														
 						}
+
+						//die;
+					
 						$this->Flash->success('The  education profile has been updated', ['key' => 'update']);
 						return $this->redirect(['action' => 'index']);
+					}
+					else
+					{
+						
+       					foreach($this->request->data['degree_id'] as $k => $v)
+						{
+							
+							if($this->request->data['degree_id'][$k]!="" && $this->request->data['program_id'][$k]!="" && $this->request->data['university_id'][$k]!="")
+								{
+
+									$photo = $articlesTable->newEntity();
+									$photo->degree_id = $this->request->data['degree_id'][$k];
+									$photo->program_id = $this->request->data['program_id'][$k];
+									$photo->course_name = $this->request->data['course_name'][$k];
+									$photo->university_id = $this->request->data['university_id'][$k];
+									$photo->collage_id = $this->request->data['collage_id'][$k];
+									$photo->starting_year = $this->request->data['starting_year'][$k];
+									$photo->ending_year = $this->request->data['ending_year'][$k];
+									$photo->created_dt = time();
+									$photo->user_id = $id;
+
+									$articlesTable->save($photo);
+
+								}
+								else
+								{
+									//echo "dff";
+									//pr($this->request->data);
+
+									$this->Flash->error('You must have to enter value to add new education', ['key' => 'positive']);
+									return $this->redirect(['action' => 'index']);
+									//die;
+									
+								}
+														
+						}
+					$this->Flash->success('The  education profile has been updated', ['key' => 'update']);
+						return $this->redirect(['action' => 'index']);
+
+					}
+						
 				}
-			}		
-		}
+		}		
+		
 	}
 function work()
    	{
    		$id=$this->Auth->user('user_id');
 		$articlesTable = TableRegistry::get('user_work_experiance');
-		$article = $articlesTable->newEntity();
+	
 
 		$existingid = $articlesTable->find()->where(['user_id' => $id])->toArray();
 
 	   	if ($this->request->is('post'))
 		{
-			if (count($existingid) <= 0)
+
+			//pr($this->request->data());die;
+			if (count($existingid) > 0)
 			{
+				$articlesTable->deleteAll(['user_id' => $id]);
+
 				foreach($this->request->data['company_name'] as $k => $v)
 				{
-					$article = $articlesTable->query();
-					if(isset($this->request->data['work_flag'][$k]))
-					{
-						$flag=$this->request->data['work_flag'][$k];
-					}
-					else
-					{
-						$flag="";
-					}
-					$article->insert(['worked_in', 'job_was', 'worked_on', 'work_from', 'work_end','work_experience','user_id','work_flag'])
-					->values([
-					'worked_in' => $this->request->data['company_name'][$k],
-					'job_was' => $this->request->data['job'][$k], 
-					'worked_on' => $this->request->data['worked_on'][$k],
-					'work_from' => $this->request->data['work_from'][$k],
-					'work_end' => $this->request->data['work_end'][$k],
-					'work_experience' => $this->request->data['work_experience'][$k],
-					'user_id' => $id,
-					'work_flag' =>$flag,
-					])
-					->execute();
+					if(isset($this->request->data['current_work_flag'][$k]))
+				     {
+				      $flag="Y";
+				     }
+				     else
+				     {
+				      $flag="N";
+				     }
+				     if(isset($this->request->data['work_flag'][$k]))
+				     {
+				      $currentflag="1";
+				     }
+				     else
+				     {
+				      $currentflag="0";
+				     }
 
+						
+					if($this->request->data['company_name'][$k]!="" && $this->request->data['job'][$k]!="" && $this->request->data['work_experience'][$k]!="")
+						{
+
+						$workdetails = $articlesTable->newEntity();
+						$workdetails->worked_in = $this->request->data['company_name'][$k];
+						$workdetails->job_was = $this->request->data['job'][$k];
+						$workdetails->worked_on = $this->request->data['worked_on'][$k];
+						$workdetails->work_from = $this->request->data['work_from'][$k];
+						$workdetails->work_end = $this->request->data['work_end'][$k];
+						$workdetails->work_experience = $this->request->data['work_experience'][$k];
+						$workdetails->work_flag = $flag;
+						$workdetails->current_work_flag = $currentflag;
+						$workdetails->created_dt = time();
+						$workdetails->user_id = $id;
+
+						$articlesTable->save($workdetails);
+
+						}
+					else
+						{
+									//echo "dff";
+									//pr($this->request->data);
+
+						$this->Flash->error('You must have to enter value to add new work experience', ['key' => 'positive']);
+						return $this->redirect(['action' => 'index']);
+									//die;
+									
+						}
 				}
 				
 			}
 			else
 			{
-
-				$articlesTable->deleteAll(['user_id' => $id]);
-
-				$article = $articlesTable->query();	
 				foreach($this->request->data['company_name'] as $k => $v)
 				{
-					
-					
+					if(isset($this->request->data['current_work_flag'][$k]))
+				     {
+				      $flag="Y";
+				     }
+				     else
+				     {
+				      $flag="N";
+				     }
+				     if(isset($this->request->data['work_flag'][$k]))
+				     {
+				      $currentflag="1";
+				     }
+				     else
+				     {
+				      $currentflag="0";
+				     }
 
-				$article->insert(['worked_in', 'job_was', 'worked_on', 'work_from', 'work_end','work_experience','user_id','work_flag'])
-				->values([
-				'worked_in' => $this->request->data['company_name'][$k],
-				'job_was' => $this->request->data['job'][$k], 
-				'worked_on' => $this->request->data['worked_on'][$k],
-				'work_from' => $this->request->data['work_from'][$k],
-				'work_end' => $this->request->data['work_end'][$k],
-				'work_experience' => $this->request->data['work_experience'][$k],
-				'user_id' => $id,
-				'work_flag' => $this->request->data['work_flag'][$k],
-				])
-				->execute();
 
-				
+				     	
+					if($this->request->data['company_name'][$k]!="" && $this->request->data['job'][$k]!="" && $this->request->data['work_experience'][$k]!="")
+						{
+
+							$workdetails = $articlesTable->newEntity();
+							$workdetails->worked_in = $this->request->data['company_name'][$k];
+							$workdetails->job_was = $this->request->data['job'][$k];
+							$workdetails->worked_on = $this->request->data['worked_on'][$k];
+							$workdetails->work_from = $this->request->data['work_from'][$k];
+							$workdetails->work_end = $this->request->data['work_end'][$k];
+							$workdetails->work_experience = $this->request->data['work_experience'][$k];
+							$workdetails->work_flag = $flag;
+							$workdetails->current_work_flag = $currentflag;
+							$workdetails->created_dt = time();
+							$workdetails->user_id = $id;
+
+							$articlesTable->save($workdetails);
+
+						}
+					else
+						{
+									//echo "dff";
+									//pr($this->request->data);
+
+						$this->Flash->error('You must have to enter value to add new work experience', ['key' => 'positive']);
+						return $this->redirect(['action' => 'index']);
+									//die;
+									
+						}
 				}
 
 			}
