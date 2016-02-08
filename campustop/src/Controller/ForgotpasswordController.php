@@ -30,9 +30,9 @@ class ForgotpasswordController extends AppController
 
 	public function index()
     {
-    	$getjobs = TableRegistry::get('countrys');
-        $countrys = $getjobs->find('list', ['keyField' => 'country_id','valueField' => 'country_name']);
-        $this->set('country', $countrys);
+    		$getjobs = TableRegistry::get('countrys');
+       		 $countrys = $getjobs->find()->toArray();
+       		 $this->set('country', $countrys);	
 		
 		
 		$userobj = TableRegistry::get('users');
@@ -82,18 +82,25 @@ class ForgotpasswordController extends AppController
 
                                  mail("someone@example.com","My subject",$msg);*/
 
-                                 $to = 'shahnidhi2488@gmail.com';
+                                 $to = $this->request->data['forgot_email'];
                                     $subject = 'Password Reset Link';
-                                   // $from = 'nidhi.shah@sinelogix.com';
+                                    $from = 'nidhi.shah@sinelogix.com';
                                      
                                     // To send HTML mail, the Content-type header must be set
-                                    $headers  = 'MIME-Version: 1.0' . "\r\n";
-                                    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                                 
+
+                                    // More headers
+                  			 $to = 'shahnidhi2488@gmail.com';
+                                    $subject = 'Password Reset Link';
+                                    $from = 'nidhi.shah@sinelogix.com';
                                      
-                                    // Create email headers
-                                    $headers .= 'From: '."nidhi.shah@sinelogix.com"."\r\n".
-                                        'Reply-To: '."nidhi.shah@sinelogix.com"."\r\n" .
-                                        'X-Mailer: PHP/' . phpversion();
+                                    // To send HTML mail, the Content-type header must be set
+
+               				$headers = "MIME-Version: 1.0" . "\r\n";
+                                    $headers .= "Content-type:text/html;charset=UTF-8" . '\r\n';
+
+                                    // More headers
+                                    $headers .= 'From:'.$from. '\r\n';
                                      
                                     // Compose a simple HTML email message
                                     $message = '<html><body><table style="border:20px solid yellowgreen;">';
@@ -110,13 +117,10 @@ class ForgotpasswordController extends AppController
                                   // echo $message;
                                    // die;
                                     if(mail($to, $subject, $message, $headers)){
-                                        echo 'Your mail has been sent successfully.';
+                                        $this->Flash->success('Password reset link has been sent to your Email Id', ['key' => 'positive']);
                                     } else{
-                                        echo 'Unable to send email. Please try again.';
-                                    }
-
-
-                        $this->Flash->success('Password reset link has been sent to your Email Id', ['key' => 'positive']);
+                                         $this->Flash->success('Unable to send email. Please try again.', ['key' => 'update']);
+                                  }
 
 
                     }else{
@@ -131,11 +135,11 @@ class ForgotpasswordController extends AppController
             }
         }
     }
-
+	
 
     public function changepassword()
     {
-        //print_r($_GET['ÑDh']);
+        
         //$userid = Security::decrypt('222c3aca8defbdc7532058466b7337a8c983aaebfd6238be53ea6fc963571163%13JEÞ2O%13þY¹Vôók%7D1gô¦WÑ%7Fò%0Ek%0F?]%D1D%16h', Security::salt());
         $string = $_SERVER['REQUEST_URI'];
         $arr = explode("/", $string, 5);
