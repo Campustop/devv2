@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+         <?php
+                include 'includes/headtag.php';
+        ?>
+        <script>
+                function scrollWin() {
+                    window.scrollTo(0, 900);
+                }
+        </script>
+<div id="mainbanner">     
+    <header id="mainheader">
+    
+
+      <!--// Header Baar //-->
+      <div class="kd-headbar">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3"><a href="<?php echo $this->Html->Url(array('controller' => 'travels', 'action' => 'index')); ?>" class="logo"><?php echo $this->Html->image('logo.png');?> </a></div>
+            <div class="col-md-9">
+              <div class="kd-rightside">
+                <nav class="navbar navbar-default navigation">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span> 
+                      <span class="icon-bar"></span>
+                    </button>
+                  </div>
+
+                  <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                    <ul style="color: #fff !important; " class="nav navbar-nav menucolor">
+                      <li><a href="<?php echo $this->Html->Url(array('controller' => 'travels', 'action' => 'index')); ?>">Home</a>
+                        <!--<ul class="sub-dropdown">
+                          <li><a href="#"></a></li>
+                        </ul>-->
+                      </li>
+                      <li><a href="<?php echo $this->Html->Url(array('controller' => 'Aboutus', 'action' => 'index')); ?>">About Us</a></li>
+                      <li><a href="#">Services</a>
+                      
+                      </li>
+                      <li><a href="#">Tour/Itineraries</a>
+                      
+                      </li>
+                      <li><a href="gallery.html">Adventure Tours</a>
+                      
+                      </li>
+                      <li><a href="#">Gallery</a>
+                      
+                      </li>
+                      <li>
+                      <div class="call">
+                        <i class="fa fa-phone"></i>1800-2345-5678</div>
+                    </li>
+                                          </ul>
+                  </div>
+                    <!-- /.navbar-collapse -->
+                </nav>
+                              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--// Header Baar //-->
+
+</header>  </div> 
+
+    </head>
+    <body>
+        <?php echo $content_for_layout; ?>
+        <?php
+            include 'includes/endtag.php';
+        ?>
+    </body>
+    
+</html>

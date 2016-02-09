@@ -1,0 +1,315 @@
+  html,body{
+  margin: 0px;
+  padding: 0px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+h2{
+  text-align: center;
+  margin: 50px 0 0;
+  color: #848484;
+  padding: 0;
+  font: 1.5em "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+.upload-wrapper {
+    max-width: 500px;
+    background-color: #E4E4E4;
+   
+    border: 1px solid #ff9900 ;
+  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.14);
+    -webkit-box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.14);
+  -moz-box-box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.14);
+}
+.priceset 
+{
+     
+      margin-left: 2%;
+}
+ .bar { 
+            position: absolute;
+            height: 18px; 
+            background: blue; 
+            width: 0%;
+            top: 50%;
+        }
+        .box {
+            position: relative;
+            background: palegreen;
+            width: 200px;
+            min-height: 200px;
+            margin: 40px;
+        }
+        .boxhover {
+            background: lawngreen;
+        }
+
+.price
+{
+  display: none!important;
+  width:5%;
+}
+.changeprice
+{
+  margin-right:2%;
+  width:5%;
+}
+#dropzone{
+    border: 1px solid #C7C7C7;
+    padding: 20px;
+    text-align: center;
+    box-shadow: inset 0px 0px 12px rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: inset 0px 0px 12px rgba(0, 0, 0, 0.12);
+    -moz-box-box-shadow: inset 0px 0px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 3px;
+}
+#dropzone i{
+    display: block;
+    font-size: small;
+    margin-bottom: 5px;
+    color: #CACACA;
+    text-shadow: 1px 1px 1px #fff;
+}
+#dropzone1{
+    border: 1px solid #C7C7C7;
+    padding: 20px;
+    text-align: center;
+    box-shadow: inset 0px 0px 12px rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: inset 0px 0px 12px rgba(0, 0, 0, 0.12);
+    -moz-box-box-shadow: inset 0px 0px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 3px;
+}
+#dropzone1 i{
+    display: block;
+    font-size: small;
+    margin-bottom: 5px;
+    color: #CACACA;
+    text-shadow: 1px 1px 1px #fff;
+}
+#dropzone2{
+    border: 1px solid #C7C7C7;
+    padding: 20px;
+    text-align: center;
+    box-shadow: inset 0px 0px 12px rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: inset 0px 0px 12px rgba(0, 0, 0, 0.12);
+    -moz-box-box-shadow: inset 0px 0px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 3px;
+}
+#dropzone2 i{
+    display: block;
+    font-size: small;
+    margin-bottom: 5px;
+    color: #CACACA;
+    text-shadow: 1px 1px 1px #fff;
+}
+.input-file {
+    position: relative;
+    overflow: hidden;
+}
+.input-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+  -ms-filter: 'alpha(opacity=0)';
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: pointer;
+    display: block;
+}
+.button{
+    position: relative;
+    overflow: hidden;
+    font-family: inherit;
+    padding: .5em 1em;
+    color: #444;
+    color: rgba(0,0,0,.8);
+    border: 1px solid #999;
+    border: 0 rgba(0,0,0,0);
+    text-decoration: none;
+    border-radius: 2px;
+    display: inline-block;
+    color: #fff;
+    font-size: 0.8em;    
+  margin-left: 2px;
+}
+.button:hover{
+   box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
+    -moz-box-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
+}
+.button:disabled{
+    background-color: #D4D4D4;
+    color: #B1B1B1;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.52);
+  box-shadow:none;
+  -moz-box-box-shadow:none;
+  -webkit-box-shadow:none;
+}
+.btn-blue{
+    background-color: #ff9900;
+}
+.btn-red{
+  background-color: #EA6363;
+  margin-left: 6%;
+}
+.file-row {
+    padding: 3px;
+    background-color: #DCDCDC;
+    margin-top: 0px;
+    box-shadow: inset 0px 0px 12px rgba(0, 0, 0, 0.04);
+    -webkit-box-shadow: inset 0px 0px 12px rgba(0, 0, 0, 0.04);
+    -moz-box-box-shadow: inset 0px 0px 12px rgba(0, 0, 0, 0.04);
+    
+  min-height:50px;
+}
+.file-row video{
+    width:100%;
+}
+.file-row audio{
+    width:100%;
+}
+
+.file-row .file-remove{
+    float: right;
+    margin-top: 2%;
+    text-decoration: none;
+    color:#848484;
+}
+.file-uploaded{
+    background-color: #D2D6E0;
+}
+.file-row canvas{
+    float: left;
+    margin-right: 10px;
+}
+.file-row span {
+    font-size: small;
+    color: #848484;
+    margin-bottom: 4px;
+    max-width: 300px;
+    overflow: hidden;
+    max-height: 16px;
+}
+.progress{
+    background-color: #FFF;
+    height: 10px;
+    overflow: hidden;
+    display: block;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 1px;
+    width: 100px;
+    border-radius: 6px;    
+ 
+}
+.progress .progress-bar {
+    background-color: rgba(67, 196, 218, 0.99);
+    width: 0;
+    height: 10px;
+    float: left;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 9px;
+    box-shadow: inset 0px 0px 9px rgba(49, 74, 56, 0.42);
+    -webkit-box-shadow: inset 0px 0px 9px rgba(49, 74, 56, 0.42);
+    -moz-box-box-shadow: inset 0px 0px 9px rgba(49, 74, 56, 0.42);
+}
+#error_output{
+  color: red;
+}
+.text-danger, .text-success{
+    float: left;
+    margin-top: -10px;
+    font-style: italic;
+}
+.text-danger {
+    color: #F00!important;
+}
+.text-success{
+    color: #0CAF00!important;
+}
+.nav-tabs>li {
+
+   border-left: 1px solid #ddd;
+        font-size: 19px;
+        
+}  
+
+  .nav-tabs {
+    
+    background-color: #F8F8F8;
+}
+.form-control {
+    display: inline-table;
+        width: 79%;
+
+}
+
+select#email_flag option[value="null"]   
+{ 
+
+    background-image:url("http://localhost/cakephp3/webroot/img/globe.jpg"); 
+      background-repeat: no-repeat;
+}
+
+input[type="text"].error, input[type="file"].error, input[type="password"].error,input[type="checkbox"].error textarea.error, select.error {
+ border:1px solid #F00!important;
+}
+
+label.error {
+ color:#ff0000!important;
+}
+.myButton {
+    background: #ff9900 linear-gradient(to bottom, #ff9900 5%, #ff9900 100%) repeat scroll 0 0;
+    border-radius: 5px;
+    box-shadow: 2px 2px 0 0 #c0c0c0;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Arial;
+    font-size: 17px;
+    margin-left: 2%;
+    padding: 3px 18px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #e1e2ed;
+}
+
+.submit_btn {
+   background:url("http://localhost/cakephp3/webroot/img/plus.jpg") no-repeat;
+  border: medium none !important;
+  width: 10%;
+  height: 8%;
+    /*margin-left: 55.5%;*/
+  color: transparent;
+  float: right;
+    
+}
+.hrstyle
+{
+  background-color: #ff9900;
+    border: medium none;
+    box-shadow: 0 2px 2px #c0c0c0;
+    display: block;
+    height: 1px;
+    margin-bottom: 3%;
+}
+
+.bordered {
+    border: 1px solid #f00;
+}
+.borderdgreen{
+
+  border: 1px solid #00a65a;
+  
+}
+ul.tagit {
+  padding: 0;
+  border-radius: unset;
+  margin-left: 11% !important;
+  }
+.ui-widget {
+    width: 70%;
+  }

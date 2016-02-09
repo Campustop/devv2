@@ -1,0 +1,15 @@
+How to composer download and installed cakephp 3
+
+1. Go to https://getcomposer.org/doc/00-intro.md
+2. php -r "readfile('https://getcomposer.org/installer');" | php   (if php enviroment variable set)
+3. if php enviroment variable not set go to control panel->sysstem->advanced system setting->enviroment variable->edit path->(before it add ;)add php.exe path(D:\wamp\bin\php\php5.5.12).
+4.restart cmd and go your wamp path and copy php -r "readfile('https://getcomposer.org/installer');" | php   and  enter
+
+5. copy composer create-project --prefer-dist cakephp/app [app_name] and enter
+
+
+
+
+
+important:
+http://stackoverflow.com/questions/tagged/cakephp-3.0?page=2&sort=newest&pagesize=15

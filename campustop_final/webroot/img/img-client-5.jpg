@@ -1,0 +1,228 @@
+ list of associations that should get eager loaded
+     * when fetching each record
+     *
+     * @return void
+     */
+    protected function _calculateAssociationMap()
+    {
+        $map = $this->_query->eagerLoader()->associationsMap($this->_defaultTable);
+        $this->_matchingMap = (new Collection($map))
+            ->match(['matching' => true])
+            ->indexBy('alias')
+            ->toArray();
+
+        $this->_containMap = (new Collection(array_reverse($map)))
+            ->match(['matching' => false])
+            ->indexBy('nestKey')
+            ->toArray();
+    }
+
+    /**
+     * Creates a map of row keys out of the query select clause that can be
+     * used to hydrate nested result sets more quickly.
+     *
+     * @return void
+     */
+    protected function _calculateColumnMap()
+    {
+        $map = [];
+        foreach ($this->_query->clause('select') as $key => $field) {
+            $key = trim($key, '"`[]');
+            if (strpos($key, '__') > 0) {
+                $parts = explode('__', $key, 2);
+                $map[$parts[0]][$key] = $parts[1];
+            } else {
+                $map[$this->_defaultAlias][$key] = $key;
+            }
+        }
+
+        foreach ($this->_matchingMap as $alias => $assoc) {
+            if (!isset($map[$alias])) {
+                continue;
+            }
+            $this->_matchingMapColumns[$alias] = $map[$alias];
+            unset($map[$alias]);
+        }
+
+        $this->_map = $map;
+    }
+
+    /**
+     * Creates a map of Type converter classes for each of the columns that should
+     * be fetched by this object.
+     *
+     * @return void
+     */
+    protected function _calculateTypeMap()
+    {
+        if (isset($this->_map[$this->_defaultAlias])) {
+            $this->_types[$this->_defaultAlias] = $this->_getTypes(
+                $this->_defaultTable,
+                $this->_map[$this->_defaultAlias]
+            );
+        }
+
+        foreach ($this->_matchingMapColumns as $alias => $keys) {
+            $this->_types[$alias] = $this->_getTypes(
+                $this->_matchingMap[$alias]['instance']->target(),
+                $keys
+            );
+        }
+
+        foreach ($this->_containMap as $assoc) {
+            $alias = $assoc['alias'];
+            if (isset($this->_types[$alias]) || !$assoc['canBeJoined'] || !isset($this->_map[$alias])) {
+                continue;
+            }
+            $this->_types[$alias] = $this->_getTypes(
+                $assoc['instance']->target(),
+                $this->_map[$alias]
+            );
+        }
+    }
+
+    /**
+     * Returns the Type classes for each of the passed fields belonging to the
+     * table.
+     *
+     * @param \Cake\ORM\Table $table The table from which to get the schema
+     * @param array $fields The fields whitelist to use for fields in the schema.
+     * @return array
+     */
+    protected function _getTypes($table, $fields)
+    {
+        $types = [];
+        $schema = $table->schema();
+        $map = array_keys(Type::map() + ['string' => 1, 'text' => 1, 'boolean' => 1]);
+        $typeMap = array_combine(
+            $map,
+            array_map(['Cake\Database\Type', 'build'], $map)
+        );
+
+        foreach (['string', 'text'] as $t) {
+            if (get_class($typeMap[$t]) === 'Cake\Database\Type') {
+                unset($typeMap[$t]);
+            }
+        }
+
+        foreach (array_intersect($fields, $schema->columns()) as $col) {
+            $typeName = $schema->columnType($col);
+            if (isset($typeMap[$typeName])) {
+                $types[$col] = $typeMap[$typeName];
+            }
+        }
+
+        return $types;
+    }
+
+    /**
+     * Helper function to fetch the next result from the statement or
+     * seeded results.
+     *
+     * @return mixed
+     */
+    protected function _fetchResult()
+    {
+        if (!$this->_statement) {
+            return false;
+        }
+
+        $row = $this->_statement->fetch('assoc');
+        if ($row === false) {
+            return $row;
+        }
+        return $this->_groupResult($row);
+    }
+
+    /**
+     * Correctly nests results keys including those coming from associations
+     *
+     * @param mixed $row Array containing columns and values or false if there is no results
+     * @return array Results
+     */
+    protected function _groupResult($row)
+    {
+        $defaultAlias = $this->_defaultAlias;
+        $results = $presentAliases = [];
+        $options = [
+            'useSetters' => false,
+            'markClean' => true,
+            'markNew' => false,
+            'guard' => false
+        ];
+
+        foreach ($this->_matchingMapColumns as $alias => $keys) {
+            $matching = $this->_matchingMap[$alias];
+            $results['_matchingData'][$alias] = $this->_castValues(
+                $alias,
+                array_combine(
+                    $keys,
+                    array_intersect_key($row, $keys)
+                )
+            );
+            if ($this->_hydrate) {
+                $options['source'] = $matching['instance']->registryAlias();
+                $entity = new $matching['entityClass']($results['_matchingData'][$alias], $options);
+                $entity->clean();
+                $results['_matchingData'][$alias] = $entity;
+            }
+        }
+
+        foreach ($this->_map as $table => $keys) {
+            $results[$table] = array_combine($keys, array_intersect_key($row, $keys));
+            $presentAliases[$table] = true;
+        }
+
+        if (isset($presentAliases[$defaultAlias])) {
+            $results[$defaultAlias] = $this->_castValues(
+                $defaultAlias,
+                $results[$defaultAlias]
+            );
+        }
+        unset($presentAliases[$defaultAlias]);
+
+        foreach ($this->_containMap as $assoc) {
+            $alias = $assoc['nestKey'];
+
+            if ($assoc['canBeJoined'] && empty($this->_map[$alias])) {
+                continue;
+            }
+
+            $instance = $assoc['instance'];
+
+            if (!$assoc['canBeJoined'] && !isset($row[$alias])) {
+                $results = $instance->defaultRowValue($results, $assoc['canBeJoined']);
+                continue;
+            }
+
+            if (!$assoc['canBeJoined']) {
+                $results[$alias] = $row[$alias];
+            }
+
+            $target = $instance->target();
+            $options['source'] = $target->registryAlias();
+            unset($presentAliases[$alias]);
+
+            if ($assoc['canBeJoined']) {
+                $results[$alias] = $this->_castValues($assoc['alias'], $results[$alias]);
+
+                $hasData = false;
+                foreach ($results[$alias] as $v) {
+                    if ($v !== null && $v !== []) {
+                        $hasData = true;
+                        break;
+                    }
+                }
+
+                if (!$hasData) {
+                    $results[$alias] = null;
+                }
+            }
+
+            if ($this->_hydrate && $results[$alias] !== null && $assoc['canBeJoined']) {
+                $entity = new $assoc['entityClass']($results[$alias], $options);
+                $entity->clean();
+                $results[$alias] = $entity;
+            }
+
+            $r
