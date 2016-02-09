@@ -22,7 +22,7 @@ class NoteController extends AppController
 		$this->Auth->autoRedirect = FALSE;	
 		parent::beforeFilter($event);
 		$this->viewBuilder()->layout('user_profile');
-		$this->Auth->deny(['addnotedetails']);
+		$this->Auth->deny(['addnotedetails','index']);
 		
 		$this->set('userData', $this->Auth->user());
 		
@@ -30,10 +30,6 @@ class NoteController extends AppController
 		
 	}
 	public function index()
-	{
-	$id=$this->Auth->user('user_id');
-
-		if($id != "")
 	{
 		
          $getjobs4 = TableRegistry::get('degree');
@@ -61,16 +57,6 @@ class NoteController extends AppController
         $this->set('country_name', $rcountry_name);
 
         $this->set('note', $this->Note->find('all'));
-
-	
-	    }
-	    else
-	    {
-	    	$session = $this->request->session();
-			$session->write('loginsession', "The record has been saved successfully");
-			return $this->redirect(['controller'=>'home','action' => 'index']);
-
-	    }
      		
 	}
 	
@@ -382,7 +368,7 @@ class NoteController extends AppController
 			//print_R($file);die;
 			$filename=time().'.'.substr(strtolower(strrchr($file['name'], '.')), 1);
 			
-			$folder =$_SERVER['DOCUMENT_ROOT'].'/webroot/img/uploads/notefiles/'.$filename; 
+			$folder =$_SERVER['DOCUMENT_ROOT'].'/campustop/webroot/img/uploads/notefiles/'.$filename; 
 			if(move_uploaded_file($this->request->data['fileupload']["tmp_name"], $folder)) {
 				print_r($filename);die;
 			} else {
@@ -400,7 +386,7 @@ class NoteController extends AppController
 				//print_R($file);die;
 				$filename=time().'.'.substr(strtolower(strrchr($file['name'], '.')), 1);
 				
-				$folder =$_SERVER['DOCUMENT_ROOT'].'/webroot/img/uploads/casestudy/'.$filename; 
+				$folder =$_SERVER['DOCUMENT_ROOT'].'/campustop/webroot/img/uploads/casestudy/'.$filename; 
 				if(move_uploaded_file($this->request->data['casefileupload']["tmp_name"], $folder)) {
 					print_r($filename);die;
 				} else {
@@ -419,7 +405,7 @@ class NoteController extends AppController
 				//print_R($file);die;
 				$filename=time().'.'.substr(strtolower(strrchr($file['name'], '.')), 1);
 				
-				$folder =$_SERVER['DOCUMENT_ROOT'].'/webroot/img/uploads/research/'.$filename; 
+				$folder =$_SERVER['DOCUMENT_ROOT'].'/campustop/webroot/img/uploads/research/'.$filename; 
 				if(move_uploaded_file($this->request->data['researchfileupload']["tmp_name"], $folder)) {
 					print_r($filename);die;
 				} else {
