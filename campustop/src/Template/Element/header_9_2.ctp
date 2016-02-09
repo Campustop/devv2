@@ -141,16 +141,18 @@ text-align:center;
                     <?php if($user['user_id']=="")
                                 {?>
                     <li class="dropdown " id="menuLogin">
-                       <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login</a>
-                          <div class="dropdown-menu" style="padding:17px;min-width: 300px;max-width: 400px;left: -180%;" id="loginmenu">
-                                  
+                       <a class="dropdown-toggle" href="#loginmenu" data-toggle="dropdown" id="loginmenu">Login</a>
+                          <div class="dropdown-menu" style="padding:17px;min-width: 300px;max-width: 400px;left: -180%;" >
                                 
-                                  <?php // $this->Form->create(['controller' => 'home','action' => 'login']); ?>
-                                            <form id="loginform"  name="loginform" onsubmit="return checkmail()">
+                               
+                                  <?php // echo $this->Form->create('user',['name'=>'loginform','id'=>'loginform','controller' => 'home','action' => 'login'] ); ?>
+                               <form id="loginform" action="" method="post" name="loginform" role="form">
                                            
                                             <h3 class="title" style="font-size:12px bold;text-align:center">Login</br>
-                                            <span class="confirmMessage" id="loginerrormessage" style="display:none; color:#ff0000; font-size:11px">
-                                              Invalid username or password, try again .</br></span>
+                                            <div id="loginerrormessage" class='alert alert-warning' style="display:none">
+                                              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                              <label style="font-size:12px bold;text-align:center"> Invalid username or password, try again .</label>
+                                            </div>
                                             <span class="small-text"> You already have an account ? Great !Login Here</span> </h3>
                                          
                                           
@@ -169,24 +171,22 @@ text-align:center;
                                                 </div>
                                                 <div class="clearfix"></div>
 
-                                                <input type="submit" id="optradio"  name="remember" class="myButton hvr-grow small-text" value="Login" />
+                                                <input type="button" id="optradio"  name="remember" class="myButton hvr-grow small-text" value="Login" />
                                                 <div  class="text-center">
                                                     <span class="pull-left small-text text-center" style="margin-top:15px; text-align:center;">
-                                                    Forgot Password? Its Ok! <a href="<?php echo SITEURL.'forgotpassword'?>" class="text-color"><u> RECOVER HERE </u></a>
+                                                    Forgot Password? Its Ok! <a href="#" class="text-color"><u> RECOVER HERE </u></a>
                                                   </span> 
                                                 </div>
                                      
                                     </form>
-                                  <div id="social" style="margin-top:80px">
-                                        <img class="" src="<?=SITEURL; ?>webroot/img/facebook.jpg" alt="" >
-                                      <a class="btn btn-default facebook" style="padding:0px;background-color:#ffffff;" href="<?=SITEURL; ?>users/googleloginfn">
-                                        <img class="" src="<?=SITEURL; ?>webroot/img/google.jpg" alt="">
-                                        </a>
-                                        <img class="" src="<?=SITEURL; ?>webroot/img/linkedin.jpg" alt="">
-                                  </div>  
-                                  <span class="small-text"  style="margin-top:15px; text-align:center;">
+                                    <div id="social" style="margin-top:80px">
+                                            <img class="" src="<?=SITEURL; ?>webroot/img/facebook.jpg" alt="" >
+                                            <img class="" src="<?=SITEURL; ?>webroot/img/google.jpg" alt="">
+                                            <img class="" src="<?=SITEURL; ?>webroot/img/linkedin.jpg" alt="">
+                                    </div>  
+                                    <span class="small-text"  style="margin-top:15px; text-align:center;">
                                         Don't have an account! <a href="<?= SITEURL; ?>register" class="text-color"><u> REGISTER NOW </u></a>
-                                  </span>   
+                                    </span>   
                                </div>
                     </li>
                     <li class="hidden-767">
@@ -255,7 +255,7 @@ text-align:center;
                   <!-- Header Share Content -->
                   <div class="bg-white hide-show-content no-display header-share-content">
                     <div class="vertically-absolute-middle social-icon gray-bg icons-circle i-3x">
-                    <a href="https://www.facebook.com/campustop.in/">
+                    <a href="#">
                       <i class="fa fa-facebook"></i>
                     </a> 
                     <a href="#">
@@ -289,54 +289,36 @@ text-align:center;
        <!-- Sticky Menu -->
     </header>
 
-  <script type="text/javascript">
-  $(document).ready(function () {
-   if($(window).width() < "1224")
-  {
-     $("#loginmenu").css("min-width","0px");
-     
-  }
-});
-</script>
  <script type="text/javascript">
-
-function checkmail()
-  {
-    var flag=true;
-    var form = $('#loginform');
-    var mail=$('#email').val();
-    var url="<?php echo SITEURL.'home';?>";
-    if(mail!='')
-    {
-      $.ajax({
-            type : "POST",
-            url:"<?php echo SITEURL.'home/login';?>",
-            data:  form.serialize(),
-            async:false,
-            success : function (data)
-            {
-              if(data=="yes")
-              {
-                
-                window.location=url;
-               
-
-              }
-              else if(data=="no")
-              {
-                  
-                $('#loginerrormessage').show();
-               flag=false;                     
-              }
-            }
-              
-        });
+    $(document).ready(function(){
+ 
+    $('#loginform').on('click', function() 
+    {  
         
-        return flag;
-    }
-  
-  }
 
+              var form = $('#loginform');
+            
+              $.ajax({
+               type:"POST",
+               url:"<?php echo SITEURL.'home/login';?>",
+               data:  form.serialize(),
+               success: function(data)
+               {
+                    if(data=="yes")
+                    {
+                      window.location="<?php echo SITEURL.'home';?>"
 
-
+                    }
+                    else
+                    {
+                      
+                      $('#loginerrormessage').show();
+                     $('.form-control').val('');
+                     
+                    }
+                 
+               }
+              });
+    });
+});
 </script>
